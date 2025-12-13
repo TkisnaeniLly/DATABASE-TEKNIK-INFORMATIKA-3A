@@ -1,19 +1,6 @@
-# Task Division Website E-Commerce
+# TASK DIVISION
 
-Dokumen ini berisi pembagian tugas (task division) dalam pengembangan **Website E-Commerce**. Selanjutnya digunakan sebagai panduan kerja tim agar setiap peran memiliki tanggung jawab yang jelas dan terstruktur.
-
----
-
-## Ruang Lingkup Proyek
-
-Website e-commerce yang dikembangkan memiliki fitur utama:
-
-* Autentikasi pengguna (login & register)
-* Katalog produk
-* Detail produk
-* Keranjang belanja
-* Checkout & transaksi
-* Manajemen pesanan
+Dokumen ini menjelaskan pembagian tugas dalam proyek **Website E‑Commerce**. Dokumen ini dibuat untuk menunjukkan peran masing‑masing anggota tim dan tanggung jawabnya selama pengembangan sistem.
 
 ---
 
@@ -21,166 +8,87 @@ Website e-commerce yang dikembangkan memiliki fitur utama:
 
 **Project Manager (PM):** Tika Isnaeni, Khilmy Firdaus
 
-**Frontend Developer:** (Nama belum ditentukan)
+**Frontend Developer:** (Nama diisi kemudian)
 
-**Backend Developer:** (Nama belum ditentukan)
+**Backend Developer:** (Nama diisi kemudian)
 
-**UI Designer:** (Nama belum ditentukan)
+**UI Designer:** (Nama diisi kemudian)
 
-**Database Engineer:** (Nama belum ditentukan)
+**Database Engineer:** (Nama diisi kemudian)
 
-**UX + QA:** (Nama belum ditentukan)
+**UX + QA:** (Nama diisi kemudian)
 
 ---
 
-## Pembagian Peran & Tugas
+## Tugas Project Manager (PM)
 
-### 1. Project Manager (PM)
-
-**Tugas:**
-
-* Menentukan tujuan dan ruang lingkup proyek
-* Menyusun timeline dan milestone
+* Menentukan scope dan batasan proyek
+* Menyusun timeline pengerjaan 2 minggu
 * Membagi tugas ke setiap role
-* Mengawasi progres pengerjaan
-* Mengelola komunikasi dan risiko proyek
-
-**Output:**
-
-* Dokumen scope proyek
-* Timeline pengerjaan
-* Laporan progres
+* Memastikan dokumentasi proyek lengkap di GitHub
+* Mengkoordinasikan komunikasi antar anggota tim
+* Melakukan monitoring progres dan evaluasi
 
 ---
 
-### 2. UI Designer
+## Tugas UI Designer
 
-**Tugas:**
+* Mendesain tampilan halaman utama
+* Mendesain halaman katalog produk
+* Mendesain halaman detail produk
+* Mendesain halaman login, register, dan profil user
+* Menyesuaikan desain dengan konsep e‑commerce fashion
 
-* Mendesain tampilan visual website
-* Menentukan warna, font, dan layout
-* Membuat desain halaman utama:
+---
+
+## Tugas Frontend Developer
+
+* Mengimplementasikan desain UI ke dalam kode
+* Membuat halaman:
 
   * Home
-  * Produk
-  * Detail produk
+  * Katalog Produk
+  * Detail Produk
   * Keranjang
   * Checkout
   * Login & Register
-
-**Output:**
-
-* Desain UI (Figma)
-* Style guide
+* Integrasi frontend dengan API backend
+* Menangani validasi input user di sisi frontend
 
 ---
 
-### 3. Database Engineer
+## Tugas Backend Developer
 
-**Tugas:**
-
-* Mendesain struktur database
-* Membuat relasi antar tabel
-* Menentukan tipe data dan primary/foreign key
-* Optimasi dan keamanan database
-
-**Tabel Utama:**
-
-* User
-* Produk
-* Kategori
-* Order
-* Order Detail
-* Pembayaran
-
-**Output:**
-
-* ERD (Entity Relationship Diagram)
-* Database schema
+* Membuat API untuk sistem e‑commerce
+* Mengelola autentikasi dan otorisasi user
+* Mengelola data produk, kategori, dan stok
+* Mengelola transaksi, pembayaran, dan status pesanan
+* Mengelola fitur return dan subscription
 
 ---
 
-### 4. Backend Developer
+## Tugas Database Engineer
 
-**Tugas:**
-
-* Mengembangkan logika bisnis e-commerce
-* Membuat API untuk:
-
-  * Autentikasi user
-  * Produk & kategori
-  * Keranjang
-  * Checkout & transaksi
-* Validasi dan keamanan data
-
-**Output:**
-
-* API backend siap digunakan
-* Sistem transaksi berjalan
+* Merancang struktur tabel database
+* Menentukan relasi antar tabel
+* Menyesuaikan database dengan kebutuhan fitur
+* Menjaga konsistensi dan integritas data
+* Mendukung kebutuhan query backend
 
 ---
 
-### 5. Frontend Developer
+## Tugas UX + QA
 
-**Tugas:**
-
-* Mengimplementasikan desain UI ke website
-* Membuat halaman sesuai kebutuhan sistem
-* Integrasi API dari backend
-* Menjamin website responsif
-
-**Output:**
-
-* Website frontend fungsional
-* Integrasi API berhasil
-
----
-
-### 6. UX + QA
-
-**Tugas UX:**
-
-* Membuat user flow belanja
-* Evaluasi kemudahan penggunaan
-* Memberikan rekomendasi perbaikan UX
-
-**Tugas QA:**
-
-* Testing seluruh fitur
-* Mencari dan mendokumentasikan bug
-* Testing lintas browser dan device
-* Validasi sebelum rilis
-
-**Output:**
-
-* User flow diagram
-* Laporan pengujian & bug
-
----
-
-## Alur Kerja Tim
-
-1. PM menentukan scope & timeline
-2. UX menyusun user flow
-3. UI membuat desain tampilan
-4. Database Engineer mendesain database
-5. Backend Developer membuat API
-6. Frontend Developer mengintegrasikan API
-7. UX + QA melakukan testing
-8. PM melakukan validasi dan rilis
+* Menguji alur penggunaan (user flow)
+* Melakukan testing fitur utama
+* Mencatat bug atau error
+* Memberikan masukan terkait kenyamanan pengguna
+* Memastikan sistem sesuai dengan kebutuhan user
 
 ---
 
 ## Catatan
 
-* Setiap role wajib mendokumentasikan hasil pekerjaannya
-* Perubahan scope harus melalui PM
-* Testing dilakukan sebelum fitur dinyatakan selesai
-
----
-
-Proyek ini dapat digunakan untuk:
-
-* Tugas kuliah
-* Proyek kelompok
-* Portofolio pengembangan website e-commerce
+* Pembagian tugas ini bersifat fleksibel dan dapat disesuaikan
+* Semua anggota tim wajib berkontribusi dan berkoordinasi
+* Dokumen ini digunakan sebagai bukti kerja tim dalam proyek
