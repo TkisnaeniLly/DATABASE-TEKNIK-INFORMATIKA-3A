@@ -1,0 +1,131 @@
+# FEATURE LIST – E-COMMERCE FASHION
+
+Dokumen ini berisi daftar fitur yang dikembangkan pada website e-commerce fashion berbasis web. Feature list ini digunakan sebagai acuan pengembangan sistem oleh tim frontend, backend, database, serta pengujian.
+
+---
+
+## 1. Modul Autentikasi & User
+
+* Registrasi user
+* Login user
+* Logout user
+* Manajemen profil customer
+* Riwayat login user
+
+---
+
+## 2. Modul Produk Fashion
+
+* Menampilkan katalog produk
+* Detail produk (nama, deskripsi, harga)
+* Manajemen brand
+* Manajemen kategori produk
+* Media/gambar produk
+* Status produk (aktif / nonaktif)
+
+---
+
+## 3. Modul Varian & Stok
+
+* Varian produk (size, warna)
+* Stok per varian
+* Validasi stok saat pembelian
+* Update stok otomatis setelah pesanan
+
+---
+
+## 4. Modul Keranjang Belanja
+
+* Menambahkan produk ke keranjang
+* Update jumlah item
+* Menghapus item dari keranjang
+* Menampilkan total harga
+
+---
+
+## 5. Modul Checkout & Pesanan
+
+* Checkout pesanan
+* Pembuatan pesanan
+* Status pesanan (menunggu, diproses, dikirim, selesai)
+* Riwayat pesanan user
+
+---
+
+## 6. Modul Pembayaran
+
+* Pilih metode pembayaran
+* Pencatatan transaksi pembayaran
+* Status pembayaran
+* Riwayat pembayaran
+
+---
+
+## 7. Modul Pengiriman
+
+* Pilih alamat pengiriman
+* Pilih jasa pengiriman
+* Perhitungan biaya pengiriman (simulasi)
+* Nomor resi pengiriman
+* Status pengiriman
+
+---
+
+## 8. Modul Return Barang
+
+* Pengajuan return barang
+* Alasan return
+* Status return (diajukan, diproses, selesai)
+* Riwayat return user
+
+---
+
+## 9. Modul Subscription
+
+* Daftar paket subscription
+* Aktivasi subscription user
+* Masa aktif subscription
+* Status subscription
+* Benefit subscription
+
+---
+
+## 10. Modul Wishlist
+
+* Menambahkan produk ke wishlist
+* Menghapus produk dari wishlist
+* Melihat daftar wishlist
+
+---
+
+## 11. Modul Review & Rating
+
+* Memberikan rating produk
+* Menulis review produk
+* Menampilkan review dan rating
+
+---
+
+## 12. Modul Promo & Diskon
+
+* Manajemen kode promo
+* Klaim promo oleh user
+* Validasi promo saat checkout
+
+---
+
+## 13. Modul Admin (Sederhana)
+
+* Manajemen produk
+* Manajemen pesanan
+* Manajemen pengiriman
+* Manajemen pembayaran
+* Manajemen return
+
+---
+
+## 14. Catatan
+
+* Fitur dikembangkan sesuai scope proyek
+* Fitur lanjutan disederhanakan untuk kebutuhan akademik
+* Perubahan fitur harus disetujui oleh Project Manager

@@ -1,0 +1,109 @@
+# USER FLOW – ZALORA-LIKE E-COMMERCE
+
+Dokumen ini menjelaskan **alur pengguna (user flow)** pada website e-commerce fashion yang mengadopsi konsep seperti Zalora. User flow digunakan sebagai acuan pengembangan frontend, backend, serta pengujian sistem.
+
+---
+
+## 1. User Flow – Pengunjung (Belum Login)
+
+1. Pengunjung membuka website
+2. Pengunjung melihat halaman home
+3. Pengunjung menelusuri katalog produk
+4. Pengunjung melihat detail produk
+5. Pengunjung diarahkan untuk login / register saat ingin membeli
+
+---
+
+## 2. User Flow – Registrasi & Login
+
+1. User memilih menu register
+2. User mengisi data akun
+3. Sistem memvalidasi data
+4. Akun berhasil dibuat
+5. User melakukan login
+6. User masuk ke halaman utama sebagai customer
+
+---
+
+## 3. User Flow – Belanja Produk (Core Flow)
+
+1. User membuka katalog produk
+2. User memilih produk fashion
+3. User melihat detail produk
+4. User memilih varian (size dan warna)
+5. User memasukkan produk ke keranjang
+6. User melihat isi keranjang
+7. User mengubah jumlah item (opsional)
+8. User melanjutkan ke checkout
+
+---
+
+## 4. User Flow – Checkout & Pesanan
+
+1. User memilih alamat pengiriman
+2. User memilih jasa pengiriman
+3. Sistem menampilkan biaya pengiriman
+4. User memilih metode pembayaran
+5. User mengonfirmasi checkout
+6. Sistem membuat pesanan
+7. Status pesanan menjadi "Menunggu Pembayaran"
+
+---
+
+## 5. User Flow – Pembayaran
+
+1. User melakukan pembayaran (simulasi)
+2. Sistem menerima konfirmasi pembayaran
+3. Status pesanan berubah menjadi "Diproses"
+
+---
+
+## 6. User Flow – Pengiriman
+
+1. Admin memproses pesanan
+2. Admin memasukkan nomor resi
+3. Sistem memperbarui status pengiriman
+4. User melihat status pengiriman
+
+---
+
+## 7. User Flow – Return Barang
+
+1. User membuka riwayat pesanan
+2. User memilih item pesanan
+3. User mengajukan return
+4. User mengisi alasan return
+5. Sistem mencatat permintaan return
+6. Admin memproses return
+7. Status return diperbarui
+
+---
+
+## 8. User Flow – Subscription User
+
+1. User melihat daftar paket subscription
+2. User memilih paket subscription
+3. User melakukan pembayaran subscription
+4. Sistem mengaktifkan subscription
+5. User mendapatkan benefit subscription
+
+---
+
+## 9. User Flow – Fitur Pendukung
+
+### 9.1 Wishlist
+
+1. User menambahkan produk ke wishlist
+2. User melihat daftar wishlist
+
+### 9.2 Review & Rating
+
+1. User membuka detail produk
+2. User memberikan rating dan ulasan
+3. Review tersimpan dan ditampilkan
+
+---
+
+## 10. Penutup
+
+Dokumen user flow ini digunakan sebagai panduan utama dalam implementasi fitur dan pengujian sistem. Perubahan alur harus melalui persetujuan Project Manager.
