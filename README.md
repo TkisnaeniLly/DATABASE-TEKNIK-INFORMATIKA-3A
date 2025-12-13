@@ -6,25 +6,25 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 
 ## Tujuan Proyek
 
-* Membangun website e-commerce fashion berbasis web
-* Mengimplementasikan alur belanja lengkap (browse → checkout)
-* Mengelola produk fashion dengan varian dan stok
-* Menerapkan konsep basis data relasional dalam sistem e-commerce
+- Membangun website e-commerce fashion berbasis web
+- Mengimplementasikan alur belanja lengkap (browse → checkout)
+- Mengelola produk fashion dengan varian dan stok
+- Menerapkan konsep basis data relasional dalam sistem e-commerce
 
 ---
 
 ## Fitur Utama
 
-* Autentikasi user (login & register)
-* Katalog produk fashion
-* Detail produk (gambar, brand, kategori)
-* Varian produk (size & warna)
-* Keranjang belanja
-* Checkout & pesanan
-* Pembayaran dan pengiriman
-* Wishlist
-* Review & rating produk
-* Promo dan diskon
+- Autentikasi user (login & register)
+- Katalog produk fashion
+- Detail produk (gambar, brand, kategori)
+- Varian produk (size & warna)
+- Keranjang belanja
+- Checkout & pesanan
+- Pembayaran dan pengiriman
+- Wishlist
+- Review & rating produk
+- Promo dan diskon
 
 ---
 
@@ -32,44 +32,21 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 
 Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 
-* Project Manager (PM)
-* UI Designer
-* Frontend Developer
-* Backend Developer
-* Database Engineer
-* UX + QA
-
----
-
-## Struktur Repository
-
-```
-ecommerce/
-│
-├── README.md
-├── SCOPE.md
-├── USER_FLOW.md
-├── FEATURE_LIST.md
-├── TIMELINE.md
-├── DATABASE_OVERVIEW.md
-├── CONTRIBUTING.md
-├── MEETING_NOTE.md
-│
-├── frontend/
-├── backend/
-└── database/
-```
+- Project Manager (PM)
+- UI Designer
+- Frontend Developer
+- Backend Developer
+- Database Engineer
+- UX + QA
 
 ---
 
 ## Catatan
 
-* Proyek ini berfokus pada konsep dan implementasi dasar e-commerce
-* Fitur lanjutan Zalora disederhanakan sesuai kebutuhan akademik
-* Setiap perubahan scope harus melalui Project Manager
+- Proyek ini berfokus pada konsep dan implementasi dasar e-commerce
+- Fitur lanjutan Zalora disederhanakan sesuai kebutuhan akademik
+- Setiap perubahan scope harus melalui Project Manager
 
 ---
 
 Dokumentasi tambahan tersedia pada file terpisah di repository ini.
-
-
