@@ -41,7 +41,6 @@ Dokumen ini menjelaskan **gambaran umum database** pada website e-commerce fashi
             Lokasi Operasional <> Unit Operasional (1 : N) → Satu lokasi operasional dapat digunakan oleh banyak unit atau aktivitas kerja.
    Fungsi : Menyimpan dan mengelola data lokasi operasional sebagai referensi utama dalam sistem, memastikan konsistensi penggunaan lokasi pada berbagai modul, serta mendukung pengelolaan aktivitas operasional dan penyimpanan barang.
 
-Kalau mau, kirim:
 27.
 28.
 
