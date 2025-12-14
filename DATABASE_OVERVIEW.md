@@ -165,11 +165,11 @@ Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan daftar prod
 ---
 
 ### Atribut
-`keranjang_id`   : sebagai Primary Key keranjang
-`user_id`        : sebagai Foreign Key ke tabel user
-`total_qty`      : total jumlah item dalam keranjang
-`total_price`    : total harga seluruh item
-`last_update`    : waktu terakhir keranjang diperbarui
+- `keranjang_id`   : sebagai Primary Key keranjang
+- `user_id`        : sebagai Foreign Key ke tabel user
+- `total_qty`      : total jumlah item dalam keranjang
+- `total_price`    : total harga seluruh item
+- `last_update`    : waktu terakhir keranjang diperbarui
 
 ---
 
