@@ -43,7 +43,7 @@ fs.readdirSync(aliasesDir).forEach((file) => {
 app.use("/public", express.static(path.join(__dirname, "/src/Assets/Public")));
 
 const apiRoutes = require("./src/Routes/index");
-app.use("/", apiRoutes);
+app.use("/api", apiRoutes);
 
 // Tangkap 404 (wajib sebelum errorHandler)
 app.use((req, res, next) => {
