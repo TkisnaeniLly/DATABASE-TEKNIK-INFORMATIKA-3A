@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
-app.use(Log("POST", "PUT", "DELETE"));
+app.use(Log("semua"));
 app.use(
   cors({
     origin: process.env.ALLOWED_ORIGIN,
