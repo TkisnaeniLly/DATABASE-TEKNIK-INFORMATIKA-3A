@@ -1,147 +1,108 @@
-# 📚 README.md – Panduan Repository Proyek Basis Data (E-Commerce)
+# Backend
 
-Repository ini digunakan untuk **Proyek Mata Kuliah Basis Data**, dengan studi kasus **Aplikasi E-Commerce**.
-
----
-
-## 🎯 Tujuan Repository
-
-- Menjadi pusat pengembangan proyek basis data secara kolaboratif
-- Melatih penggunaan Git & GitHub sesuai standar dasar industri
-- Mendokumentasikan analisis, desain, dan implementasi proyek
-- Mempermudah dosen dalam menilai proses dan hasil kerja tim
+Backend bagian dari proyek **Aplikasi E-Commerce** Backend berfungsi sebagai penyedia REST API,
+pengelola logika bisnis, middleware, serta penghubung antara frontend dan basis data.
 
 ---
 
-## 🗂 Struktur Dokumentasi Markdown
+## 📂 Struktur Folder
 
-Berikut adalah penjelasan **setiap file Markdown utama** yang ada di repository ini.
-
----
-
-## 📘 README.md
-
-Dokumen utama repository.
-
-Fungsi:
-
-- Menjelaskan tujuan repository
-- Memberi gambaran umum proyek
-- Menjelaskan fungsi setiap file Markdown
-
-📌 **Baca pertama kali sebelum mengerjakan apapun.**
-
----
-
-## 🤝 CONTRIBUTING.md
-
-Panduan resmi cara berkontribusi ke repository.
-
-Berisi:
-
-- Cara clone repository
-- Cara membuat branch
-- Tahapan pengerjaan tugas (Tahap 1, 2, dan Finalisasi)
-- Aturan commit
-- Cara push dan Pull Request
-
-📌 **WAJIB dibaca sebelum mulai mengerjakan tugas.**
-
----
-
-## 🔀 GIT_WORKFLOW.md
-
-Menjelaskan **alur kerja Git secara detail**.
-
-Berisi:
-
-- Struktur branch
-- Alur kerja dari clone → commit → push
-- Penjelasan Tahap 1 (Analisis Normalisasi)
-- Penjelasan Tahap 2 (Pembagian Tugas)
-- Tahap Finalisasi
-- Contoh commit message yang benar
-- Konfigurasi Git (user.name & user.email)
-- Koneksi GitHub via HTTPS dan SSH
-- Script otomatis SSH untuk Linux dan Windows
-
-📌 **Sangat penting bagi mahasiswa yang belum terbiasa dengan Git.**
+```
+Backend/
+├── App.js
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── request.rest
+├── src/
+│   ├── Assets/
+│   │   ├── Public/
+│   │   └── Private/
+│   ├── Controllers/
+│   │   ├── Home/
+│   │   │   └── index.js
+│   │   ├── Payments/
+│   │   └── index.js
+│   ├── Routes/
+│   │   └── index.js
+│   ├── Middlewares/
+│   │   ├── authenticated.js
+│   │   ├── authLogin.js
+│   │   ├── errorHandlers.js
+│   │   └── Log.js
+│   └── Libs/
+│       ├── index.js
+│       └── Utils/
+│           └── response.js
+└── node_modules/
+```
 
 ---
 
-## 🛡 CODE_OF_CONDUCT.md
+## 🚀 Menjalankan Backend
 
-Kode etik seluruh kontributor.
+### 1. Install dependency
 
-Berisi:
+```bash
+npm install
+```
 
-- Prinsip dasar berkolaborasi
-- Perilaku yang diharapkan
-- Perilaku yang dilarang
-- Cara melaporkan pelanggaran
-- Tindakan yang dapat diambil oleh PM
+### 2. Konfigurasi environment
 
-📌 Bertujuan menjaga lingkungan kerja yang sopan, profesional, dan nyaman.
+Buat file `.env`:
 
----
+```env
+PORT=3000
+NODE_ENV=development
+```
 
-## 🧩 NORMALISASI / ANALISIS (Branch Pribadi)
+### 3. Jalankan server
 
-File Markdown yang dibuat **oleh masing-masing mahasiswa** pada Tahap 1.
-
-Biasanya bernama:
-
-- `NORMALISASI.md`
-- `analisis_normalisasi.md`
-
-Isi minimal:
-
-- Deskripsi tabel awal
-- Proses normalisasi (1NF, 2NF, 3NF)
-- Keputusan:
-
-  - Layak dijadikan tabel
-  - Atau cukup sebagai proses aplikasi
-
-- Alasan teknis
-
-📌 File ini **tidak ada di main**, tetapi berada di **branch masing-masing mahasiswa**.
+```bash
+npm run dev
+```
 
 ---
 
-## 👥 TASK_DIVISION.md
+## 🖥 Contoh Log Terminal
 
-Dokumen pembagian tugas tim (Tahap 2).
-
-Berisi:
-
-- Nama anggota
-- NIM
-- Peran (UI, Frontend, Backend, UX, Testing)
-
-📌 Digunakan sebagai acuan kerja tim dan penilaian kontribusi.
-
----
-
-## ⚠️ Catatan Penting untuk Mahasiswa
-
-- Jangan langsung push ke `main`
-- Selalu bekerja di **branch masing-masing**
-- Ikuti aturan commit
-- Baca dokumentasi sebelum bertanya
-- Gunakan Git Bash atau VS Code sesuai kenyamanan
+```text
+[nodemon] starting `node App.js`
+Registered aliases from index.js
+🚀 Server running on port 3000
+LOG REQUEST {
+  path: '/',
+  ipClient: '127.0.0.1',
+  hostname: 'localhost',
+  protocol: 'http',
+  method: 'GET',
+  dateTime: '15 Desember 2025 pukul 00.30 WIB'
+}
+```
 
 ---
 
-## 🙌 Penutup
+## 📡 Dokumentasi Routes / Endpoint
 
-Seluruh file Markdown di repository ini **saling terhubung** dan dibuat untuk:
+| Method | Endpoint | Deskripsi                     |
+| ------ | -------- | ----------------------------- |
+| GET    | `/`      | Endpoint utama (health check) |
 
-- Membantu mahasiswa memahami alur proyek
-- Membiasakan dokumentasi yang rapi
-- Mengurangi kesalahan teknis
-- Meningkatkan kualitas kerja tim
+---
 
-Jika masih bingung, **baca README → CONTRIBUTING → GIT_WORKFLOW** secara berurutan.
+## 🧠 Dokumentasi App.js
 
-Selamat mengerjakan mohon kerja samanya.
+App.js berfungsi sebagai entry point aplikasi backend dengan alur:
+
+1. Inisialisasi Express
+2. Registrasi middleware global
+3. Registrasi routes
+4. Menjalankan server berdasarkan PORT dari environment
+
+---
+
+## 📌 Baca terlebih dahulu file
+
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [CONTRIBUTING.md](CONTRIBUTING.md), dan [GIT_WORKFLOW.md](GIT_WORKFLOW.md)  
+agar tidak terjadi kesalahan saat mengembangkan aplikasi ini.
