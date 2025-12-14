@@ -60,7 +60,7 @@ Penggabungan tabel User dan Customer dilakukan untuk menjaga normalisasi data hi
 3.
 4. ....
 5.
-6. Tabel Inventory (Ditambahk oleh Daris Nabil Maftuh)
+6. Tabel Inventory (Ditambahkan oleh Daris Nabil Maftuh)
    Entitas utama : Inventory (Stok Produk)
    Atribut Utama : Inventory_Id (PK), Variant_Id (FK), Location_Id (FK), Stock_Qty, Stock_Minimum, Stock_Status, Last_Updated
    Relasi        : Inventory <> Varian Produk (1 : 1 / 1 : N) → Satu varian produk memiliki data stok.
@@ -70,7 +70,7 @@ Penggabungan tabel User dan Customer dilakukan untuk menjaga normalisasi data hi
 7...
 8...
 9...
-22. Tabel Klaim Promo
+22. Tabel Klaim Promo (Ditambahkan oleh Dimas Faril Ardiansyah)
     ENTITAS UTAMA : (klaim promo)
     ATRIBUT : sebagai berikut ya ges
     -Klaim_id : sebagai primary key, identitas unik pada tabel klaim promo (Primary key), kunci utama.
@@ -90,7 +90,7 @@ Penggabungan tabel User dan Customer dilakukan untuk menjaga normalisasi data hi
     -satu pesanan boleh tidak pake promo
     -jika pake promo'n hanya satu promo 
         
-26. Tabel Lokasi Operasional
+26. Tabel Lokasi Operasional 
     Entitas utama : Lokasi Operasional
     Atribut Utama : Location_Id (PK), Location_Name
    Relasi : Lokasi Operasional <> Inventory (1 : N) → Satu lokasi operasional dapat menyimpan banyak data stok produk.
