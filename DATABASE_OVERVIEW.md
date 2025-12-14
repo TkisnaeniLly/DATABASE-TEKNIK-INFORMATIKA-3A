@@ -188,7 +188,70 @@ Digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan
 
 ---
 
-## 13.
+## 13. Tabel Pesanan
+*(Ditambahkan oleh Syah Irkham Ramdhan)*
+
+### Deskripsi
+Tabel `Pesanan` adalah tabel transaksional utama yang mencatat setiap pembelian yang berhasil dibuat oleh pengguna. Tabel ini mengintegrasikan data dari User, Alamat Pengiriman, dan Metode Pembayaran serta menjadi induk bagi Item Pesanan.
+
+---
+
+### Atribut  
+Tabel `Pesanan` memiliki atribut sebagai berikut:
+Nama Atribut,Keterangan,Kunci
+
+- `order_id` : Primary Key (PK). Identitas unik untuk setiap transaksi pesanan.
+- `user_id` : Foreign Key (FK) ke Tabel Users (No. 1). Pelanggan yang membuat pesanan.
+- `address_id` : Foreign Key (FK) ke Tabel Alamat Pengiriman (No. 2). Alamat tujuan pesanan.
+- `payment_method_id` : Foreign Key (FK) ke Tabel Metode Pembayaran (No. 16). Metode bayar yang dipilih.
+- `order_date` : Tanggal dan waktu pesanan dibuat.
+- `status` : Status terkini pesanan (misalnya: Paid, Shipped, Delivered).
+- `total_price`,Total harga pesanan yang harus dibayar.
+- `biaya_pengiriman`,Biaya pengiriman yang dikenakan.
+- `tracking_number`,Nomor resi pelacakan dari jasa pengiriman.
+- `created_at`,Waktu pencatatan pesanan dalam sistem.
+
+---
+
+### Relasi  
+Tabel `Pesanan` memiliki relasi dengan beberapa tabel lain, yaitu:
+
+- **users – pesanan** (1 : N)
+  Satu pengguna dapat membuat banyak pesanan. (user_id di Pesanan).
+  
+- **alamat_pengiriman – pesanan** (1 : N)
+  Satu alamat dapat digunakan untuk banyak pesanan. (address_id di Pesanan).
+
+- **metode_pembayaran – pesanan** (1 : N)
+  Satu metode pembayaran dapat digunakan untuk banyak pesanan. (payment_method_id di Pesanan).
+
+- **pesanan – item_pesanan** (1 : N)
+  Satu pesanan terdiri dari banyak item produk yang dibeli. (order_id di Item Pesanan).
+
+- **pesanan – detail_pengiriman** (1 : 1)
+  Satu pesanan memiliki satu catatan detail pengiriman. (order_id di Detail Pengiriman).
+
+- **pesanan – detail_pembayaran** (1 : 1)
+  Satu pesanan memiliki satu catatan detail pembayaran. (order_id di Detail Pembayaran).
+
+- **pesanan – klaim_promo** (1 : 0..1 atau 1 : N)
+  Satu pesanan dapat menggunakan satu atau lebih promo yang telah diklaim. (order_id di Klaim Promo).
+
+- **pesanan – return** (1 : N)
+  Satu pesanan dapat memiliki banyak pengajuan return (melalui Item Pesanan).
+
+---
+
+### Fungsi  
+Tabel `Pesanan` berfungsi sebagai: 
+1. Perekam Transaksi Utama: Mencatat detail dan riwayat setiap transaksi pembelian.
+2. Manajemen Status: Mengelola dan memperbarui Status pesanan dari awal hingga selesai.
+3. Integrator Data: Menghubungkan semua data master (User, Alamat, Pembayaran) dengan data item produk yang dibeli.
+
+---
+
+### Catatan Normalisasi  
+Tabel ini dirancang untuk memenuhi Third Normal Form (3NF), di mana semua atribut non-key secara langsung bergantung pada Kunci Utama `order_id`, tanpa adanya ketergantungan transitif.
 
 ---
 
