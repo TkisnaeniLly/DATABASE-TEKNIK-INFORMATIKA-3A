@@ -189,7 +189,7 @@ Digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan
 ---
 
 ## 13. Tabel Pesanan
-*(Ditambahkan oleh Syah Irkham Ramdhan)*
+*(Ditambahkan oleh Syah Irkham Ramadhan)*
 
 ### Deskripsi
 Tabel `Pesanan` adalah tabel transaksional utama yang mencatat setiap pembelian yang berhasil dibuat oleh pengguna. Tabel ini mengintegrasikan data dari User, Alamat Pengiriman, dan Metode Pembayaran serta menjadi induk bagi Item Pesanan.
