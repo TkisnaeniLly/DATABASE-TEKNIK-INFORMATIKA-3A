@@ -1,4 +1,4 @@
-# DATABASE OVERVIEW – E-COMMERCE
+# DATABASE OVERVIEW – E-COMMERCE - Kim
 
 **Gambaran umum database** pada website e-commerce fashion. Database dirancang menggunakan **basis data relasional** untuk mendukung fitur belanja, transaksi, return, pengiriman dan subscription.
 
