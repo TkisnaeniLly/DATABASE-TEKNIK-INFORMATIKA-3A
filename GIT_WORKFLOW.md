@@ -194,7 +194,7 @@ git commit -m "feat: menambahkan fitur checkout"
 ### Konfigurasi Identitas
 
 ```bash
-git config --global user.name "Nama Anda"
+git config --global user.name "username"
 git config --global user.email "email@kampus.ac.id"
 ```
 
