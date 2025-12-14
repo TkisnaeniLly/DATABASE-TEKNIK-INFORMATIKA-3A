@@ -70,6 +70,7 @@ Alasan:
 
 ## ERD (Entity Relationship Diagram)
 
+```
 +----------------+       +-----------------+       +--------------------+
 |    PARTNERS    | 1   N | PAYMENT_METHODS | N   1 | PAYMENT_CATEGORIES |
 +----------------+-------+-----------------+-------+--------------------+
