@@ -81,7 +81,7 @@ Penggabungan tabel User dan Customer dilakukan untuk menjaga normalisasi data hi
 
    
 18. Tabel Detail Pengiriman (Di tambahkan oleh Fajar Niko P)
-    ENITITAS UTAMA : Detail Pengiriman
+    ENTITAS UTAMA : Detail Pengiriman
     ATRIBUT : ini di bawah yaa
             : Primary Key sebagai identitas unik data detail pengiriman
             : Order_Id Foreign Key (FK) merujuk ke tabel Pesanan (Tabel 13). Mengidentifikasi pesanan mana yang terkait dengan detail ini.
