@@ -1,343 +1,151 @@
-# DATABASE OVERVIEW – E-COMMERCE
+NORMALISASI BASIS DATA – Virgiawan Ananda Purwoko
 
-**Gambaran umum database** pada website e-commerce fashion. Database dirancang menggunakan **basis data relasional** untuk mendukung fitur belanja, transaksi, return, pengiriman dan subscription.
-
----
-
-## Tujuan Database
-
-- Menyimpan data user dan customer
-- Mengelola produk fashion beserta varian dan stok
-- Mendukung proses keranjang, pesanan, pembayaran, dan pengiriman
-- Mendukung fitur return, promo, wishlist, review, dan subscription
+*Proyek** : Aplikasi E-Commerce
+**Mata Kuliah** : Basis Data
+**Tahap** : 1 – Analisis & Normalisasi
 
 ---
 
-## Ringkasan Desain Database
+## Deskripsi Awal Tabel
 
-- Database menggunakan konsep relasional
-- Setiap tabel memiliki primary key
-- Relasi antar tabel menggunakan foreign key
-- Struktur database mendukung skalabilitas sistem
+**Detail Promosi** pada sistem e-commerce.
 
-## Entitas Utama dan Fungsinya
-# Desain Basis Data – Sistem E-Commerce (Zalora-like)
+### Atribut Awal
 
-Dokumen ini menjelaskan beberapa tabel utama dalam perancangan basis data sistem e-commerce, beserta atribut, relasi, dan fungsinya. Setiap tabel dirancang untuk mendukung proses bisnis secara efisien dan terintegrasi.
-
----
-
-## 1. Tabel Users  
-*(Ditambahkan oleh Tika Isnaeni)*
-
-### Deskripsi  
-Tabel `users` merupakan hasil penggabungan antara tabel **User** dan **Customer**. Penggabungan ini dilakukan untuk meningkatkan efisiensi penyimpanan data serta menghindari redundansi. Dalam sistem e-commerce (Zalora-like), customer pada dasarnya adalah user yang telah melakukan autentikasi dan melakukan aktivitas transaksi, sehingga pemisahan tabel dianggap tidak diperlukan.
-
----
-
-### Atribut  
-Tabel `users` memiliki atribut sebagai berikut:
-
-- `user_id` : Primary key yang mengidentifikasi setiap pengguna secara unik  
-- `role` : Menentukan peran pengguna dalam sistem (customer atau admin)  
-- `email` : Digunakan sebagai identitas login pengguna  
-- `password` : Menyimpan kata sandi pengguna dalam bentuk terenkripsi  
-- `phone` : Menyimpan nomor telepon pengguna  
-- `status` : Menunjukkan status akun pengguna (aktif / nonaktif)  
-- `last_login` : Mencatat waktu terakhir pengguna melakukan login  
-- `full_name` : Menyimpan nama lengkap pengguna  
-- `gender` : Menyimpan jenis kelamin pengguna  
-- `birth_date` : Menyimpan tanggal lahir pengguna  
-- `registered_at` : Mencatat waktu pendaftaran akun  
+| Atribut             | Keterangan                           |
+| ------------------- | ------------------------------------          |
+| `promo_id`          | ID unik promo (primary key)                   |
+| `kode_promo`        | Kode promo yang digunakan pengguna            |
+| `nama_promo`        | Nama atau judul promo                         |
+| `jenis_diskon`      | Jenis diskon (persentase / nominal)           |
+| `nilai_diskon`      | Besar diskon yang diberikan                   |
+| `tanggal_mulai`     | Tanggal mulai promo berlaku                   |
+| `tanggal_akhir`     | Tanggal promo berakhir                        |
+| `minimal_transaksi` | Minimum nilai transaksi agar promo aktif      |
+| `maksimal_diskon`   | Batas maksimum potongan (jika persen)         |
+| `kuota`             | Jumlah maksimal penggunaan promo              |
+| `status`            | Status promo (aktif / nonaktif / kadaluarsa)  |
+| `keterangan`        | Penjelasan atau syarat tambahan promo         |
 
 ---
 
-### Relasi  
-Tabel `users` memiliki relasi dengan beberapa tabel lain, yaitu:
+## Analisis Kebutuhan Sistem
 
-- **users – alamat_pengiriman** (1 : N)  
-  Satu pengguna dapat memiliki lebih dari satu alamat pengiriman  
+Dalam sistem e-commerce, promo memiliki karakteristik:
 
-- **users – keranjang** (1 : 1)  
-  Satu pengguna memiliki satu keranjang belanja aktif  
+- Tidak selalu berlaku untuk semua transaksi
+- Memiliki periode waktu tertentu (mulai dan berakhir)
+- Dapat memiliki berbagai jenis dan aturan (persentase, nominal, syarat minimal)
+- Memerlukan pengelolaan status (aktif, nonaktif, kadaluarsa)
+- Dapat digunakan pada lebih dari satu pesanan (Order)
 
-- **users – pesanan** (1 : N)  
-  Satu pengguna dapat melakukan banyak pesanan  
-
-- **users – wishlist** (1 : N)  
-  Satu pengguna dapat memiliki banyak item wishlist  
-
-- **users – user_subscription** (1 : N)  
-  Satu pengguna dapat memiliki satu atau lebih data subscription  
-
-- **users – return** (1 : N)  
-  Satu pengguna dapat mengajukan beberapa pengajuan return  
-
-- **users – review** (1 : N)  
-  Satu pengguna dapat memberikan banyak ulasan produk  
-
-- **users – log_aktivitas** (1 : N)  
-  Satu pengguna memiliki banyak catatan log aktivitas  
-
-- **users – riwayat_pencarian** (1 : N)  
-  Satu pengguna memiliki banyak riwayat pencarian produk  
+Karena itu, data promo tidak dapat digabung langsung dengan tabel Order dan perlu dikelola dalam tabel tersendiri.
 
 ---
 
-### Fungsi  
-Tabel `users` berfungsi sebagai pusat data pengguna dalam sistem e-commerce. Tabel ini digunakan untuk mengelola autentikasi dan otorisasi pengguna, menyimpan data profil customer, serta menjadi referensi utama bagi seluruh aktivitas pengguna seperti transaksi, subscription, pengajuan return, dan penggunaan promo. Dengan adanya tabel ini, sistem dapat mengelola data pengguna secara terintegrasi dan konsisten.
+## Proses Normalisasi
+
+### First Normal Form (1NF)
+
+- Semua atribut bersifat atomik
+- Tidak ada data multivalue (satu kolom satu nilai)
+
+  **Memenuhi 1NF**
+
+  ---
+
+  ### Second Normal Form (2NF)
+
+- Primary Key hanya satu (promo_id)
+- Seluruh atribut bergantung penuh pada Primary Key
+
+**Memenuhi 2NF**
+
+ ---
+
+ ### Third Normal Form (3NF)
+
+- Tidak terdapat ketergantungan transitif
+- Setiap atribut non-primary tidak bergantung pada atribut non-primary lainnya
+
+  **Memenuhi 3NF**
+
+  ---
+
+  ## Keputusan Normalisasi
+
+  ### Dijadikan Tabel Tersendiri
+
+  Alasan:
+
+1. Promo merupakan entitas bisnis, bukan sekadar atribut tambahan
+2. Memiliki periode berlaku dan status yang jelas
+3. Dapat digunakan pada lebih dari satu transaksi (Order)
+4. Menghindari redundansi data pada tabel Order
+5. Mendukung pengelolaan dan pengembangan promo di masa depan
 
 ---
 
-### Catatan Normalisasi  
-Penggabungan tabel **User** dan **Customer** dilakukan untuk menjaga normalisasi data hingga **Third Normal Form (3NF)**, mengurangi duplikasi data, serta meningkatkan performa query dalam sistem e-commerce.
+## Relasi Antar Tabel
+
+- Promo (1) → (N) Klaim_Promo
+- User (1) → (N) Klaim_Promo
+- Promo (1) → (N) Order
 
 ---
 
-## 2.
+## ERD 
+
+```
++-------------+     1     N     +----------------+     N     1     +-------------+
+|   PROMO     |--------------- |  KLAIM_PROMO   |--------------- |    USER     |
++-------------+                 +----------------+                 +-------------+
+| promo_idPK  |                 | klaim_idPK     |                 | user_idPK   |
+| kode_promo  |                 | promo_idFK     |                 | name        |
+| jenis_diskon|                 | user_idFK      |                 | email       |
+| nilai_diskon|                 | used_at        |                 |             |
+| start_date  |                 | status         |                 |             |
+| end_date    |                 +----------------+                 +-------------+
+| status      |
++-------------+
+
+           1
+           |
+           |
+           N
+     +-------------+
+     |   ORDER     |
+     +-------------+
+     | order_idPK  |
+     | user_idFK   |
+     | promo_idFK  |
+     | order_date  |
+     | total_price |
+     +-------------+
+
+```
 
 ---
 
-## 3.
-
----
-
-## 4.
-
----
-
-## 5.
-
----
-
-## 6. Tabel Inventory  
-*(Ditambahkan oleh Daris Nabil Maftuh)*
-
-### Entitas Utama  
-**Inventory (Stok Produk)**
-
-### Atribut Utama  
-- `inventory_id` (PK)  
-- `variant_id` (FK)  
-- `location_id` (FK)  
-- `stock_qty`  
-- `stock_minimum`  
-- `stock_status`  
-- `last_updated`  
-
-### Relasi  
-- **Inventory – Varian Produk** (1 : 1 / 1 : N)  
-  Satu varian produk memiliki data stok  
-
-- **Inventory – Lokasi Operasional** (N : 1)  
-  Banyak data stok berada pada satu lokasi (gudang / toko)  
-
-- **Inventory – Item Pesanan** (tidak langsung)  
-  Stok berkurang saat terjadi transaksi pembelian  
-
-### Fungsi  
-Tabel `inventory` berfungsi untuk mengelola ketersediaan stok setiap varian produk berdasarkan lokasi penyimpanan, memantau jumlah stok, serta mendukung proses pengendalian persediaan dan transaksi penjualan.
-
----
-
-## 7.
-
----
-
-## 8.
-
----
-
-## 9.
-
----
-
-## 10.
-
----
-
-## 11. Tabel Keranjang Sementara
-*(Ditambahkan oleh Moh Ilham Dwinanto)*
-
-### Deskripsi
-Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan proses checkout dan pembuatan pesanan (Order). Keranjang bersifat sementara dan dapat berubah sewaktu-waktu selama user belum menyelesaikan transaksi.
-
----
-
-### Atribut
-- `keranjang_id`   : sebagai Primary Key keranjang
-- `user_id`        : sebagai Foreign Key ke tabel user
-- `total_qty`      : total jumlah item dalam keranjang
-- `total_price`    : total harga seluruh item
-- `last_update`    : waktu terakhir keranjang diperbarui
-
----
-
-### Relasi
-- user -> keranjang (1:1) : satu user hanya memiliki satu keranjang aktif
-- keranjang -> item_keranjang (1:N) : satu keranjang dapat berisi banyak item
-
----
-
-### Fungsi
-Digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan proses checkout dan pembuatan pesanan (Order).
-
----
-
-## 12.
-
----
-
-## 13.
-
----
-
-## 14.
-
----
-
-## 15.
-
----
-
-## 16. Tabel Metode Pembayaran  
-*(Ditambahkan oleh Panji Pramudia)*
-
-### Deskripsi  
-Tabel `payment_methods` merupakan hasil normalisasi untuk memisahkan konfigurasi teknis pembayaran dari data penyedia layanan (Partners). Dalam sistem e-commerce, satu penyedia layanan (seperti Bank) dapat memiliki berbagai jenis produk pembayaran (Virtual Account, Kartu Kredit), sehingga pemisahan tabel ini dilakukan untuk menghindari redundansi data penyedia serta memudahkan pengaturan biaya layanan yang berbeda-beda.
-
----
-
-### Atribut  
-Tabel `payment_methods` memiliki atribut sebagai berikut:
-
-- `method_id` : Primary key yang mengidentifikasi setiap metode pembayaran secara unik  
-- `partner_id` : Foreign key yang menghubungkan metode ini dengan data penyedia layanan (partners)  
-- `category_id` : Foreign key yang mengelompokkan metode ke dalam jenis tertentu (seperti E-Wallet atau Transfer Bank)  
-- `method_name` : Menyimpan nama tampilan metode pembayaran di aplikasi  
-- `method_code` : Kode unik (slug) yang digunakan untuk integrasi API dengan payment gateway  
-- `admin_fee_flat` : Menyimpan nominal biaya admin dalam bentuk rupiah tetap  
-- `admin_fee_percent` : Menyimpan biaya admin dalam bentuk persentase  
-- `min_amount` : Membatasi jumlah minimal transaksi yang diperbolehkan  
-- `is_active` : Menunjukkan status ketersediaan metode pembayaran (aktif / nonaktif)  
-
----
-
-### Relasi  
-Tabel `payment_methods` memiliki relasi dengan beberapa tabel lain, yaitu:
-
-- **partners – payment_methods** (1 : N)  
-  Satu partner (penyedia) dapat menyediakan lebih dari satu metode pembayaran  
-
-- **payment_categories – payment_methods** (1 : N)  
-  Satu kategori pembayaran dapat membawahi banyak metode pembayaran  
-
-- **payment_methods – payments** (1 : N)  
-  Satu metode pembayaran dapat digunakan dalam banyak riwayat transaksi yang dilakukan user  
-
----
-
-### Fungsi  
-Tabel `payment_methods` berfungsi sebagai pusat konfigurasi opsi pembayaran dalam sistem e-commerce. Tabel ini digunakan untuk menampilkan pilihan bayar yang tersedia di halaman *checkout*, menjadi acuan perhitungan total biaya admin secara otomatis, serta menjadi referensi validasi bagi tabel transaksi (payments). Dengan adanya tabel ini, sistem dapat mengelola penambahan atau penonaktifan metode bayar secara dinamis tanpa mengganggu integritas data.
-
----
-
-### Catatan Normalisasi  
-Pemisahan tabel **Partners** dan **Payment Methods** dilakukan untuk menjaga normalisasi data hingga **Third Normal Form (3NF)**, mencegah duplikasi data penyedia layanan, serta mendukung skalabilitas jika terjadi penambahan produk pembayaran baru di masa depan.
-
----
-
-## 17.
-
----
-
-## 18.
-
----
-
-## 19.
-
----
-
-## 20.
-
----
-
-## 21.
-
----
-
-## 22. Tabel Klaim Promo  
-*(Ditambahkan oleh Dimas Faril Ardiansyah)*
-
-### Entitas Utama  
-**Klaim Promo**
-
-### Atribut  
-- `klaim_id` : Primary key, identitas unik klaim promo  
-- `user_id` : Foreign key yang menunjukkan user yang mengklaim promo  
-- `promo_id` : Foreign key yang menunjukkan promo yang diklaim  
-- `order_id` : Foreign key yang menunjukkan pesanan tempat promo digunakan  
-- `klaim_date` : Waktu promo diklaim  
-- `klaim_status` : Status klaim promo (berhasil / dibatalkan)  
-
-### Relasi  
-- **Klaim Promo – Users** (1 : N)  
-  Satu user dapat mengklaim banyak promo  
-
-- **Klaim Promo – Promo** (1 : N)  
-  Satu promo dapat digunakan oleh banyak user  
-
-- **Klaim Promo – Pesanan** (1 : 0..1)  
-  Satu pesanan boleh tidak menggunakan promo, dan jika menggunakan hanya satu promo  
-
----
-## 23.
-
----
-
-## 24.
-
----
-
-## 25.
-
----
-
-## 26. Tabel Lokasi Operasional  
-*(Ditambahkan oleh Najwa Alief Nursfhifa)*
-
-### Entitas Utama  
-**Lokasi Operasional**
-
-### Atribut Utama  
-- `location_id` (PK)  
-- `location_name`  
-
-### Relasi  
-- **Lokasi Operasional – Inventory** (1 : N)  
-  Satu lokasi operasional dapat menyimpan banyak data stok produk  
-
-- **Lokasi Operasional – Unit Operasional** (1 : N)  
-  Satu lokasi operasional dapat digunakan oleh banyak unit atau aktivitas kerja  
-
-### Fungsi  
-Tabel `lokasi_operasional` berfungsi untuk menyimpan dan mengelola data lokasi operasional sebagai referensi utama dalam sistem, memastikan konsistensi penggunaan lokasi pada berbagai modul, serta mendukung pengelolaan aktivitas operasional dan penyimpanan barang.
-
----
-
-
-## Catatan
-
-- Detail SQL dan implementasi teknis disesuaikan oleh Database Engineer (Satu Kelas)
-- Dokumen ini digunakan sebagai acuan konseptual dan akademik
-
----
-
-## 27.
-
----
-
-## 28.
+## Perbandingan dengan Tabel Mahasiswa Lain
+
+|  Mahasiswa   |  Tabel       |                          Konsistensi                                           |     |
+| ----------   | -----------  | ------------------------------------------------------------------------------ | --- |
+| User         | Customer     | Promo dapat dibatasi per pengguna atau segmen tertentu (melalui klaim promo).  | ✔️  |
+| Produk       | Product      | Promo dapat berlaku untuk produk, kategori, atau brand tertentu.               | ✔️  |
+| Order        | Pesanan      | Promo diterapkan pada saat checkout dan tercatat pada data pesanan.            | ✔️  |
+| Klaim Promo  | Ambil Promo  | Menyimpan riwayat penggunaan promo oleh pengguna serta kontrol kuota.          | ✔️  |
+| Subscription | Berlangganan | Promo diterapkan pada saat checkout dan tercatat pada data pesanan.            | ✔️  |
+| **Virgi**    | Promo        | Menyimpan aturan diskon secara terpisah dari transaksi.                        | ✔️  |
+
+Struktur Promo **selaras dan konsisten** dengan tabel mahasiswa lain.
+
+## Kesimpulan
+
+- Memenuhi prinsip normalisasi hingga 3NF
+- Mewakili entitas bisnis promo secara mandiri
+- Mendukung pengelolaan aturan diskon, periode berlaku, dan status promo
+- Menghindari redundansi data pada tabel pesanan
+- Mendukung pengembangan dan skalabilitas sistem promo di masa depan
 
 ---
