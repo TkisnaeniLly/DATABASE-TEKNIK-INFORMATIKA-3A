@@ -335,7 +335,33 @@ Pemisahan tabel **Partners** dan **Payment Methods** dilakukan untuk menjaga nor
 
 ---
 
-## 25.
+## 25.## 25.Tabel Riwayat_Pencarian
+(Ditambahkan oleh Eka Nurbela)
+
+### Deskripsi
+Tabel riwayat_pencarian digunakan untuk menyimpan seluruh aktivitas pencarian produk yang dilakukan oleh pengguna dalam sistem e-commerce (Zalora-like). Tabel ini mencatat kata kunci pencarian, waktu pencarian, serta keterkaitannya dengan pengguna dan produk. Data pada tabel ini sangat penting untuk keperluan analisis perilaku pengguna, personalisasi rekomendasi produk, serta evaluasi tren pencarian dalam sistem.
+
+### Atribut 
+Tabel riwayat_pencarian memiliki atribut sebagai berikut:
+search_id : Primary key yang mengidentifikasi setiap aktivitas pencarian secara unik
+user_id : Foreign key yang mereferensikan pengguna yang melakukan pencarian
+product_id : Foreign key yang mereferensikan produk yang berkaitan dengan pencarian (opsional)
+keyword : Menyimpan kata kunci pencarian yang dimasukkan oleh pengguna
+search_time : Mencatat waktu terjadinya aktivitas pencarian
+
+### Relasi  
+Tabel riwayat_pencarian memiliki relasi dengan tabel lain sebagai berikut:
+users – riwayat_pencarian (1 : N)
+Satu pengguna dapat melakukan banyak aktivitas pencarian produk
+produk – riwayat_pencarian (1 : N)
+Satu produk dapat muncul dalam banyak riwayat pencarian pengguna
+
+### Fungsi  
+Tabel riwayat_pencarian berfungsi untuk mencatat dan menyimpan jejak pencarian pengguna dalam sistem e-commerce. Data dari tabel ini dapat dimanfaatkan untuk menganalisis minat dan preferensi pengguna, meningkatkan fitur rekomendasi produk, mengoptimalkan hasil pencarian, serta mendukung kebutuhan business intelligence seperti analisis tren produk yang paling sering dicari.
+
+## Catatan
+Tabel riwayat_pencarian telah dinormalisasi hingga Third Normal Form (3NF). Seluruh atribut non-kunci bergantung secara langsung pada primary key (search_id) dan tidak memiliki ketergantungan transitif. Data pengguna dan produk tidak disimpan secara redundan, melainkan direferensikan melalui foreign key (user_id dan product_id), sehingga menjaga konsistensi data dan efisiensi penyimpanan dalam sistem e-commerce.
+
 
 ---
 
