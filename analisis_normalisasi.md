@@ -1,87 +1,105 @@
-Analisis & Perancangan Tabel User (Penggabungan Customer dan User)
-1. Alasan Penggabungan Tabel
+# Analisis & Perancangan Tabel `users`
 
-Pada rancangan awal, terdapat dua tabel terpisah yaitu User dan Customer.
-Namun, dalam konteks sistem e-commerce seperti Zalora, setiap customer pasti merupakan user, dan tidak ada kebutuhan kuat untuk memisahkan keduanya.
+Dokumen ini menjelaskan perancangan ulang tabel **User** dan **Customer** pada sistem e-commerce dengan konsep seperti Zalora. Kedua tabel tersebut digabung menjadi satu tabel agar struktur database lebih efisien dan tidak terjadi redundansi data.
 
-Untuk meningkatkan efisiensi data, mengurangi redundansi, serta mempermudah relasi antar tabel, maka tabel User dan Customer digabung menjadi satu tabel bernama users.
+---
 
-🗂️ Tabel: users
-Atribut Tabel
-Nama Atribut	Tipe	Keterangan
-user_id	PK	ID unik user
-role	Enum	Jenis user (customer, admin)
-email	Varchar	Email untuk login
-password	Varchar	Password user
-phone_number	Varchar	Nomor HP user
-full_name	Varchar	Nama lengkap user
-gender	Enum	Jenis kelamin
-birth_date	Date	Tanggal lahir
-status	Enum	Status akun (aktif / nonaktif)
-registered_at	DateTime	Tanggal pendaftaran
-last_login	DateTime	Login terakhir
-🔗 Relasi dengan Tabel Lain
+## 1. Latar Belakang Penggabungan Tabel
 
-Tabel users memiliki relasi dengan beberapa tabel lain, yaitu:
+Pada rancangan awal basis data, terdapat dua tabel terpisah yaitu **User** dan **Customer**. Namun dalam sistem e-commerce, **setiap customer pasti merupakan user** yang melakukan login dan berinteraksi dengan sistem.
 
-Tabel Tujuan	Relasi	Keterangan
-alamat_pengiriman	1 : N	Satu user bisa memiliki banyak alamat
-keranjang	1 : 1	Satu user memiliki satu keranjang aktif
-pesanan	1 : N	Satu user bisa membuat banyak pesanan
-wishlist	1 : N	User dapat menyimpan banyak produk favorit
-user_subscription	1 : N	User dapat memiliki riwayat langganan
-review	1 : N	User dapat memberikan review produk
-klaim_promo	1 : N	User dapat mengklaim promo
-log_aktivitas	1 : N	Aktivitas user dicatat oleh sistem
-⚙️ Fungsi Tabel users
+Pemisahan kedua tabel tersebut berpotensi menimbulkan:
 
-Tabel users berfungsi sebagai:
+* Duplikasi data identitas
+* Relasi yang tidak perlu kompleks
+* Kesulitan dalam pengelolaan data user
 
-Penyimpanan data identitas pengguna sistem
+Oleh karena itu, tabel **User** dan **Customer** digabung menjadi satu tabel bernama **`users`** untuk meningkatkan efisiensi dan konsistensi data.
 
-Dasar autentikasi dan otorisasi
+---
 
-Penghubung utama ke seluruh aktivitas user (pesanan, pembayaran, review, return, subscription)
+## 2. Struktur Tabel `users`
 
-📊 Analisis Normalisasi
-First Normal Form (1NF)
+### Nama Tabel
 
-Semua atribut bernilai atomik
+`users`
 
-Tidak ada atribut multivalue
+### Atribut Tabel
 
-Setiap record dapat diidentifikasi dengan primary key (user_id)
+| Nama Atribut  | Keterangan                               |
+| ------------- | ---------------------------------------- |
+| user_id       | Primary key sebagai identitas unik user  |
+| role          | Menentukan peran user (customer / admin) |
+| email         | Email user untuk login                   |
+| password      | Password user                            |
+| phone_number  | Nomor telepon user                       |
+| full_name     | Nama lengkap user                        |
+| gender        | Jenis kelamin user                       |
+| birth_date    | Tanggal lahir user                       |
+| status        | Status akun (aktif / nonaktif)           |
+| registered_at | Tanggal pendaftaran akun                 |
+| last_login    | Waktu terakhir user login                |
 
-✅ Memenuhi 1NF
+---
 
-Second Normal Form (2NF)
+## 3. Relasi Tabel `users`
 
-Primary key hanya satu atribut (user_id)
+Tabel `users` menjadi pusat relasi dalam sistem e-commerce dan berhubungan dengan beberapa tabel lain sebagai berikut:
 
-Semua atribut non-key bergantung sepenuhnya pada primary key
+| Tabel Terkait     | Jenis Relasi | Keterangan                              |
+| ----------------- | ------------ | --------------------------------------- |
+| alamat_pengiriman | 1 : N        | Satu user dapat memiliki banyak alamat  |
+| keranjang         | 1 : 1        | Satu user memiliki satu keranjang aktif |
+| pesanan           | 1 : N        | User dapat melakukan banyak transaksi   |
+| wishlist          | 1 : N        | User dapat menyimpan produk favorit     |
+| review            | 1 : N        | User dapat memberikan ulasan produk     |
+| user_subscription | 1 : N        | Riwayat langganan user                  |
+| klaim_promo       | 1 : N        | User dapat mengklaim promo              |
+| log_aktivitas     | 1 : N        | Aktivitas user tercatat dalam sistem    |
 
-✅ Memenuhi 2NF
+---
 
-Third Normal Form (3NF)
+## 4. Fungsi Tabel `users`
 
-Tidak terdapat ketergantungan transitif
+Tabel `users` berfungsi sebagai:
 
-Data pribadi, login, dan status user berada dalam satu entitas yang logis
+* Penyimpanan data identitas pengguna
+* Dasar autentikasi dan otorisasi sistem
+* Penghubung utama ke seluruh aktivitas user seperti pemesanan, pembayaran, return, dan subscription
 
-Data alamat, transaksi, dan subscription dipisahkan ke tabel lain
+---
 
-✅ Memenuhi 3NF
+## 5. Analisis Normalisasi
 
-🧠 Kesimpulan
+### First Normal Form (1NF)
 
-Penggabungan tabel User dan Customer menjadi tabel users membuat desain database:
+* Semua atribut bernilai atomik
+* Tidak terdapat atribut multivalue
+* Setiap record memiliki primary key
 
-Lebih sederhana
+**Status: Memenuhi 1NF**
 
-Lebih efisien
+---
 
-Mudah dikembangkan
+### Second Normal Form (2NF)
 
-Sesuai dengan kebutuhan sistem e-commerce modern
+* Primary key terdiri dari satu atribut yaitu `user_id`
+* Semua atribut non-key bergantung sepenuhnya pada primary key
 
-Struktur ini mendukung fitur utama seperti login, transaksi, return, subscription, dan aktivitas user secara terintegrasi.
+**Status: Memenuhi 2NF**
+
+---
+
+### Third Normal Form (3NF)
+
+* Tidak terdapat ketergantungan transitif
+* Data alamat, transaksi, dan subscription dipisahkan ke tabel lain
+* Setiap atribut hanya bergantung pada primary key
+
+**Status: Memenuhi 3NF**
+
+---
+
+## Kesimpulan
+
+Penggabungan tabel **User** dan **Customer** menjadi tabel **`users`** menghasilkan struktur database yang lebih sederhana, efisien, dan mudah dikembangkan. Desain ini mendukung kebutuhan sistem e-commerce modern serta memudahkan pengelolaan data pengguna secara terintegrasi.
