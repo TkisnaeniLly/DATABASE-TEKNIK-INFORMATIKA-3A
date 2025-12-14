@@ -68,8 +68,19 @@ Alasan:
 
 ---
 
-## ERD
-+----------------+ +-----------------+ +--------------------+ | Partners | 1 N | Payment Methods | N 1 | Payment Categories | +----------------+--------+-----------------+--------+--------------------+ | partner_id(PK) | | method_id(PK) | | category_id(PK) | | name | | partner_id(FK) | | name | | code | | category_id(FK) | | slug | | logo_url | | method_name | +--------------------+ | is_active | | method_code | +----------------+ | admin_fee | | is_active | +-----------------+
+## ERD (Entity Relationship Diagram)
+
++----------------+       +-----------------+       +--------------------+
+|    PARTNERS    | 1   N | PAYMENT_METHODS | N   1 | PAYMENT_CATEGORIES |
++----------------+-------+-----------------+-------+--------------------+
+| partner_id (PK)|       | method_id (PK)  |       | category_id (PK)   |
+| name           |       | partner_id (FK) |       | name               |
+| code           |       | category_id (FK)|       | slug               |
+| logo_url       |       | method_name     |       +--------------------+
+| is_active      |       | method_code     |
++----------------+       | admin_fee       |
+                         | is_active       |
+                         +-----------------+
 
 ---
 
