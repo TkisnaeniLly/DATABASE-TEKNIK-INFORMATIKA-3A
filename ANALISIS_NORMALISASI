@@ -1,3 +1,89 @@
-Analisis & Perancangan Tabel Patner Company
+# Analisis & Perancangan Tabel `Patner Company`
 
+[cite_start]Dokumen ini menjelaskan perancangan tabel **Patner Company** yang berfungsi menyimpan data entitas eksternal yang bermitra dengan sistem *e-commerce* (Zalora-like), seperti penyedia logistik, pembayaran, dan *brand* produk[cite: 3].
 
+---
+
+## 1. Latar Belakang Perancangan Tabel
+
+Dalam sistem *e-commerce*, banyak proses bisnis yang bergantung pada pihak ketiga. [cite_start]Tabel **`Patner Company`** dirancang untuk memusatkan data semua mitra ini[cite: 3]. Pengelompokan ini menghindari redundansi data di tabel terpisah serta mempermudah pengelolaan data dan *branding* mitra.
+
+* [cite_start]**Logistik:** Dibutuhkan jasa pengiriman eksternal (misalnya JNE, J&T)[cite: 3].
+* [cite_start]**Pembayaran:** Dibutuhkan bank atau *e-wallet* sebagai penyedia metode pembayaran (misalnya OVO, Kredivo)[cite: 3].
+* [cite_start]**Produk:** Produk disediakan oleh berbagai *Brand* (mitra) (misalnya Nike, H&M)[cite: 3].
+
+---
+
+## 2. Struktur Tabel `Patner Company`
+
+### Nama Tabel
+
+[cite_start]`Patner Company` [cite: 4]
+
+### Atribut Tabel
+
+| Nama Atribut | Keterangan |
+| :--- | :--- |
+| `Partner_Id` | [cite_start]Primary Key sebagai identitas unik perusahaan mitra[cite: 4]. |
+| `Name` | [cite_start]Nama resmi perusahaan mitra (contoh: "Levi's", "Bank Mandiri")[cite: 4]. |
+| `Logo_Url` | [cite_start]URL lokasi logo mitra untuk keperluan tampilan *website*[cite: 4]. |
+| `Type` | [cite_start]Kategori peran mitra (`Logistics`, `Payment`, `Brand`, `Marketing`)[cite: 4]. |
+
+---
+
+## 3. Relasi Tabel `Patner Company`
+
+[cite_start]Tabel `Patner Company` berfungsi sebagai tabel master yang berelasi dengan tabel lain melalui tipe mitra (`Type`)[cite: 4].
+
+| Tabel Terkait | Jenis Relasi | Keterangan |
+| :--- | :--- | :--- |
+| **Produk** (Tabel 3) | 1 : N | Satu Partner (sebagai Brand) dapat memiliki banyak Produk. [cite_start]Relasi melalui `Brand_Id`[cite: 3]. |
+| **Metode Pembayaran** (Tabel 16) | 1 : N | Satu Partner (sebagai Payment Provider) dapat menyediakan banyak Metode Pembayaran. |
+| **Jasa Pengiriman** (Tabel 17) | 1 : N | Satu Partner (sebagai Logistik) dapat menyediakan berbagai Service Pengiriman. |
+| **Promo** (Tabel 21) | N : N | Promo dapat memiliki keterikatan eksklusif dengan Partner tertentu (misalnya Promo Bank X). |
+
+---
+
+## 4. Fungsi Tabel `Patner Company`
+
+Tabel `Patner Company` berfungsi sebagai:
+
+* [cite_start]Penyimpanan data identitas perusahaan mitra secara terpusat[cite: 3].
+* [cite_start]Dasar untuk menampilkan logo dan nama *brand* atau penyedia layanan di halaman *e-commerce*[cite: 4].
+* [cite_start]Penghubung utama ke data produk, pembayaran, dan pengiriman berdasarkan jenis mitra[cite: 3].
+
+---
+
+## 5. Analisis Normalisasi
+
+### First Normal Form (1NF)
+
+* Semua atribut bernilai atomik.
+* Tidak terdapat atribut *multivalue*.
+* [cite_start]Setiap *record* memiliki *primary key* (`Partner_Id`)[cite: 4].
+
+**Status: Memenuhi 1NF**
+
+---
+
+### Second Normal Form (2NF)
+
+* [cite_start]*Primary key* terdiri dari satu atribut yaitu `Partner_Id`[cite: 4].
+* [cite_start]Semua atribut non-key (`Name`, `Logo_Url`, `Type`) bergantung sepenuhnya pada `Partner_Id`[cite: 4].
+
+**Status: Memenuhi 2NF**
+
+---
+
+### Third Normal Form (3NF)
+
+* Tidak terdapat ketergantungan transitif.
+* [cite_start]Setiap atribut non-key hanya bergantung langsung pada *primary key* (`Partner_Id`)[cite: 4].
+
+**Status: Memenuhi 3NF**
+
+---
+
+## Kesimpulan
+
+Perancangan tabel **`Patner Company`** dengan pengelompokan berdasarkan `Type` menghasilkan struktur yang efisien dan mendukung kebutuhan sistem *e-commerce* untuk berinteraksi dengan berbagai pihak eksternal. Desain ini juga memenuhi kaidah normalisasi hingga Third Normal Form (3NF).
