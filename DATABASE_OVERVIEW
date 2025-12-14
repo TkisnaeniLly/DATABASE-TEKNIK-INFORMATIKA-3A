@@ -1,6 +1,6 @@
 # DATABASE OVERVIEW – E-COMMERCE
 
-Dokumen ini menjelaskan **gambaran umum database** pada website e-commerce fashion. Database dirancang menggunakan **basis data relasional** untuk mendukung fitur belanja, transaksi, return, pengiriman dan subscription.
+Dokumen ini menjelaskan **gambaran umum database** pada website e-commerce fashion khusus tabel Lokasi Operasional. Database dirancang menggunakan **basis data relasional** untuk mendukung fitur belanja, transaksi, return, pengiriman dan subscription.
 
 ---
 
@@ -20,29 +20,12 @@ Dokumen ini menjelaskan **gambaran umum database** pada website e-commerce fashi
 * Struktur database mendukung skalabilitas sistem
   
 ## Tabel, Entitas Utama, Relasi dan Fungsinya
-
-1. Tabel User
-2.
-3.
-4.
-5.
-6. Tabel Inventory
-   Entitas utama : Inventory (Stok Produk)
-   Atribut Utama : Inventory_Id (PK), Variant_Id (FK), Location_Id (FK), Stock_Qty, Stock_Minimum, Stock_Status, Last_Updated
-   Relasi        : Inventory <> Varian Produk (1 : 1 / 1 : N) → Satu varian produk memiliki data stok.
-                   Inventory <> Lokasi Operasional (N : 1) → Banyak data stok berada pada satu lokasi (gudang/toko).
-                   Inventory <> Item Pesanan (tidak langsung) → Stok berkurang saat terjadi transaksi pembelian.
-   Fungsi        : Mengelola ketersediaan stok setiap varian produk berdasarkan lokasi penyimpanan, memantau jumlah stok, serta mendukung proses pengendalian persediaan dan transaksi penjualan.
 26. Tabel Lokasi Operasional
     Entitas utama : Lokasi Operasional
     Atribut Utama : Location_Id (PK), Location_Name
     Relasi : Lokasi Operasional <> Inventory (1 : N) → Satu lokasi operasional dapat menyimpan banyak data stok produk.
             Lokasi Operasional <> Unit Operasional (1 : N) → Satu lokasi operasional dapat digunakan oleh banyak unit atau aktivitas kerja.
     Fungsi : Menyimpan dan mengelola data lokasi operasional sebagai referensi utama dalam sistem, memastikan konsistensi penggunaan lokasi pada berbagai modul, serta mendukung pengelolaan aktivitas operasional dan penyimpanan barang.
-
-27.
-28.
-
 ---
 
 ## Catatan
