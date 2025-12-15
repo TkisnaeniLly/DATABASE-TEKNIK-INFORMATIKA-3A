@@ -123,7 +123,7 @@ Namun:
 
 ## Relasi Antar Tabel (Ringkas)
 
-```
+```text
 Customer (1) ──── (N) Alamat_Pengiriman
                       │
                       │ (1)
