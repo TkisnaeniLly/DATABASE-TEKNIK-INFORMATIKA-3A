@@ -71,7 +71,7 @@ Artinya, alamat **bukan data sementara**, melainkan **data master milik customer
 
 ## Keputusan Normalisasi
 
-### ✅ Wajib Dijadikan Tabel di Database
+### Wajib Dijadikan Tabel di Database
 
 **Tabel Alamat Pengiriman harus menjadi tabel tersendiri di database**, bukan hanya diproses di aplikasi.
 
@@ -110,14 +110,14 @@ Artinya, alamat **bukan data sementara**, melainkan **data master milik customer
 
 ### Apakah Ada Tabel yang Sama atau Duplikat?
 
-❌ **Tidak ada tabel lain yang memiliki fungsi sama** dengan Tabel Alamat Pengiriman.
+**Tidak ada tabel lain yang memiliki fungsi sama** dengan Tabel Alamat Pengiriman.
 
 Namun:
 
 * Tabel **Lokasi Operasional** ➜ alamat internal perusahaan
 * Tabel **Detail Pengiriman** ➜ status & proses pengiriman
 
-📌 **Ketiganya berbeda fungsi dan tidak boleh disatukan**.
+**Ketiganya berbeda fungsi dan tidak boleh disatukan**.
 
 ---
 
@@ -135,9 +135,9 @@ Customer (1) ──── (N) Alamat_Pengiriman
 
 ## Kesalahan Desain yang Harus Dihindari
 
-❌ Menyimpan alamat langsung di tabel Order
-❌ Mengelola alamat hanya sebagai object di aplikasi
-❌ Menyimpan alamat berulang di setiap transaksi
+Menyimpan alamat langsung di tabel Order
+Mengelola alamat hanya sebagai object di aplikasi
+Menyimpan alamat berulang di setiap transaksi
 
 Dampak:
 
