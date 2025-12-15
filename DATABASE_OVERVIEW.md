@@ -492,7 +492,7 @@ Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok seca
 
 ---
 
-## 8. Tabel Brand
+# 8. Tabel Brand
 *(Ditambahkan oleh Juniar Viki Mahasa)*
 
 ### Deskripsi
