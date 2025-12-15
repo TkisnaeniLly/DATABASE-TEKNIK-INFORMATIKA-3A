@@ -32,8 +32,6 @@ Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi pe
 
 Berikut gambaran ERD sederhana untuk tabel Inventory:
 
-## 4. ERD (Entity Relationship Diagram)
-
 +-------------------+      1        N      +-------------------+
 |      Varian       |-------------------->|     Inventory     |
 +-------------------+                     +-------------------+
@@ -74,4 +72,5 @@ Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi mu
 
 ## 6. Kesimpulan
 Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
+
 
