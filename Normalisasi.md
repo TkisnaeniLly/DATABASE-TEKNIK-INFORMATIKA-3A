@@ -125,7 +125,7 @@ Namun:
 
 ```text
 +-----------------------+        +-----------------------------+
-|       CUSTOMER        | 1    N |     ALAMAT_PENGIRIMAN        |
+|       CUSTOMER        | 1    N |     ALAMAT_PENGIRIMAN       |
 +-----------------------+--------+-----------------------------+
 | PK customer_id        |        | PK address_id               |
 | email                 |        | FK customer_id              |
@@ -147,13 +147,13 @@ Namun:
 | PK address_id               |        | PK order_id          |
 | FK customer_id              |        | FK user_id           |
 +-----------------------------+        | FK address_id        |
-                                      | order_date           |
-                                      | status               |
-                                      | total_price          |
-                                      +----------------------+
+                                       | order_date           |
+                                       | status               |
+                                       | total_price          |
+                                       +----------------------+
 
 +----------------------+        +-----------------------------+
-|        ORDER         | 1    1 |     DETAIL_PENGIRIMAN        |
+|        ORDER         | 1    1 |     DETAIL_PENGIRIMAN       |
 +----------------------+--------+-----------------------------+
 | PK order_id          |        | PK detail_pengiriman_id     |
 | FK address_id        |        | FK order_id                 |
