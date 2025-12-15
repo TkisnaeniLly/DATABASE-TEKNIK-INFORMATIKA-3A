@@ -1,10 +1,5 @@
 # Backend
 
-Backend bagian dari proyek **Aplikasi E-Commerce** Backend berfungsi sebagai penyedia REST API,
-pengelola logika bisnis, middleware, serta penghubung antara frontend dan basis data.
-
----
-
 ## 🚀 Menjalankan Backend
 
 ### 1. Install dependency
@@ -15,14 +10,11 @@ npm install
 
 ### 2. Konfigurasi environment
 
-Ganti nama file `.env.sample` menjadi `.env`, sesuaikan isi dari masing-masing variabel.
+Ganti nama file `.env.sample` menjadi `.env`, lalu sesuaikan nilainya.
 
 ```env
 PORT=3000
 NODE_ENV=development
-...
-...
-...
 ```
 
 ### 3. Jalankan server
@@ -53,45 +45,85 @@ LOG REQUEST {
 
 ## 📡 Dokumentasi Routes / Endpoint
 
-Endpoint berikut disediakan oleh backend sebagai **REST API** untuk kebutuhan aplikasi.
+Endpoint berikut disediakan oleh backend sebagai **REST API**.
 
-### 📍 User / Home
+---
 
-| Method | Endpoint     | Deskripsi                                      |
-| ------ | ------------ | ---------------------------------------------- |
-| GET    | `/api/users` | Mengambil data user / endpoint awal (home API) |
+### 📍 User / Beranda (Protected)
+
+| Method | Endpoint       | Deskripsi                   | Auth |
+| ------ | -------------- | --------------------------- | ---- |
+| GET    | `/api/`        | Endpoint beranda (home API) | JWT  |
+| GET    | `/api/beranda` | Endpoint beranda (home API) | JWT  |
+| GET    | `/api/home`    | Endpoint beranda (home API) | JWT  |
+
+**Header wajib**
+
+```
+Authorization: Bearer <JWT_TOKEN>
+```
 
 ---
 
 ### 🔐 Autentikasi
 
-| Method | Endpoint                 | Deskripsi                |
-| ------ | ------------------------ | ------------------------ |
-| POST   | `/api/auth/register`     | Registrasi user baru     |
-| POST   | `/api/auth/login`        | Autentikasi user (login) |
-| POST   | `/api/auth/logout`       | Logout user              |
-| GET    | `/api/auth/verify-email` | Verifikasi email user    |
+| Method | Endpoint                 | Deskripsi                           | Auth |
+| ------ | ------------------------ | ----------------------------------- | ---- |
+| POST   | `/api/auth/register`     | Registrasi user baru                | ❌   |
+| GET    | `/api/auth/verify-email` | Verifikasi email user melalui token | ❌   |
+| POST   | `/api/auth/login`        | Login user (mengirim OTP ke email)  | ❌   |
+| PUT    | `/api/auth/verify-login` | Verifikasi OTP login & generate JWT | ❌   |
+| DELETE | `/api/auth/logout`       | Logout user & invalidasi sesi       | JWT  |
+
+Baca selengkapnya di [Dokumentasi Auth](Doc/authentikasi.md).
 
 ---
 
-### 📌 Catatan Teknis
+## 🔄 Alur Autentikasi
 
-- Semua endpoint:
-  - Menggunakan format **JSON**
-  - Mengikuti prinsip **RESTful API**
-- Request & response:
-  - Data dikirim melalui body (`POST`)
-  - Data sensitif **tidak dikirim melalui URL**
-- Endpoint dapat berkembang sesuai kebutuhan aplikasi
+```text
+Register
+   ↓
+Email verifikasi (link + token)
+   ↓
+Email terverifikasi
+   ↓
+Login (email + password)
+   ↓
+OTP dikirim ke email
+   ↓
+Verifikasi OTP
+   ↓
+JWT aktif
+   ↓
+Akses API terproteksi
+   ↓
+Logout
+```
+
+---
+
+## 🔐 Keamanan API
+
+- Semua request & response menggunakan format **JSON**
+- Endpoint terproteksi **wajib** menyertakan:
+  ```
+  Authorization: Bearer <JWT_TOKEN>
+  ```
+- JWT berlaku selama **1 hari**
+- OTP login berlaku selama **5 menit**
+- Token verifikasi email bersifat **sekali pakai**
+
+---
 
 ## 🧠 Dokumentasi App.js
 
-App.js berfungsi sebagai entry point aplikasi backend dengan alur:
+`App.js` berfungsi sebagai **entry point** aplikasi backend dengan alur:
 
 1. Inisialisasi Express
 2. Registrasi middleware global
 3. Registrasi routes
-4. Menjalankan server berdasarkan PORT dari environment
+4. Menjalankan server berdasarkan `PORT` dari environment
 
 ---
 
