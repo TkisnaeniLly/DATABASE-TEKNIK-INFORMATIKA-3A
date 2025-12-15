@@ -1,54 +1,103 @@
-# Analisis & Perancangan Tabel Pesanan
+# NORMALISASI BASIS DATA -  SYAH IRKHAM RAMADHAN
 
-Dokumen ini menjelaskan perancangan tabel *Pesanan* yang berfungsi menyimpan data utama setiap transaksi yang telah diselesaikan oleh customer pada sistem e-commerce.
-
----
-
-## 1. Latar Belakang Perancangan Tabel
-
-Tabel *Pesanan* (Tabel 13) adalah inti dari proses transaksi. Setiap kali customer menyelesaikan proses checkout, sebuah record akan dibuat di tabel ini. Tabel ini berfungsi sebagai jembatan yang menghubungkan data customer, produk, pembayaran, dan pengiriman.
-
-Perancangan tabel ini bertujuan untuk:
-
-* Mencatat riwayat pembelian lengkap setiap user.
-* Menentukan status pesanan saat ini (misalnya: Pending, Processing, Shipped, Delivered).
-* Menyimpan ringkasan finansial (Total_Price dan Biaya_Pengiriman) dan detail Foreign Key ke entitas terkait.
+**Tahap 1** : Analisis dan Normalisasi Tabel Pesanan
 
 ---
 
-## 2. Struktur Tabel Pesanan
+## Atribut Awal
 
-### Nama Tabel
-
-Pesanan
-
-### Atribut Tabel
-
-| Nama Atribut | Keterangan |
-| :--- | :--- |
-| Order_Id | Primary Key sebagai identitas unik setiap pesanan. |
-| User_Id | Foreign Key (FK) merujuk ke tabel users (Tabel 1). Mencatat siapa yang melakukan pesanan. |
-| Order_Date | Tanggal pesanan dibuat. |
-| Status | Status pesanan saat ini (misalnya: Pending, Processing, Delivered). |
-| Total_Price | Total harga seluruh item pesanan. |
-| Biaya_Pengiriman | Biaya yang dikenakan untuk pengiriman. |
-| Payment_Method_Id | Foreign Key (FK) merujuk ke tabel Metode Pembayaran (Tabel 16). |
-| Address_Id | Foreign Key (FK) merujuk ke tabel Alamat Pengiriman (Tabel 2). Mencatat alamat tujuan. |
-| Tracking_Number | Nomor pelacakan (residu) yang diberikan oleh jasa pengiriman. |
-| Created_At | Waktu record pesanan ini dibuat. |
+| Atribut            | Keterangan                                  |
+|--------------------|---------------------------------------------|
+| Pesanan_id         | Primary Key tabel Pesanan/Order             |
+| user_id            | Foreign Key ke tabel User (Pembeli)         |
+| tanggal_pesanan    | Waktu pesanan dibuat/di-checkout            |
+| sub_total          | Total harga item sebelum diskon/ongkir      |
+| diskon             | Jumlah diskon yang diterapkan               |
+| ongkos_kirim       | Biaya pengiriman                            |
+| total_bayar        | Total akhir yang harus dibayar ($\text{Subtotal} - \text{Diskon} + \text{Ongkos Kirim}$)         |
+| status_pesanan     | Status saat ini (Diproses, Dikirim, Selesai, Dibatalkan)         |
+| alamat_kirim_id    | Foreign Key ke tabel Alamat Pengiriman         |
 
 ---
 
-## 3. Relasi Tabel Pesanan
+## Proses Normalisasi
 
-Tabel Pesanan memiliki banyak relasi sebagai penghubung utama transaksi:
+### First Normal Form (1NF)
+- Aturan: Tidak ada atribut multi-value atau repeating groups. Setiap field bernilai atomik.
+- Analisis: Semua atribut dirancang untuk menyimpan satu nilai tunggal. Tidak ada kelompok atribut berulang dalam satu baris.
 
-| Tabel Terkait | Jenis Relasi | Keterangan |
-| :--- | :--- | :--- |
-| *users* (Tabel 1) | N : 1 | Banyak Pesanan dimiliki oleh Satu User (User_Id FK). |
-| *Alamat Pengiriman* (Tabel 2) | N : 1 | Banyak Pesanan dapat menggunakan Satu Alamat Pengiriman yang tersimpan di profil user (Address_Id FK). |
-| *Metode Pembayaran* (Tabel 16) | N : 1 | Banyak Pesanan dapat menggunakan Satu Jenis Metode Pembayaran (Payment_Method_Id FK). |
-| *Item Pesanan* (Tabel 14) | 1 : N | Satu Pesanan terdiri dari banyak Item Pesanan (produk/varian). |
-| *Detail Pengiriman* (Tabel 18) | 1 : 1 | Satu Pesanan memiliki satu Detail Pengiriman yang mencatat info kurir, waktu kirim, dan status pengiriman. |
-| *Detail Pembayaran* (Tabel 19) | 1 : 1 | Satu Pesanan memiliki satu Detail Pembayaran yang mencatat status lunas, waktu bayar, dan referensi transaksi. |
-| *Klaim Promo* (Tabel 22)
+**LULUS 1NF**
+
+---
+
+### Second Normal Form (2NF)
+- Aturan: Harus Lulus 1NF, dan semua atribut non-key harus bergantung penuh pada Primary Key ($\text{PK}$). (Relevan jika $\text{PK}$ adalah Composite Key).
+- Analisis:<br> -  $\text{PK}$ tabel Pesanan adalah pesanan_id (PK tunggal).<br>
+            -  Semua atribut non-key (seperti total_bayar, status_pesanan, user_id, dll.) bergantung penuh pada pesanan_id. Jika pesanan_id berubah, seluruh data                  Pesanan berubah.
+
+**LULUS 2NF**
+
+---
+
+### Third Normal Form (3NF)
+
+- Aturan: Harus Lulus 2NF, dan tidak boleh ada dependensi transitif antar atribut non-key. Artinya, tidak ada atribut non-key yang bergantung pada atribut non-key lainnya.
+- Analisis:<br> - Atribut non-key seperti subtotal, diskon, ongkos_kirim, dan total_bayar semua bergantung pada pesanan_id, bukan satu sama lain.<br>
+                - Detail data eksternal (misalnya detail alamat pengiriman) dipisahkan ke tabel lain dan diakses melalui Foreign Key (alamat_kirim_id), sehingga                      detail tersebut tidak melanggar 3NF di tabel Pesanan.
+**LULUS 3NF**
+
+---
+
+## Keputusan Normalisasi
+
+Tabel Pesanan dan Item Pesanan dipecah menjadi entitas terpisah:
+1. Pesanan (Header): Menyimpan ringkasan transaksi (tanggal, total bayar, status, pembeli).
+2. Item Pesanan (Detail): Menyimpan detail barang apa saja yang dibeli dalam pesanan tersebut (untuk mencegah repeating groups dan mematuhi 1NF).
+
+---
+
+## Relasi Antar Tabel
+
+- **User (1) → (N) Pesanan = Satu User dapat memiliki banyak Pesanan/Transaksi historis.**
+- **Pesanan (1) → (N) Item Pesanan = Satu Pesanan terdiri dari banyak Item Pesanan (Detail Barang).**
+- **Pesanan (1) → (N) Alamat Pengiriman = Satu Pesanan terkait dengan satu Alamat Pengiriman spesifik saat transaksi.**
+
+---
+
+## ERD
+
+```
++---------------+ 1 | N +-----------------+ 1 | N +-----------------------+ N | 1 +-----------------+
+|     User      |---|---|     Pesanan     |---|---|   Item Pesanan        |---|---| Produk Variant  |
++---------------+---+---+-----------------+---+---+-----------------------+---+---+-----------------+
+| user_id(PK)   |   |   | pesanan_id(PK)  |   |   | item_pesanan_id(PK)   |   |   | variant_id(PK)  |
+| tipe_user     |   |   | user_id(FK)     |   |   | pesanan_id(FK)        |   |   | produk_id(FK)   |
+| email         |   |   | alamat_kirim_id(FK) |   | variant_id(FK)        |   |   | nama_variant    |
+| password      |   |   | tanggal_pesan   |   |   | quantity              |   |   | harga           |
+| no_hp         |   |   | total_bayar     |   |   | harga_satuan_saat_itu |   |   +-----------------+
+| status        |   |   | status_pesanan  |   |   | subtotal              |   |
++---------------+   |   +-----------------+   |   +-----------------------+   
+                    |                         |                           
+                    +--- 1 | 1 ---+           |
+                                 |           |
+                                 |           |
+                                 |           |
+                        +----------------------+
+                        | Alamat Pengiriman    |
+                        +----------------------+
+                        | alamat_kirim_id(PK)  |
+                        | user_id(FK)          |
+                        | jalan                |
+                        | kota                 |
+                        +----------------------+
+```
+
+---
+
+## Kesimpulan 
+
+Tabel Pesanan dan Item Pesanan merupakan inti dari data transaksi yang bersifat historis dan permanen.
+- Struktur kedua tabel memenuhi prinsip Third Normal Form (3NF).
+- Pemisahan detail (Item Pesanan) dari header (Pesanan) memastikan data transaksi tidak redundan dan mudah untuk diolah, dipertahankan (integritas), serta dilaporkan.
+
+---
