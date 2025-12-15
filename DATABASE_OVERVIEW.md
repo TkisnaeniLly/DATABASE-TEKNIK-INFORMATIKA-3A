@@ -388,33 +388,33 @@ Tabel Jasa_Pengiriman digunakan untuk menyimpan data perusahaan atau pihak ekspe
 ## Atribut 
 Tabel jasa pengiriman memiliki Atribut:
 
-Id_Pengiriman (PK) : Primary Key, identitas unik jasa pengiriman
-Nama_Pengiriman : Nama ekspedisi (JNE, J&T, dll)
-Service_Type : Jenis layanan (REG, YES, ECO, dll)
-Estimasi_Delivery_Days : Estimasi waktu pengiriman
-Logo : Logo jasa pengiriman
-Status : Aktif / Nonaktif
+- `Id_Pengiriman` (PK) : Primary Key, identitas unik jasa pengiriman  
+- `Nama_Pengiriman` : Nama ekspedisi (JNE, J&T, dll)  
+- `Service_Type` : Jenis layanan (REG, YES, ECO, dll)  
+- `Estimasi_Delivery_Days` : Estimasi waktu pengiriman  
+- `Logo` : Logo jasa pengiriman  
+- `Status` : Aktif / Nonaktif  
 
 ## Relasi
-Relasi 1: Jasa_Pengiriman → Detail_Pengiriman
-One to Many (1 : N)
-Satu jasa pengiriman bisa digunakan oleh banyak pengiriman
-Relasi:
-Jasa_Pengiriman.Courier_Id (PK)
-Detail_Pengiriman.Courier_Id (FK)
 
-Relasi 2: Pesanan → Detail_Pengiriman
-One to One / One to Many
-Setiap pesanan memiliki detail pengiriman
+### Relasi 1: Jasa_Pengiriman → Detail_Pengiriman
+One to Many (1 : N)  
+Satu jasa pengiriman bisa digunakan oleh banyak pengiriman  
+
 Relasi:
-Pesanan.Order_Id (PK)
-Detail_Pengiriman.Order_Id (FK)
+- Jasa_Pengiriman.Courier_Id (PK)  
+- Detail_Pengiriman.Courier_Id (FK)  
+
+### Relasi 2: Pesanan → Detail_Pengiriman
+One to One / One to Many  
+Setiap pesanan memiliki detail pengiriman  
+
+Relasi:
+- Pesanan.Order_Id (PK)  
+- Detail_Pengiriman.Order_Id (FK)  
 
 ## Fungsi 
 Tabel Jasa_Pengiriman berfungsi untuk menyimpan dan mengelola data master perusahaan ekspedisi yang digunakan dalam proses pengiriman pesanan. Tabel ini menjadi referensi utama dalam menentukan jasa pengiriman pada setiap transaksi, sehingga sistem dapat mencatat informasi pengiriman secara konsisten dan terstruktur. Selain itu, tabel ini membantu menghindari duplikasi data jasa pengiriman, memudahkan pengelolaan layanan pengiriman, serta mendukung integritas data dalam sistem informasi penjualan atau e-commerce.
-
-
-
 
 ---
 
@@ -429,7 +429,7 @@ Tabel Jasa_Pengiriman berfungsi untuk menyimpan dan mengelola data master perusa
 ## 20.
 
 ## Tabel Return  
-*(ditambah oleh Rafik Hidayat)*
+*(ditambah oleh Fifi Nurfadilah)*
 
 ## Atribut Awal
 
@@ -578,26 +578,26 @@ Dengan demikian, **tabel Return harus disimpan di database**, bukan hanya sebaga
 
 ---
 
-## 25.## 25.Tabel Riwayat_Pencarian
-(Ditambahkan oleh Eka Nurbela)
+## 25.Tabel Riwayat_Pencarian
+*(Ditambahkan oleh Eka Nurbela)*
 
 ### Deskripsi
 Tabel riwayat_pencarian digunakan untuk menyimpan seluruh aktivitas pencarian produk yang dilakukan oleh pengguna dalam sistem e-commerce (Zalora-like). Tabel ini mencatat kata kunci pencarian, waktu pencarian, serta keterkaitannya dengan pengguna dan produk. Data pada tabel ini sangat penting untuk keperluan analisis perilaku pengguna, personalisasi rekomendasi produk, serta evaluasi tren pencarian dalam sistem.
 
 ### Atribut 
 Tabel riwayat_pencarian memiliki atribut sebagai berikut:
-search_id : Primary key yang mengidentifikasi setiap aktivitas pencarian secara unik
-user_id : Foreign key yang mereferensikan pengguna yang melakukan pencarian
-product_id : Foreign key yang mereferensikan produk yang berkaitan dengan pencarian (opsional)
-keyword : Menyimpan kata kunci pencarian yang dimasukkan oleh pengguna
-search_time : Mencatat waktu terjadinya aktivitas pencarian
+- `search_id` : Primary key yang mengidentifikasi setiap aktivitas pencarian secara unik
+- `user_id` : Foreign key yang mereferensikan pengguna yang melakukan pencarian
+- `product_id` : Foreign key yang mereferensikan produk yang berkaitan dengan pencarian (opsional)
+- `keyword` : Menyimpan kata kunci pencarian yang dimasukkan oleh pengguna
+- `search_time` : Mencatat waktu terjadinya aktivitas pencarian
 
 ### Relasi  
 Tabel riwayat_pencarian memiliki relasi dengan tabel lain sebagai berikut:
-users – riwayat_pencarian (1 : N)
-Satu pengguna dapat melakukan banyak aktivitas pencarian produk
-produk – riwayat_pencarian (1 : N)
-Satu produk dapat muncul dalam banyak riwayat pencarian pengguna
+- users – riwayat_pencarian (1 : N)  
+  Satu pengguna dapat melakukan banyak aktivitas pencarian produk
+- produk – riwayat_pencarian (1 : N)  
+  Satu produk dapat muncul dalam banyak riwayat pencarian pengguna
 
 ### Fungsi  
 Tabel riwayat_pencarian berfungsi untuk mencatat dan menyimpan jejak pencarian pengguna dalam sistem e-commerce. Data dari tabel ini dapat dimanfaatkan untuk menganalisis minat dan preferensi pengguna, meningkatkan fitur rekomendasi produk, mengoptimalkan hasil pencarian, serta mendukung kebutuhan business intelligence seperti analisis tren produk yang paling sering dicari.
@@ -644,6 +644,7 @@ Tabel `lokasi_operasional` berfungsi untuk menyimpan dan mengelola data lokasi o
 ## 28.
 
 ---
+
 
 
 
