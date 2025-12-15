@@ -517,7 +517,7 @@ Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok seca
 ---
 
 ### 7. Tabel Media
-**(Ditambahkan oleh Wylson Marcho Adelwin)**
+**(Ditambahkan oleh Elitsa Effie)**
 Deskripsi Umum
 Tabel media digunakan untuk menyimpan data media visual berupa gambar atau video yang berkaitan dengan produk dalam sistem e-commerce. Media produk berperan penting dalam memberikan informasi visual kepada pengguna, meningkatkan daya tarik produk, serta mendukung pengalaman pengguna (user experience) dalam proses pencarian dan pemilihan produk. Dalam sistem e-commerce (Zalora-like), satu produk dapat memiliki lebih dari satu media untuk menampilkan berbagai sudut pandang, detail, atau variasi produk. Oleh karena itu, data media dipisahkan ke dalam tabel tersendiri agar pengelolaan media lebih terstruktur dan efisien.
 
