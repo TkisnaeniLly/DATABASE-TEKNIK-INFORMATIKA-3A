@@ -32,7 +32,7 @@ Dokumen ini menjelaskan beberapa tabel utama dalam perancangan basis data sistem
 ### Deskripsi  
 Tabel `users` merupakan hasil penggabungan antara tabel **User** dan **Customer**. Penggabungan ini dilakukan untuk meningkatkan efisiensi penyimpanan data serta menghindari redundansi. Dalam sistem e-commerce (Zalora-like), customer pada dasarnya adalah user yang telah melakukan autentikasi dan melakukan aktivitas transaksi, sehingga pemisahan tabel dianggap tidak diperlukan.
 
-## 1. Latar Belakang Penggabungan Tabel
+## Latar Belakang Penggabungan Tabel
 
 Pada rancangan awal basis data, terdapat dua tabel terpisah yaitu **User** dan **Customer**. Namun dalam sistem e-commerce, **setiap customer pasti merupakan user** yang melakukan login dan berinteraksi dengan sistem.
 
@@ -44,7 +44,7 @@ Pemisahan kedua tabel tersebut berpotensi menimbulkan:
 
 Oleh karena itu, tabel **User** dan **Customer** digabung menjadi satu tabel bernama **`users`** untuk meningkatkan efisiensi dan konsistensi data.
 
-## 2. Struktur Tabel `users`
+## Struktur Tabel `users`
 
 ### Nama Tabel
 
@@ -66,7 +66,7 @@ Oleh karena itu, tabel **User** dan **Customer** digabung menjadi satu tabel ber
 | registered_at | Tanggal pendaftaran akun                 |
 | last_login    | Waktu terakhir user login                |
 
-## 3. Relasi Tabel `users`
+## Relasi Tabel `users`
 
 Tabel `users` menjadi pusat relasi dalam sistem e-commerce dan berhubungan dengan beberapa tabel lain sebagai berikut:
 
@@ -82,7 +82,7 @@ Tabel `users` menjadi pusat relasi dalam sistem e-commerce dan berhubungan denga
 | log_aktivitas     | 1 : N        | Aktivitas user tercatat dalam sistem      |
 | return            | 1 : N        | User dapat mengajukan pengembalian barang |
 
-## 4. Fungsi Tabel `users`
+## Fungsi Tabel `users`
 
 Tabel `users` berfungsi sebagai:
 
@@ -90,7 +90,7 @@ Tabel `users` berfungsi sebagai:
 * Dasar autentikasi dan otorisasi sistem
 * Penghubung utama ke seluruh aktivitas user seperti pemesanan, pembayaran, return, dan subscription
 
-## 5. Analisis Normalisasi
+## Analisis Normalisasi
 
 ### First Normal Form (1NF)
 
@@ -121,7 +121,7 @@ Penggabungan tabel **User** dan **Customer** menjadi tabel **`users`** menghasil
 
 
 # 2. Tabel : Alamat Pengiriman
-(Ditambahkan oleh Sae Al Chaq
+*(Ditambahkan oleh Sae Al Chaq)*
 **Normalisasi Basis data**
 
 ## Deskripsi Awal Tabel
@@ -351,9 +351,6 @@ Produk memiliki relasi N:M dengan entitas lain (seperti Keranjang atau Pesanan) 
 
     * **Tabel Terlibat:** **Tabel Item Pesanan** (Riyan Zacki Saputra) menggunakan `Variant_Id` sebagai Foreign Key.
 
-
----
-
 # 4. Tabel Kategori
 *(Ditambahkan oleh FAWWAZ ARDIANSYAH)*
 
@@ -486,8 +483,6 @@ Normalisasi tabel **Kategori**:
 | Varian_Type   | Jenis varian(misalnya Warna,Ukuran,Material) |
 | Ukuran_Varian | Nilai detail varian (contoh: Merah, Small)   |
 
----
-
 ## Proses Normalisasi  
 
 ### First Normal Form (1NF)  
@@ -497,8 +492,6 @@ Normalisasi tabel **Kategori**:
 
 *LULUS 1NF*  
 
----
-
 ### Second Normal Form (2NF)  
 
 - Punya PK tunggal (Varian_Id)  
@@ -506,16 +499,12 @@ Normalisasi tabel **Kategori**:
 
 *LULUS 2NF*  
 
----
-
 ### Third Normal Form (3NF)  
 
 - Tidak terdapat dependensi transitif antar atribut non-key  
 - Varian_Type dan Ukuran_Varian bergantung langsung pada Varian_Id, bukan pada atribut lain  
 
 *LULUS 3NF*  
-
----
 
 ## Keputusan Normalisasi  
 
@@ -528,18 +517,14 @@ Alasan:
 3. Memudahkan pengelolaan stok dan harga berdasarkan varian  
 4. Mendukung fleksibilitas sistem e-commerce (misalnya filter produk berdasarkan warna/ukuran)  
 
----
-
 ## Relasi Antar Tabel  
 
 - *Produk (1) → (N) Varian*  
 - *Varian (1) → (N) Item Keranjang*  
 
----
-
 ## ERD  
 
-
+```
 +----------------+        +------------------+        +-----------------------+
 |    Produk      | 1    N |     Varian       | 1    N | Item Keranjang        |
 +----------------+--------+------------------+--------+-----------------------+
@@ -549,8 +534,7 @@ Alasan:
 | harga          |        | ukuran_varian    |        | quantity              |
 | deskripsi      |        +------------------+        | subtotal              |
 +----------------+                                     +-----------------------+
-
----
+```
 
 ## Kesimpulan  
 
@@ -629,7 +613,7 @@ Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok seca
 ---
 
 ### 7. Tabel Media
-**(Ditambahkan oleh Elitsa Effie)**
+*(Ditambahkan oleh Elitsa Effie)*
 Deskripsi Umum
 Tabel media digunakan untuk menyimpan data media visual berupa gambar atau video yang berkaitan dengan produk dalam sistem e-commerce. Media produk berperan penting dalam memberikan informasi visual kepada pengguna, meningkatkan daya tarik produk, serta mendukung pengalaman pengguna (user experience) dalam proses pencarian dan pemilihan produk. Dalam sistem e-commerce (Zalora-like), satu produk dapat memiliki lebih dari satu media untuk menampilkan berbagai sudut pandang, detail, atau variasi produk. Oleh karena itu, data media dipisahkan ke dalam tabel tersendiri agar pengelolaan media lebih terstruktur dan efisien.
 
@@ -682,6 +666,7 @@ Third Normal Form (3NF)
 Status: Memenuhi 3NF
 
 ### ERD
+```
 +--------------------+      1        N     +--------------------+
 |      Product       |-------------------->|        Media       |
 +--------------------+                     +--------------------+
@@ -692,11 +677,10 @@ Status: Memenuhi 3NF
 | Deskripsi          |                     | Position           |
 | Status             |                     | Created_At         |
 +--------------------+                     +--------------------+
-
+```
 
 ### Kesimpulan
 Tabel media dirancang sebagai tabel terpisah untuk menyimpan data visual produk agar struktur basis data tetap efisien dan ter-normalisasi. Desain ini mendukung kebutuhan sistem e-commerce modern dalam menampilkan informasi produk secara visual, meningkatkan pengalaman pengguna, serta memudahkan pengelolaan dan pengembangan fitur media di masa mendatang.
-
 
 ---
 
