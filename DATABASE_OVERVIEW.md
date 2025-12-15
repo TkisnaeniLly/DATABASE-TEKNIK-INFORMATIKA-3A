@@ -516,7 +516,75 @@ Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok seca
 
 ---
 
-## 7.
+### 7. Tabel Media
+**(Ditambahkan oleh Wylson Marcho Adelwin)**
+Deskripsi Umum
+Tabel media digunakan untuk menyimpan data media visual berupa gambar atau video yang berkaitan dengan produk dalam sistem e-commerce. Media produk berperan penting dalam memberikan informasi visual kepada pengguna, meningkatkan daya tarik produk, serta mendukung pengalaman pengguna (user experience) dalam proses pencarian dan pemilihan produk. Dalam sistem e-commerce (Zalora-like), satu produk dapat memiliki lebih dari satu media untuk menampilkan berbagai sudut pandang, detail, atau variasi produk. Oleh karena itu, data media dipisahkan ke dalam tabel tersendiri agar pengelolaan media lebih terstruktur dan efisien.
+
+Latar Belakang Pemisahan Tabel
+Pada rancangan basis data, data produk dan data media tidak digabung dalam satu tabel karena satu produk dapat memiliki banyak file media. Jika media disimpan langsung pada tabel produk, maka akan menimbulkan:
+•	Duplikasi data produk
+•	Struktur tabel yang tidak efisien
+•	Pelanggaran kaidah normalisasi (multivalue attribute)
+Oleh karena itu, tabel media dibuat sebagai tabel terpisah yang berelasi dengan tabel product untuk menjaga efisiensi penyimpanan dan konsistensi data.
+
+Atribut Tabel
+| Nama Atribut | Keterangan                               |
+| ------------ | ---------------------------------------- |
+| media_id     | Primary key sebagai identitas unik media |
+| product_id   | Foreign key yang mereferensikan produk   |
+| media_url    | Lokasi atau URL file media               |
+| media_type   | Jenis media (image / video)              |
+| position     | Urutan tampilan media                    |
+| created_at   | Waktu media ditambahkan                  |
+
+Relasi Tabel media
+Tabel media memiliki relasi dengan tabel lain sebagai berikut:
+| Tabel Terkait | Jenis Relasi   | Keterangan                                           |
+| ------------- | -------------- | ---------------------------------------------------- |
+| product       | 1 : N          | Satu produk dapat memiliki banyak media              |
+| variant       | tidak langsung | Media dapat merepresentasikan varian produk tertentu |
+| wishlist      | tidak langsung | Media ditampilkan saat produk masuk wishlist         |
+
+### Fungsi Tabel media
+Tabel media berfungsi sebagai:
+•	Penyimpanan data gambar dan video produk
+•	Pendukung tampilan detail produk dalam sistem e-commerce
+•	Meningkatkan daya tarik visual dan kepercayaan pengguna terhadap produk
+•	Mendukung fitur galeri produk dan urutan tampilan media
+
+### Analisis Normalisasi
+First Normal Form (1NF)
+•	Setiap atribut bernilai atomik
+•	Tidak terdapat atribut multivalue
+•	Setiap data media direpresentasikan dalam satu baris
+Status: Memenuhi 1NF
+Second Normal Form (2NF)
+•	Primary key tunggal (media_id)
+•	Seluruh atribut non-key bergantung penuh pada primary key
+Status: Memenuhi 2NF
+Third Normal Form (3NF)
+•	Tidak terdapat ketergantungan transitif
+•	Informasi produk dipisahkan ke tabel product
+•	Tabel media hanya menyimpan data yang berkaitan langsung dengan media
+Status: Memenuhi 3NF
+
+### ERD
++--------------------+      1        N     +--------------------+
+|      Product       |-------------------->|        Media       |
++--------------------+                     +--------------------+
+| Product_Id (PK)    |                     | Media_Id (PK)      |
+| Brand_Id (FK)      |                     | Product_Id (FK)    |
+| Category_Id (FK)   |                     | Media_Url          |
+| Nama_Produk        |                     | Media_Type         |
+| Deskripsi          |                     | Position           |
+| Status             |                     | Created_At         |
++--------------------+                     +--------------------+
+
+
+### Kesimpulan
+Tabel media dirancang sebagai tabel terpisah untuk menyimpan data visual produk agar struktur basis data tetap efisien dan ter-normalisasi. Desain ini mendukung kebutuhan sistem e-commerce modern dalam menampilkan informasi produk secara visual, meningkatkan pengalaman pengguna, serta memudahkan pengelolaan dan pengembangan fitur media di masa mendatang.
+
 
 ---
 
