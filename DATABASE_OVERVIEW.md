@@ -427,6 +427,7 @@ Alasan:
 
 ## ERD  
 
+```
 
 +----------------+        +------------------+        +-----------------------+
 |    Produk      | 1    N |     Varian       | 1    N | Item Keranjang        |
@@ -436,7 +437,8 @@ Alasan:
 | kategori       |        | varian_type      |        | varian_id(FK)         |
 | harga          |        | ukuran_varian    |        | quantity              |
 | deskripsi      |        +------------------+        | subtotal              |
-+----------------+                                     +-----------------------+
++----------------+                                    +-----------------------+
+```
 
 ---
 
