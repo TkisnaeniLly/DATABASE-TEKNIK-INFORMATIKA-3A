@@ -1,9 +1,12 @@
 # NORMALISASI TABEL INVENTORY / STOK
 
-## Entitas Utama
-Inventory adalah entitas utama yang menyimpan data stok produk berdasarkan varian dan lokasi.
+## 1. Entitas Utama
+Inventory merupakan entitas utama yang berfungsi menyimpan data stok produk berdasarkan varian dan lokasi penyimpanan. Tabel ini berperan penting dalam mengontrol ketersediaan barang pada sistem e-commerce.
 
-## Atribut
+---
+
+## 2. Atribut
+Tabel Inventory memiliki atribut sebagai berikut:
 - inventory_id (PK)
 - variant_id (FK)
 - location_id (FK)
@@ -12,11 +15,46 @@ Inventory adalah entitas utama yang menyimpan data stok produk berdasarkan varia
 - stock_status
 - last_updated
 
-## Relasi Antar Tabel
-Inventory berelasi dengan tabel Varian dan Lokasi Operasional.
+Setiap atribut memiliki fungsi spesifik dan tidak saling bergantung secara transitif.
 
-## Normalisasi
-Tabel Inventory memenuhi Third Normal Form (3NF).
+---
 
-## Penggabungan Tabel
-Tabel Inventory tidak digabungkan dengan tabel lain untuk menghindari redundansi data.
+## 3. Relasi Antar Tabel
+Relasi tabel Inventory dengan tabel lain adalah:
+- Inventory berelasi dengan tabel Varian melalui atribut variant_id.
+- Inventory berelasi dengan tabel Lokasi Operasional melalui atribut location_id.
+
+Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi penyimpanan (gudang/toko).
+
+---
+
+## 4. ERD (Entity Relationship Diagram)
+
+Berikut gambaran ERD sederhana untuk tabel Inventory:
+
+Varian (variant_id)  
+        │  
+        │ 1..n  
+        ▼  
+Inventory (inventory_id, stock_qty, stock_status, location_id)  
+        ▲  
+        │ n..1  
+        │  
+Lokasi_Operasional (location_id)
+
+Diagram ini menunjukkan bahwa satu varian dapat memiliki data stok, dan satu lokasi operasional dapat menyimpan banyak data inventory.
+
+---
+
+## 5. Keputusan Normalisasi
+Berdasarkan analisis normalisasi:
+- Tabel Inventory **tidak digabungkan** dengan tabel Varian maupun Produk.
+- Pemisahan tabel dilakukan untuk menghindari redundansi data dan menjaga konsistensi stok.
+- Tabel Inventory berdiri sendiri sebagai tabel transaksi stok dan memenuhi prinsip **Third Normal Form (3NF)**.
+
+Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi multi-gudang.
+
+---
+
+## 6. Kesimpulan
+Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
