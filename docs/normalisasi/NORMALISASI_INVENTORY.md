@@ -28,36 +28,6 @@ Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi pe
 
 ---
 
-## 4. ERD (Entity Relationship Diagram)
-
-Berikut gambaran ERD sederhana untuk tabel Inventory:
-
-+-------------------+      1        N      +-------------------+
-|      Varian       |-------------------->|     Inventory     |
-+-------------------+                     +-------------------+
-| variant_id (PK)   |                     | inventory_id (PK) |
-| product_id (FK)   |                     | variant_id (FK)   |
-| nama_varian       |                     | location_id (FK)  |
-| harga             |                     | stock_qty         |
-+-------------------+                     | stock_minimum     |
-                                          | stock_status      |
-                                          | last_updated      |
-                                          +-------------------+
-                                                    |
-                                                    | N
-                                                    |
-                                                    | 1
-                                          +----------------------+
-                                          | Lokasi Operasional   |
-                                          +----------------------+
-                                          | location_id (PK)     |
-                                          | nama_lokasi          |
-                                          | tipe_lokasi          |
-                                          +----------------------+
-
-Diagram ini menunjukkan bahwa satu varian dapat memiliki banyak data inventory,
-dan satu lokasi operasional dapat menyimpan banyak data inventory.
-
 ---
 
 ## 5. Keputusan Normalisasi
@@ -72,6 +42,7 @@ Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi mu
 
 ## 6. Kesimpulan
 Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
+
 
 
 
