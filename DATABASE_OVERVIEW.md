@@ -308,6 +308,16 @@ Produk memiliki relasi N:M dengan entitas lain (seperti Keranjang atau Pesanan) 
     * **Tabel Terlibat:** **Tabel Item Pesanan** (Riyan Zacki Saputra) menggunakan `Variant_Id` sebagai Foreign Key.
 
 
+---
+
+## 4.
+
+---
+
+## 5.
+
+---
+
 - Tidak selalu berlaku untuk semua transaksi
 - Memiliki periode waktu tertentu (mulai dan berakhir)
 - Dapat memiliki berbagai jenis dan aturan (persentase, nominal, syarat minimal)
@@ -327,6 +337,50 @@ Karena itu, data promo tidak dapat digabung langsung dengan tabel Order dan perl
 
 ## 6. Tabel Inventory  
 *(Ditambahkan oleh Daris Nabil Maftuh)*
+
+### Entitas Utama  
+**Inventory (Stok Produk)**
+
+### Atribut Utama  
+- `inventory_id` (PK)  
+- `variant_id` (FK)  
+- `location_id` (FK)  
+- `stock_qty`  
+- `stock_minimum`  
+- `stock_status`  
+- `last_updated`  
+
+### Relasi  
+- **Inventory – Varian Produk** (1 : 1 / 1 : N)  
+  Satu varian produk memiliki data stok  
+
+- **Inventory – Lokasi Operasional** (N : 1)  
+  Banyak data stok berada pada satu lokasi (gudang / toko)  
+
+- **Inventory – Item Pesanan** (tidak langsung)  
+  Stok berkurang saat terjadi transaksi pembelian  
+
+### Fungsi  
+Tabel `inventory` berfungsi untuk mengelola ketersediaan stok setiap varian produk berdasarkan lokasi penyimpanan, memantau jumlah stok, serta mendukung proses pengendalian persediaan dan transaksi penjualan.
+
+
+---
+
+## 7.
+
+---
+
+## 8.
+
+---
+
+## 9.
+
+---
+
+## 10.
+
+---
 
   **Memenuhi 1NF**
 
@@ -466,6 +520,9 @@ Desain ini memenuhi prinsip normalisasi hingga **Third Normal Form (3NF)** serta
 ## 11. Tabel Keranjang Sementara
 *(Ditambahkan oleh Moh Ilham Dwinanto)*
 
+### Deskripsi
+Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan proses checkout dan pembuatan pesanan (Order). Keranjang bersifat sementara dan dapat berubah sewaktu-waktu selama user belum menyelesaikan transaksi.
+
 - Promo (1) → (N) Klaim_Promo
 - User (1) → (N) Klaim_Promo
 - Promo (1) → (N) Order
@@ -503,6 +560,7 @@ Digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan
 
 ---
 
+## 12.
 ## 12. Tabel Item Keranjang Sementara
 *(Ditambahkan oleh Nicko Ikhwan Prayogi)*
 
@@ -566,6 +624,8 @@ Digunakan untuk menyimpan data produk yang dipilih oleh user yang kemudian disim
 ### Deskripsi
 Tabel `Pesanan` adalah tabel transaksional utama yang mencatat setiap pembelian yang berhasil dibuat oleh pengguna. Tabel ini mengintegrasikan data dari User, Alamat Pengiriman, dan Metode Pembayaran serta menjadi induk bagi Item Pesanan.
 
+---
+
 ### Atribut  
 Tabel `Pesanan` memiliki atribut sebagai berikut:
 Nama Atribut,Keterangan,Kunci
@@ -580,6 +640,8 @@ Nama Atribut,Keterangan,Kunci
 - `biaya_pengiriman`,Biaya pengiriman yang dikenakan.
 - `tracking_number`,Nomor resi pelacakan dari jasa pengiriman.
 - `created_at`,Waktu pencatatan pesanan dalam sistem.
+
+---
 
 ### Relasi  
 Tabel `Pesanan` memiliki relasi dengan beberapa tabel lain, yaitu:
@@ -608,11 +670,15 @@ Tabel `Pesanan` memiliki relasi dengan beberapa tabel lain, yaitu:
 - **pesanan – return** (1 : N)
   Satu pesanan dapat memiliki banyak pengajuan return (melalui Item Pesanan).
 
+---
+
 ### Fungsi  
 Tabel `Pesanan` berfungsi sebagai: 
 1. Perekam Transaksi Utama: Mencatat detail dan riwayat setiap transaksi pembelian.
 2. Manajemen Status: Mengelola dan memperbarui Status pesanan dari awal hingga selesai.
 3. Integrator Data: Menghubungkan semua data master (User, Alamat, Pembayaran) dengan data item produk yang dibeli.
+
+---
 
 ### Catatan Normalisasi  
 Tabel ini dirancang untuk memenuhi Third Normal Form (3NF), di mana semua atribut non-key secara langsung bergantung pada Kunci Utama `order_id`, tanpa adanya ketergantungan transitif.
@@ -628,6 +694,7 @@ Tabel ini dirancang untuk memenuhi Third Normal Form (3NF), di mana semua atribu
 *(Ditambahkan oleh Elitsa Effie)*
 
 ### Deskripsi
+**Tabel wishlist** digunakan untuk menyimpan data produk yang ditandai sebagai favorit oleh pengguna dalam sistem e-commerce. Tabel ini berperan sebagai penghubung antara tabel users dan product, serta dipisahkan dari tabel keranjang karena memiliki fungsi penyimpanan minat pengguna, bukan persiapan transaksi pembelian.
 Tabel "wishlist' digunakan untuk menyimpan data produk yang ditandai sebagai favorit oleh pengguna dalam sistem e-commerce. Tabel ini berperan sebagai penghubung antara tabel users dan product, serta dipisahkan dari tabel keranjang karena memiliki fungsi penyimpanan minat pengguna, bukan persiapan transaksi pembelian.
 
 ### Atribut
@@ -710,6 +777,27 @@ Tabel Jasa_Pengiriman digunakan untuk menyimpan data perusahaan atau pihak ekspe
 ## Atribut 
 Tabel jasa pengiriman memiliki Atribut:
 
+Id_Pengiriman (PK) : Primary Key, identitas unik jasa pengiriman
+Nama_Pengiriman : Nama ekspedisi (JNE, J&T, dll)
+Service_Type : Jenis layanan (REG, YES, ECO, dll)
+Estimasi_Delivery_Days : Estimasi waktu pengiriman
+Logo : Logo jasa pengiriman
+Status : Aktif / Nonaktif
+
+## Relasi
+Relasi 1: Jasa_Pengiriman → Detail_Pengiriman
+One to Many (1 : N)
+Satu jasa pengiriman bisa digunakan oleh banyak pengiriman
+Relasi:
+Jasa_Pengiriman.Courier_Id (PK)
+Detail_Pengiriman.Courier_Id (FK)
+
+Relasi 2: Pesanan → Detail_Pengiriman
+One to One / One to Many
+Setiap pesanan memiliki detail pengiriman
+Relasi:
+Pesanan.Order_Id (PK)
+Detail_Pengiriman.Order_Id (FK)
 - `Id_Pengiriman` (PK) : Primary Key, identitas unik jasa pengiriman  
 - `Nama_Pengiriman` : Nama ekspedisi (JNE, J&T, dll)  
 - `Service_Type` : Jenis layanan (REG, YES, ECO, dll)  
@@ -738,6 +826,9 @@ Relasi:
 ## Fungsi 
 Tabel Jasa_Pengiriman berfungsi untuk menyimpan dan mengelola data master perusahaan ekspedisi yang digunakan dalam proses pengiriman pesanan. Tabel ini menjadi referensi utama dalam menentukan jasa pengiriman pada setiap transaksi, sehingga sistem dapat mencatat informasi pengiriman secara konsisten dan terstruktur. Selain itu, tabel ini membantu menghindari duplikasi data jasa pengiriman, memudahkan pengelolaan layanan pengiriman, serta mendukung integritas data dalam sistem informasi penjualan atau e-commerce.
 
+
+
+
 ---
 
 ## 18.
@@ -748,6 +839,7 @@ Tabel Jasa_Pengiriman berfungsi untuk menyimpan dan mengelola data master perusa
 
 ---
 
+## 20.
 ## 20. Tabel Return  
 *(ditambah oleh Fifi Nurfadilah)*
 
@@ -898,6 +990,8 @@ Dengan demikian, **tabel Return harus disimpan di database**, bukan hanya sebaga
 
 ---
 
+## 25.## 25.Tabel Riwayat_Pencarian
+(Ditambahkan oleh Eka Nurbela)
 ## 25.Tabel Riwayat_Pencarian
 *(Ditambahkan oleh Eka Nurbela)*
 
@@ -906,6 +1000,18 @@ Tabel riwayat_pencarian digunakan untuk menyimpan seluruh aktivitas pencarian pr
 
 ### Atribut 
 Tabel riwayat_pencarian memiliki atribut sebagai berikut:
+search_id : Primary key yang mengidentifikasi setiap aktivitas pencarian secara unik
+user_id : Foreign key yang mereferensikan pengguna yang melakukan pencarian
+product_id : Foreign key yang mereferensikan produk yang berkaitan dengan pencarian (opsional)
+keyword : Menyimpan kata kunci pencarian yang dimasukkan oleh pengguna
+search_time : Mencatat waktu terjadinya aktivitas pencarian
+
+### Relasi  
+Tabel riwayat_pencarian memiliki relasi dengan tabel lain sebagai berikut:
+users – riwayat_pencarian (1 : N)
+Satu pengguna dapat melakukan banyak aktivitas pencarian produk
+produk – riwayat_pencarian (1 : N)
+Satu produk dapat muncul dalam banyak riwayat pencarian pengguna
 - `search_id` : Primary key yang mengidentifikasi setiap aktivitas pencarian secara unik
 - `user_id` : Foreign key yang mereferensikan pengguna yang melakukan pencarian
 - `product_id` : Foreign key yang mereferensikan produk yang berkaitan dengan pencarian (opsional)
@@ -961,6 +1067,32 @@ Tabel `lokasi_operasional` berfungsi untuk menyimpan dan mengelola data lokasi o
 
 ---
 
+## 28. Tabel Patner Company
+*(Ditambahkan Oleh Mohammad Naufal Hakim Widhiananda)*
+### Entitas Utama
+**Patner Company (Perusahaan Mitra)**
+
+### Atribut Utama
+- `Partner_Id` (PK)
+- `Name`
+- `Logo_Url`
+- `Type` (Logistics, Payment, Brand, Marketing)
+
+### Relasi
+- **Patner Company - Produk (1 : N)**
+  Satu Partner (sebagai Brand) dapat menyediakan banyak Produk
+- **Patner Company - Metode Pembayaran (1 : N)**
+  Satu Partner (sebagai Payment Provider) dapat menyediakan satu atau lebih Metode Pembayaran
+- **Patner Company - Jasa Pengiriman (1 : N)**
+  Satu Partner (sebagai Perusahaan Logistik) dapat menyediakan berbagai Service Jasa Pengiriman
+- **Patner Company - Promo (N : N)**
+  Promo dapat bersifat eksklusif untuk Partner tertentu (misalnya, promo Bank X)
+
+### Fungsi
+- Berfungsi sebagai tabel master untuk menyimpan dan mengelola data perusahaan eksternal yang bekerja sama dengan e-commerce, termasuk Brand yang dijual (misalnya Nike, H&M), Penyedia Pembayaran (Bank, E-Wallet), dan Perusahaan Logistik (Jasa Pengiriman).
+- Memastikan data mitra terpusat dan konsisten di seluruh modul, seperti menampilkan logo brand di halaman produk atau logo bank di halaman checkout.
+
+---
 - Memenuhi prinsip normalisasi hingga 3NF
 - Mewakili entitas bisnis promo secara mandiri
 - Mendukung pengelolaan aturan diskon, periode berlaku, dan status promo
