@@ -282,7 +282,7 @@ Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi pe
                                            | nama_lokasi            |
                                            | tipe_lokasi            |
                                            +------------------------+
-
+```
 ### 5. Keputusan Normalisasi
 Berdasarkan analisis normalisasi:
 - Tabel Inventory **tidak digabungkan** dengan tabel Varian maupun Produk.
