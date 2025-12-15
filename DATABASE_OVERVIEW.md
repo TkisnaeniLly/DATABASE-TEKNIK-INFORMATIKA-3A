@@ -76,6 +76,9 @@ Tabel `users` memiliki relasi dengan beberapa tabel lain, yaitu:
 - **users – riwayat_pencarian** (1 : N)  
   Satu pengguna memiliki banyak riwayat pencarian produk  
 
+- - **users - klaim promo** (1 : N)
+  Satu pengguna memiliki banyak promo yang dapat diklaim
+
 ---
 
 ### Fungsi  
