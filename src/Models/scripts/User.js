@@ -50,6 +50,12 @@ const User = sequelize.define(
     last_login: {
       type: DataTypes.DATE,
     },
+    // 🔥 TAMBAHKAN INI
+    token_version: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
     updated_at: {
       type: DataTypes.DATE,
     },
@@ -60,9 +66,6 @@ const User = sequelize.define(
   }
 );
 
-// ==========================
-// Hook: auto update updated_at
-// ==========================
 User.beforeSave((user) => {
   user.updated_at = new Date();
 });

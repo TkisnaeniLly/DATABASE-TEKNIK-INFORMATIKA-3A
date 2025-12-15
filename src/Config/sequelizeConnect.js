@@ -1,10 +1,6 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-
-// Tentukan environment (default: development)
 const environment = process.env.NODE_ENV || "development";
-
-// Konfigurasi database berdasarkan environment
 const dbConfig =
   environment === "production"
     ? {

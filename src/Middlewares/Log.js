@@ -1,13 +1,11 @@
 const Log = (setup = "semua") => {
-  // Normalisasi setup ke huruf besar
   const allowedMethod = setup.toUpperCase();
 
   return (req, res, next) => {
     const method = req.method.toUpperCase();
 
-    // Filter sesuai setup
     if (allowedMethod !== "SEMUA" && method !== allowedMethod) {
-      return next(); // Lewati logging jika tidak sesuai
+      return next();
     }
 
     const hostname = req.hostname;
@@ -19,12 +17,10 @@ const Log = (setup = "semua") => {
       req.connection?.remoteAddress ||
       req.socket?.remoteAddress;
 
-    // Hilangkan "::ffff:" jika ada
     if (ipClient?.includes("::ffff:")) {
       ipClient = ipClient.replace("::ffff:", "");
     }
 
-    // Format waktu lokal Indonesia
     const currentDate = new Date();
     const options = {
       hour: "2-digit",

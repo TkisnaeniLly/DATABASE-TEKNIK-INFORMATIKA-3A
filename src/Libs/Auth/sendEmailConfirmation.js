@@ -4,42 +4,19 @@ const nodemailer = require("nodemailer");
 
 const sendEmailConfirmation = async (userId) => {
   try {
-    // ==========================
-    // 1. Ambil data user
-    // ==========================
     const user = await User.findByPk(userId);
     if (!user) return false;
 
-    // ==========================
-    // 2. Generate token
-    // ==========================
     const token = crypto.randomBytes(32).toString("hex");
-
-    // Hash token (yang disimpan ke DB)
     const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
-
-    // ==========================
-    // 3. Expired token (30 menit)
-    // ==========================
     const expiredAt = new Date(Date.now() + 5 * 60 * 1000);
-
-    // ==========================
-    // 4. Simpan token hash
-    // ==========================
     await EmailVerification.create({
       user_id: user.user_id,
       token_hash: tokenHash,
       expired_at: expiredAt,
     });
 
-    // ==========================
-    // 5. Buat link verifikasi
-    // ==========================
     const verifyLink = `${process.env.APP_URL}/auth/verify-email?token=${token}`;
-
-    // ==========================
-    // 6. Kirim email
-    // ==========================
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,

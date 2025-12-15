@@ -5,10 +5,6 @@ const { User, EmailVerification } = require("../../Models");
 const VerifyEmail = async (req, res) => {
   try {
     const { token } = req.query;
-
-    // ======================
-    // 1. Validasi token ada
-    // ======================
     if (!token) {
       return response(res, {
         statusCode: 400,
@@ -17,14 +13,8 @@ const VerifyEmail = async (req, res) => {
       });
     }
 
-    // ======================
-    // 2. Hash token dari URL
-    // ======================
     const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
 
-    // ======================
-    // 3. Cari token di DB
-    // ======================
     const verification = await EmailVerification.findOne({
       where: { token_hash: tokenHash },
     });
@@ -37,9 +27,6 @@ const VerifyEmail = async (req, res) => {
       });
     }
 
-    // ======================
-    // 4. Cek sudah diverifikasi
-    // ======================
     if (verification.verified_at) {
       return response(res, {
         statusCode: 400,
@@ -48,9 +35,6 @@ const VerifyEmail = async (req, res) => {
       });
     }
 
-    // ======================
-    // 5. Cek expired
-    // ======================
     if (new Date() > verification.expired_at) {
       return response(res, {
         statusCode: 400,
@@ -58,10 +42,6 @@ const VerifyEmail = async (req, res) => {
         data: null,
       });
     }
-
-    // ======================
-    // 6. Ambil user
-    // ======================
     const user = await User.findByPk(verification.user_id);
 
     if (!user) {
@@ -72,21 +52,12 @@ const VerifyEmail = async (req, res) => {
       });
     }
 
-    // ======================
-    // 7. Update status akun
-    // ======================
     user.status_akun = "active";
     await user.save();
 
-    // ======================
-    // 8. Tandai token sudah dipakai
-    // ======================
     verification.verified_at = new Date();
     await verification.save();
 
-    // ======================
-    // 9. Response sukses
-    // ======================
     return response(res, {
       statusCode: 200,
       message: "Email berhasil diverifikasi. Akun Anda sudah aktif.",

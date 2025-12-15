@@ -5,8 +5,6 @@ const sendEmailConfirmation = require("sendEmailConfirmation");
 
 const Register = async (req, res) => {
   try {
-    //?   Tabel User
-    //?   atribut tabel : user_id, username, password, email, phone_number, role, full_name, gender, birth_date, status_akun, registered_at, last_login, updated_at
     const {
       username,
       password,
@@ -32,7 +30,6 @@ const Register = async (req, res) => {
       status_akun,
       registered_at,
     };
-    // TODO : Libs/Auth/ValidasiInputRegister -> module-alias = validasiInputRegister
     const validasi = await validasiInputRegister(datas);
     if (!validasi.success) {
       return response(res, {
@@ -42,7 +39,6 @@ const Register = async (req, res) => {
       });
     }
 
-    // TODO : Libs/Auth/Register rekam data new user -> module-alias = registerSaveData
     const saveData = await registerSaveData(datas);
     if (!saveData.success) {
       return response(res, {
@@ -51,7 +47,6 @@ const Register = async (req, res) => {
         data: null,
       });
     }
-    // TODO : Libs/Auth/Email kirim email konfirmasi -> module-alias = sendEmailConfirmation
     const sendEmail = await sendEmailConfirmation(saveData.user_id);
     if (!sendEmail) {
       return response(res, {
@@ -61,7 +56,6 @@ const Register = async (req, res) => {
       });
     }
 
-    // TODO : Return response
     response(res, {
       statusCode: 200,
       message: "Berhasil Mendaftar, silahkan konfirmasi email anda.",

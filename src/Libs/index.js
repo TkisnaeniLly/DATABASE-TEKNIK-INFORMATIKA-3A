@@ -16,6 +16,14 @@ function utilityAliases() {
     "sendEmailConfirmation",
     path.join(__dirname, "Auth", "sendEmailConfirmation.js")
   );
+  addAlias(
+    "generateLoginOtp",
+    path.join(__dirname, "Auth", "generateLoginOtp.js")
+  );
+  addAlias(
+    "sendLoginOtpEmail",
+    path.join(__dirname, "Auth", "sendLoginOtpEmail.js")
+  );
 }
 
 module.exports = utilityAliases;

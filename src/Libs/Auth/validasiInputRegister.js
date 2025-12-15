@@ -3,9 +3,6 @@ const zxcvbn = require("zxcvbn");
 
 const ValidasiInputRegister = async (datas) => {
   try {
-    // ======================
-    // 1. Validasi wajib isi
-    // ======================
     if (!datas.username || !datas.email || !datas.password) {
       return {
         success: false,
@@ -13,9 +10,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // ======================
-    // 2. Cek username unik
-    // ======================
     if (await User.findOne({ where: { username: datas.username } })) {
       return {
         success: false,
@@ -23,10 +17,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // ======================
-    // 3. Cek email unik & domain
-    // ======================
-    // Validasi format email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(datas.email)) {
       return {
@@ -35,7 +25,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // Validasi domain email yang diizinkan
     if (process.env.ALLOWED_DOMAIN_MAIL) {
       const emailDomain = datas.email.split("@")[1]?.toLowerCase();
       const allowedDomains = process.env.ALLOWED_DOMAIN_MAIL.split(",").map(
@@ -52,7 +41,6 @@ const ValidasiInputRegister = async (datas) => {
       }
     }
 
-    // Cek apakah email sudah terdaftar
     if (await User.findOne({ where: { email: datas.email } })) {
       return {
         success: false,
@@ -60,9 +48,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // ======================
-    // 4. Cek phone unik
-    // ======================
     if (
       datas.phone_number &&
       (await User.findOne({ where: { phone_number: datas.phone_number } }))
@@ -73,9 +58,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // ======================
-    // 5. Panjang minimum
-    // ======================
     if (datas.password.length < 8) {
       return {
         success: false,
@@ -83,9 +65,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // ======================
-    // 6. Cek kekuatan password (zxcvbn)
-    // ======================
     const passwordCheck = zxcvbn(datas.password, [
       datas.username,
       datas.email,
@@ -108,9 +87,6 @@ const ValidasiInputRegister = async (datas) => {
       };
     }
 
-    // ======================
-    // VALID
-    // ======================
     return {
       success: true,
       message: "Validasi berhasil.",
