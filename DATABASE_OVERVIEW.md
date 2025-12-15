@@ -118,32 +118,66 @@ Tabel `users` berfungsi sebagai:
 
 ## 6. Diagram ERD
 ```
-+----------------------+
-| User |
-+----------------------+
-| PK user_id |
-| name |
-| email |
-| password |
-| phone |
-| address |
-| role |
-| status |
-| created_at |
-| updated_at |
-+----------------------+
-| 1
-|
-| N
-+----------------------+
-| Order |
-+----------------------+
-| PK order_id |
-| FK user_id |
-| order_date |
-| total_price |
-| order_status |
-+----------------------+
+┌───────────────┐
+│ User          │
+│───────────────│
+│ PK user_id    │
+│ name          │
+│ email         │
+│ password      │
+│ phone         │
+│ address       │
+│ role          │
+│ created_at    │
+│ updated_at    │
+└───────┬───────┘
+        │
+        │ 1 : N
+        │
+┌───────▼────────┐
+│ Pesanan        │
+│─────────────── │
+│ PK order_id    │
+│ FK user_id     │
+│ order_date     │
+│ status         │
+└────────────────┘
+        │
+        │ 1 : N
+        │
+┌───────▼─────────────┐
+│ Riwayat_Pencarian   │
+│─────────────────────│
+│ PK search_id        │
+│ FK user_id          │
+│ keyword             │
+│ search_time         │
+└─────────────────────┘
+        │
+        │ 1 : N
+        │
+┌───────▼─────────────┐
+│ Review_Produk       │
+│─────────────────────│
+│ PK review_id        │
+│ FK user_id          │
+│ FK product_id       │
+│ rating              │
+│ komentar            │
+└─────────────────────┘
+        │
+        │ 1 : N
+        │
+┌───────▼─────────────┐
+│ User_Subscription   │
+│─────────────────────│
+│ PK user_sub_id      │
+│ FK user_id          │
+│ FK subsc_id         │
+│ start_date          │
+│ end_date            │
+│ status              │
+└─────────────────────┘
 ```
 
 ## Kesimpulan
