@@ -15,23 +15,24 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 
 ## Fitur Utama
 
-| No | Fitur                                   | Backend | Frontend | UI | UX/Testing |
-|----|-----------------------------------------|:-------:|:--------:|:--:|:----------:|
-| 1  | Autentikasi user (login & register)     |   [x]   |   [ ]    | [ ]|    [ ]     |
-| 2  | Katalog produk fashion                  |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 3  | Detail produk (gambar, brand, kategori) |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 4  | Varian produk (size & warna)            |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 5  | Keranjang belanja                       |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 6  | Checkout & pesanan                      |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 7  | Pembayaran dan pengiriman               |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 8  | Wishlist                                |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 9  | Review & rating produk                  |   [ ]   |   [ ]    | [ ]|    [ ]     |
-| 10 | Promo dan diskon                        |   [ ]   |   [ ]    | [ ]|    [ ]     |
+| No  | Fitur                                   | Backend | Frontend | UI  | UX/Testing |
+| --- | --------------------------------------- | :-----: | :------: | :-: | :--------: |
+| 1   | Autentikasi user (login & register)     |   [x]   |   [ ]    | [ ] |    [ ]     |
+| 2   | Katalog produk fashion                  |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 3   | Detail produk (gambar, brand, kategori) |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 4   | Varian produk (size & warna)            |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 5   | Keranjang belanja                       |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 6   | Checkout & pesanan                      |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 7   | Pembayaran dan pengiriman               |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 8   | Wishlist                                |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 9   | Review & rating produk                  |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 10  | Promo dan diskon                        |   [ ]   |   [ ]    | [ ] |    [ ]     |
 
 Keterangan:
-- Backend  : API, database, autentikasi, dan logika bisnis
+
+- Backend : API, database, autentikasi, dan logika bisnis
 - Frontend: Integrasi API & state management
-- UI      : Tampilan visual (layout, warna, komponen)
+- UI : Tampilan visual (layout, warna, komponen)
 - UX/Testing: Pengujian, usability, dan user experience
 
 ---
@@ -64,6 +65,7 @@ Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 ---
 
 Dokumentasi tambahan tersedia pada file terpisah di repository ini.
+
 
 
 
