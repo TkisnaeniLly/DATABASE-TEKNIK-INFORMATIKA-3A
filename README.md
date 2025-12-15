@@ -10,32 +10,55 @@ pengelola logika bisnis, middleware, serta penghubung antara frontend dan basis 
 ```
 Backend/
 ├── App.js
+├── sync-db.js
 ├── .env
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
 ├── request.rest
-├── src/
-│   ├── Assets/
-│   │   ├── Public/
-│   │   └── Private/
-│   ├── Controllers/
-│   │   ├── Home/
-│   │   │   └── index.js
-│   │   ├── Payments/
-│   │   └── index.js
-│   ├── Routes/
-│   │   └── index.js
-│   ├── Middlewares/
-│   │   ├── authenticated.js
-│   │   ├── authLogin.js
-│   │   ├── errorHandlers.js
-│   │   └── Log.js
-│   └── Libs/
-│       ├── index.js
-│       └── Utils/
-│           └── response.js
-└── node_modules/
+├── README.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── GIT_WORKFLOW.md
+├── LICENSE
+├── node_modules/
+└── src/
+    ├── Assets/
+    │   ├── Public/
+    │   └── Private/
+    ├── Config/
+    │   └── sequelizeConnect.js
+    ├── Controllers/
+    │   ├── Auth/
+    │   │   ├── Login.js
+    │   │   ├── Logout.js
+    │   │   ├── Register.js
+    │   │   └── VerifyEmail.js
+    │   ├── Home/
+    │   │   └── index.js
+    │   ├── Payments/
+    │   └── index.js
+    ├── Libs/
+    │   ├── Auth/
+    │   │   ├── registerSaveData.js
+    │   │   ├── sendEmailConfirmation.js
+    │   │   └── validasiInputRegister.js
+    │   ├── Utils/
+    │   │   └── response.js
+    │   └── index.js
+    ├── Middlewares/
+    │   ├── authenticated.js
+    │   ├── authLogin.js
+    │   ├── errorHandlers.js
+    │   └── Log.js
+    ├── Models/
+    │   ├── index.js
+    │   └── scripts/
+    │       ├── EmailVerification.js
+    │       ├── User.js
+    │       └── UserProfile.js
+    └── Routes/
+        └── index.js
 ```
 
 ---
@@ -50,11 +73,14 @@ npm install
 
 ### 2. Konfigurasi environment
 
-Buat file `.env`:
+Ganti nama file `.env.sample` menjadi `.env`, sesuaikan isi dari masing-masing variabel.
 
 ```env
 PORT=3000
 NODE_ENV=development
+...
+...
+...
 ```
 
 ### 3. Jalankan server
@@ -85,11 +111,36 @@ LOG REQUEST {
 
 ## 📡 Dokumentasi Routes / Endpoint
 
-| Method | Endpoint | Deskripsi                     |
-| ------ | -------- | ----------------------------- |
-| GET    | `/`      | Endpoint utama (health check) |
+Endpoint berikut disediakan oleh backend sebagai **REST API** untuk kebutuhan aplikasi.
+
+### 📍 User / Home
+
+| Method | Endpoint     | Deskripsi                                      |
+| ------ | ------------ | ---------------------------------------------- |
+| GET    | `/api/users` | Mengambil data user / endpoint awal (home API) |
 
 ---
+
+### 🔐 Autentikasi
+
+| Method | Endpoint                 | Deskripsi                |
+| ------ | ------------------------ | ------------------------ |
+| POST   | `/api/auth/register`     | Registrasi user baru     |
+| POST   | `/api/auth/login`        | Autentikasi user (login) |
+| POST   | `/api/auth/logout`       | Logout user              |
+| GET    | `/api/auth/verify-email` | Verifikasi email user    |
+
+---
+
+### 📌 Catatan Teknis
+
+- Semua endpoint:
+  - Menggunakan format **JSON**
+  - Mengikuti prinsip **RESTful API**
+- Request & response:
+  - Data dikirim melalui body (`POST`)
+  - Data sensitif **tidak dikirim melalui URL**
+- Endpoint dapat berkembang sesuai kebutuhan aplikasi
 
 ## 🧠 Dokumentasi App.js
 
