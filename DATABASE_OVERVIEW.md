@@ -27,7 +27,7 @@ Dokumen ini menjelaskan beberapa tabel utama dalam perancangan basis data sistem
 ---
 
 
-## 1. Tabel Users  
+# 1. Tabel Users  
 *(Ditambahkan oleh Tika Isnaeni)*
 
 ### Deskripsi  
@@ -93,13 +93,184 @@ Penggabungan tabel **User** dan **Customer** dilakukan untuk menjaga normalisasi
 
 Dalam sistem e-commerce, promo memiliki karakteristik:
 
-## 2.
+# 2. Tabel : Alamat Pengiriman
+(Ditambahkan oleh Sae Al Chaq
+**Normalisasi Basis data**
+
+## Deskripsi Awal Tabel
+
+Tabel **Alamat Pengiriman** digunakan untuk menyimpan informasi alamat tujuan pengiriman barang pada sistem e-commerce.
+
+### Atribut Tabel
+
+| Atribut       | Keterangan                    |
+| ------------- | ----------------------------- |
+| address_id    | Primary Key alamat            |
+| customer_id   | Foreign Key ke tabel Customer |
+| label         | Penanda alamat (Rumah/Kantor) |
+| nama_penerima | Nama penerima paket           |
+| telepon       | Nomor telepon penerima        |
+| alamat        | Detail alamat jalan           |
+| provinsi      | Provinsi tujuan               |
+| kota          | Kota tujuan                   |
+| kecamatan     | Kecamatan tujuan              |
+| kode_pos      | Kode pos                      |
+| is_default    | Penanda alamat utama          |
+| dibuat_pada   | Waktu pembuatan alamat        |
+
+## Analisis Kebutuhan Sistem
+
+Dalam sistem e-commerce:
+
+* Satu customer **dapat memiliki lebih dari satu alamat pengiriman**
+* Alamat **digunakan berulang** untuk banyak pesanan
+* Alamat harus tetap tersimpan walaupun pesanan selesai
+* Alamat berpengaruh langsung ke proses logistik dan pengiriman
+
+Artinya, alamat **bukan data sementara**, melainkan **data master milik customer**.
+
+## Proses Normalisasi
+
+### First Normal Form (1NF)
+
+* Semua atribut bersifat atomik
+* Tidak ada atribut multivalue
+
+**Memenuhi 1NF**
+
+### Second Normal Form (2NF)
+
+* Primary Key tunggal (`address_id`)
+* Seluruh atribut bergantung penuh pada Primary Key
+
+**Memenuhi 2NF**
+
+### Third Normal Form (3NF)
+
+* Tidak terdapat dependensi transitif
+* Data customer dipisah ke tabel Customer
+
+**Memenuhi 3NF**
+
+## Keputusan Normalisasi
+
+### Wajib Dijadikan Tabel di Database
+
+**Tabel Alamat Pengiriman harus menjadi tabel tersendiri di database**, bukan hanya diproses di aplikasi.
+
+### Alasan Utama
+
+1. Alamat merupakan **entitas bisnis**
+2. Digunakan oleh banyak transaksi (Order)
+3. Bersifat permanen dan berulang
+4. Mencegah pengulangan alamat di tabel Order
+5. Mendukung histori dan audit
+
+## Koreksi & Keterkaitan dengan 28 Tabel Lain
+
+### Tabel yang Berkaitan Langsung
+
+| Tabel             | Relasi         | Keterangan                        |
+| ----------------- | -------------- | --------------------------------- |
+| Customer          | 1 → N          | Satu customer punya banyak alamat |
+| Order             | 1 → 1          | Order menggunakan satu alamat     |
+| Detail Pengiriman | 1 → 1          | Menggunakan alamat tujuan         |
+| Jasa Pengiriman   | Tidak langsung | Estimasi dan rute pengiriman      |
+
+### Tabel yang **TIDAK BOLEH DIGABUNG**
+
+| Tabel             | Alasan                            |
+| ----------------- | --------------------------------- |
+| Order             | Menghindari redundansi alamat     |
+| Customer          | Customer bisa punya banyak alamat |
+| Detail Pengiriman | Fokus ke status & tracking        |
+
+### Apakah Ada Tabel yang Sama atau Duplikat?
+
+**Tidak ada tabel lain yang memiliki fungsi sama** dengan Tabel Alamat Pengiriman.
+
+Namun:
+
+* Tabel **Lokasi Operasional** ➜ alamat internal perusahaan
+* Tabel **Detail Pengiriman** ➜ status & proses pengiriman
+
+**Ketiganya berbeda fungsi dan tidak boleh disatukan**.
+
+## Relasi Antar Tabel (Ringkas)
+
+```text
++-----------------------+        +-----------------------------+
+|       CUSTOMER        | 1    N |     ALAMAT_PENGIRIMAN       |
++-----------------------+--------+-----------------------------+
+| PK customer_id        |        | PK address_id               |
+| email                 |        | FK customer_id              |
+| status                |        | label                       |
++-----------------------+        | nama_penerima               |
+                                 | telepon                     |
+                                 | alamat                      |
+                                 | provinsi                    |
+                                 | kota                        |
+                                 | kecamatan                   |
+                                 | kode_pos                    |
+                                 | is_default                  |
+                                 | dibuat_pada                 |
+                                 +-----------------------------+
+
++-----------------------------+        +----------------------+
+|     ALAMAT_PENGIRIMAN       | 1    N |        ORDER         |
++-----------------------------+--------+----------------------+
+| PK address_id               |        | PK order_id          |
+| FK customer_id              |        | FK user_id           |
++-----------------------------+        | FK address_id        |
+                                       | order_date           |
+                                       | status               |
+                                       | total_price          |
+                                       +----------------------+
+
++----------------------+        +-----------------------------+
+|        ORDER         | 1    1 |     DETAIL_PENGIRIMAN       |
++----------------------+--------+-----------------------------+
+| PK order_id          |        | PK detail_pengiriman_id     |
+| FK address_id        |        | FK order_id                 |
++----------------------+        | courier_id                  |
+                                | tracking_number             |
+                                | shipped_at                  |
+                                | delivered_at                |
+                                | pengiriman_status           |
+                                +-----------------------------+
+
+```
+
+## Kesalahan Desain yang Harus Dihindari
+
+Menyimpan alamat langsung di tabel Order
+Mengelola alamat hanya sebagai object di aplikasi
+Menyimpan alamat berulang di setiap transaksi
+
+Dampak:
+
+* Data ganda
+* Sulit update alamat
+* Tidak konsisten
+
+## Kesimpulan
+
+### Jawaban Final
+
+> **Tabel Alamat Pengiriman WAJIB dijadikan tabel di database**.
+
+### Ringkasan
+
+* Memenuhi prinsip normalisasi hingga 3NF
+* Tidak tumpang tindih dengan 28 tabel lain
+* Memiliki relasi jelas dan terpisah
+* Tidak boleh digantikan oleh logic aplikasi
 
 
 ---
 
 
-## 3. Tabel Produk 
+# 3. Tabel Produk 
 *(Ditambahkan oleh Faiq Ahmad)*
 
 ## No. 1: Analisis Atribut pada Tabel Produk
@@ -156,13 +327,11 @@ Produk memiliki relasi N:M dengan entitas lain (seperti Keranjang atau Pesanan) 
 
 ---
 
-## 4.
+# 4.
 
 ---
 
-## 5.
-
----
+# 5.
 
 - Tidak selalu berlaku untuk semua transaksi
 - Memiliki periode waktu tertentu (mulai dan berakhir)
@@ -172,8 +341,6 @@ Produk memiliki relasi N:M dengan entitas lain (seperti Keranjang atau Pesanan) 
 
 Karena itu, data promo tidak dapat digabung langsung dengan tabel Order dan perlu dikelola dalam tabel tersendiri.
 
----
-
 ## Proses Normalisasi
 
 ### First Normal Form (1NF)
@@ -181,7 +348,7 @@ Karena itu, data promo tidak dapat digabung langsung dengan tabel Order dan perl
 - Semua atribut bersifat atomik
 - Tidak ada data multivalue (satu kolom satu nilai)
 
-## 6. Tabel Inventory  
+# 6. Tabel Inventory  
 *(Ditambahkan oleh Daris Nabil Maftuh)*
 *NORMALISASI TABEL INVENTORY / STOK*
 
@@ -255,45 +422,7 @@ Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok seca
 
 ---
 
-## 9.
-
----
-
-## 10.
-
----
-
-  **Memenuhi 1NF**
-
-  ---
-
-  ### Second Normal Form (2NF)
-
-- Primary Key hanya satu (promo_id)
-- Seluruh atribut bergantung penuh pada Primary Key
-
-**Memenuhi 2NF**
-
- ---
-
- ### Third Normal Form (3NF)
-
----
-
-- Tidak terdapat ketergantungan transitif
-- Setiap atribut non-primary tidak bergantung pada atribut non-primary lainnya
-
-  **Memenuhi 3NF**
-
-  ---
-
-  ## Keputusan Normalisasi
-
-  ### Dijadikan Tabel Tersendiri
-
----
-
-## 9. Tabel Subscription
+# 9. Tabel Subscription
 *(Ditambahkan oleh Hamudi Bait Khalimi)*
 
 ### 1. Deskripsi Umum
@@ -397,7 +526,11 @@ Desain ini memenuhi prinsip normalisasi hingga **Third Normal Form (3NF)** serta
 
 ---
 
-## 11. Tabel Keranjang Sementara
+#10.
+
+---
+
+# 11. Tabel Keranjang Sementara
 *(Ditambahkan oleh Moh Ilham Dwinanto)*
 
 ### Deskripsi
@@ -406,8 +539,6 @@ Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan daftar prod
 - Promo (1) → (N) Klaim_Promo
 - User (1) → (N) Klaim_Promo
 - Promo (1) → (N) Order
-
----
 
 ## ERD 
 
@@ -438,10 +569,9 @@ Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan daftar prod
 ### Fungsi
 Digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan proses checkout dan pembuatan pesanan (Order).
 
-
 ---
 
-## 12. Tabel Item Keranjang Sementara
+# 12. Tabel Item Keranjang Sementara
 *(Ditambahkan oleh Nicko Ikhwan Prayogi)*
 
 ### Deskripsi
@@ -496,7 +626,7 @@ Digunakan untuk menyimpan data produk yang dipilih oleh user yang kemudian disim
 
 ---
 
-## 13. Tabel Pesanan
+# 13. Tabel Pesanan
 *(Ditambahkan oleh Syah Irkham Ramadhan)*
 
 ### Deskripsi
@@ -560,7 +690,7 @@ Tabel ini dirancang untuk memenuhi Third Normal Form (3NF), di mana semua atribu
 ---
 
 
-### 15. Tabel Wishlist/Favorite
+# 15. Tabel Wishlist/Favorite
 *(Ditambahkan oleh Elitsa Effie)*
 
 ### Deskripsi
@@ -598,7 +728,7 @@ Aktivitas penambahan atau penghapusan wishlist dapat dicatat sebagai log aktivit
 ---
 
 
-## 16. Tabel Metode Pembayaran  
+# 16. Tabel Metode Pembayaran  
 *(Ditambahkan oleh Panji Pramudia)*
 
 ### Deskripsi  
@@ -638,7 +768,7 @@ Pemisahan tabel **Partners** dan **Payment Methods** dilakukan untuk menjaga nor
 ---
 
 
-## 17. Tabel Jasa Pengiriman 
+# 17. Tabel Jasa Pengiriman 
 *(ditambah oleh Rafik Hidayat)*
 
 ## Deskripsi 
@@ -697,11 +827,9 @@ Relasi:
 Tabel Jasa_Pengiriman berfungsi untuk menyimpan dan mengelola data master perusahaan ekspedisi yang digunakan dalam proses pengiriman pesanan. Tabel ini menjadi referensi utama dalam menentukan jasa pengiriman pada setiap transaksi, sehingga sistem dapat mencatat informasi pengiriman secara konsisten dan terstruktur. Selain itu, tabel ini membantu menghindari duplikasi data jasa pengiriman, memudahkan pengelolaan layanan pengiriman, serta mendukung integritas data dalam sistem informasi penjualan atau e-commerce.
 
 
-
-
 ---
 
-## 18. Tabel Detail Pengiriman
+# 18. Tabel Detail Pengiriman
 *(Ditambahkan oleh Fajar Niko Pratama)*
 
 # Analisis & Perancangan Tabel Detail Pengiriman
@@ -780,11 +908,11 @@ Tabel Detail Pengiriman berfungsi sebagai:
 
 ---
 
-## 19.
+# 19.
 
 ---
 
-## 20. Tabel Return  
+# 20. Tabel Return  
 *(ditambah oleh Fifi Nurfadilah)*
 
 ## Atribut Awal
@@ -889,7 +1017,7 @@ Dengan demikian, **tabel Return harus disimpan di database**, bukan hanya sebaga
 
 ---
 
-## 21. Tabel Promo
+# 21. Tabel Promo
 *(Ditambahkan oleh Virgiawan Ananda Purwoko)
 **Normalisasi Basis Data**
 
@@ -1023,7 +1151,7 @@ Struktur Promo **selaras dan konsisten** dengan tabel mahasiswa lain.
 ---
 
 
-## 22. Tabel Klaim Promo  
+# 22. Tabel Klaim Promo  
 *(Ditambahkan oleh Dimas Faril Ardiansyah)*
 
 ### Entitas Utama  
@@ -1063,7 +1191,7 @@ Struktur Promo **selaras dan konsisten** dengan tabel mahasiswa lain.
 
 ---
 
-## 25.## 25.Tabel Riwayat_Pencarian
+# 25.Tabel Riwayat_Pencarian
 (Ditambahkan oleh Eka Nurbela)
 ## 25.Tabel Riwayat_Pencarian
 *(Ditambahkan oleh Eka Nurbela)*
@@ -1108,7 +1236,7 @@ Tabel riwayat_pencarian telah dinormalisasi hingga Third Normal Form (3NF). Selu
 ---
 
 
-## 26. Tabel Lokasi Operasional  
+# 26. Tabel Lokasi Operasional  
 *(Ditambahkan oleh Najwa Alief Nursfhifa)*
 
 ### Entitas Utama  
@@ -1136,11 +1264,11 @@ Tabel `lokasi_operasional` berfungsi untuk menyimpan dan mengelola data lokasi o
 
 ---
 
-## 27.
+# 27.
 
 ---
 
-## 28. Tabel Patner Company
+# 28. Tabel Patner Company
 *(Ditambahkan Oleh Mohammad Naufal Hakim Widhiananda)*
 ### Entitas Utama
 **Patner Company (Perusahaan Mitra)**
