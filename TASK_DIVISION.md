@@ -19,17 +19,17 @@ Website e-commerce yang dikembangkan memiliki fitur utama:
 
 ## Tim Proyek
 
-**Project Manager (PM):** Tika Isnaeni, Khilmy Firdaus
+**Project Manager (PM):** Tika Isnaeni, Khilmy Firdaus Romadon
 
-**Frontend Developer:** (Nama belum ditentukan)
+**Frontend Developer:** Dimas Faril, Arman Maulana, Panji Pramudia, Rafik Hidayat, Fajar Niko 
 
-**Backend Developer:** (Nama belum ditentukan)
+**Backend Developer:** Daris Nabil Maftuh, Moh, Ilham Dwinanto, Hamudi Bait Khalimi, Wylson Marcho, Faiq Ahmad
 
-**UI Designer:** (Nama belum ditentukan)
+**UI Designer:** Piejar Annisa, Moh. Naufal Hakim, Juniar Viki, Naufal Fawwaz, Riyan zacki
 
-**Database Engineer:** (Nama belum ditentukan)
+**Database Engineer:** Sae Al Chaq, Apriyoda Pratama, Syah Irkham Ramadhan, Virgiawan Ananda, Nicko Ikhwan
 
-**UX + QA:** (Nama belum ditentukan)
+**UX + QA:** Elitsa Effie, Najwa Alief, Eka Nurbela, Fifi Nurfdhila, Haidar Muhammad
 
 ---
 
