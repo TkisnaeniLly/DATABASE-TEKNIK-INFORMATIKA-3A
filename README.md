@@ -28,7 +28,13 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 
 ---
 
-## Task Division (Ringkas)
+## Database Overview
+
+Detail pengerjaan tugas basis data mencari atribut, relasi, fungsi atribut terdapat pada dokumen **Database Overview**
+
+---
+
+## Task Division
 
 Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 
@@ -50,3 +56,4 @@ Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 ---
 
 Dokumentasi tambahan tersedia pada file terpisah di repository ini.
+
