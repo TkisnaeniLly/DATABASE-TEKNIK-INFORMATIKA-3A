@@ -527,7 +527,7 @@ Desain ini memenuhi prinsip normalisasi hingga **Third Normal Form (3NF)** serta
 ---
 
 # 10. Tabel User Subcription
-(Ditambahkan oleh Piejar Annisa Berlianti)
+*(Ditambahkan oleh Piejar Annisa Berlianti)*
 **NORMALISASI BASIS DATA**
 
 ## Deskripsi Awal Tabel
@@ -1005,7 +1005,7 @@ Tabel Detail Pengiriman berfungsi sebagai:
 ---
 
 # 20. Tabel Return  
-*(ditambah oleh Fifi Nurfadilah)*
+*(ditambahkan oleh Fifi Nurfadilah)*
 
 ## Atribut Awal
 
@@ -1110,7 +1110,7 @@ Dengan demikian, **tabel Return harus disimpan di database**, bukan hanya sebaga
 ---
 
 # 21. Tabel Promo
-*(Ditambahkan oleh Virgiawan Ananda Purwoko)
+*(Ditambahkan oleh Virgiawan Ananda Purwoko)*
 **Normalisasi Basis Data**
 
 ### Deskripsi Awal Tabel
@@ -1284,8 +1284,6 @@ Struktur Promo **selaras dan konsisten** dengan tabel mahasiswa lain.
 ---
 
 # 25.Tabel Riwayat_Pencarian
-(Ditambahkan oleh Eka Nurbela)
-## 25.Tabel Riwayat_Pencarian
 *(Ditambahkan oleh Eka Nurbela)*
 
 ### Deskripsi
