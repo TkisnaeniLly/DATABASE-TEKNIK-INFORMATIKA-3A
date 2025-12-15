@@ -27,8 +27,7 @@ Relasi tabel Inventory dengan tabel lain adalah:
 Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi penyimpanan (gudang/toko).
 
 ---
-## ERD (Entity Relationship Diagram)
-
+```ERD
 +--------------------+      1        N      +--------------------+
 |       VARIAN       |-------------------->|     INVENTORY      |
 +--------------------+                     +--------------------+
@@ -51,6 +50,7 @@ Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi pe
                                            | nama_lokasi            |
                                            | tipe_lokasi            |
                                            +------------------------+
+```
 
 ---
 
@@ -66,6 +66,7 @@ Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi mu
 
 ## 6. Kesimpulan
 Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
+
 
 
 
