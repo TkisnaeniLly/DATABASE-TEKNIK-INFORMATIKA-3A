@@ -1092,7 +1092,6 @@ product_id : Foreign key yang mereferensikan produk yang berkaitan dengan pencar
 keyword : Menyimpan kata kunci pencarian yang dimasukkan oleh pengguna
 search_time : Mencatat waktu terjadinya aktivitas pencarian
 
-### Relasi  
 Tabel riwayat_pencarian memiliki relasi dengan tabel lain sebagai berikut:
 users – riwayat_pencarian (1 : N)
 Satu pengguna dapat melakukan banyak aktivitas pencarian produk
