@@ -492,9 +492,49 @@ Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok seca
 
 ---
 
-## 8.
+## 8. Tabel Brand
+*(Ditambahkan oleh Juniar Viki Mahasa)*
 
----
+### Deskripsi
+Tabel Brand merupakan tabel master yang digunakan untuk menyimpan informasi merek atau produsen produk dalam sistem, seperti identitas brand, logo, dan negara asal. Tabel ini berfungsi sebagai acuan bagi tabel Product sehingga setiap produk dapat dikaitkan dengan brand tertentu, mendukung pengelolaan data yang terstruktur, konsisten, serta memudahkan proses pencarian, pelaporan, dan analisis produk berdasarkan brand.
+
+### Atribut
+- `Brand_Id`         : Primary Key, identitas unik brand
+- `Brand_Name`       : Nama resmi brand
+- `Logi_Url`         : Lokasi file logo brand
+- `Origin_Country`   : Negara asal brand
+
+### Relasi
+- **brand – product** (1 : N)
+  Satu Brand dapat memiliki banyak Product dan Satu Product hanya berasal dari satu Brand
+  
+- **brand – partner company** (1 : N) (opsional, tergantung implementasi)
+  Satu Brand dapat terdaftar sebagai Partner Company bertipe Brand
+
+- **brand – promo** (1 : N) atau (M : N)
+  Satu Brand dapat memiliki banyak Promo dan Satu Promo bisa berlaku untuk: Satu Brand saja → 1:N atau Banyak Brand → M:N (dengan tabel penghubung Promo_Brand)
+
+### Fungsi
+Tabel Brand berfungsi untuk menyimpan dan mengelola data merek produk sebagai data induk (master data) dalam sistem. Tabel ini digunakan untuk mengelompokkan produk berdasarkan brand, menjaga konsistensi informasi merek, mencegah duplikasi data pada tabel produk, serta mendukung proses pencarian, pelaporan, dan analisis performa produk berdasarkan brand.
+
+### Catatan Normalisasi
+Tabel Brand telah memenuhi prinsip normalisasi hingga Third Normal Form (3NF). Pada First Normal Form (1NF), seluruh atribut bersifat atomik dan tidak terdapat data berulang dalam satu kolom. Pada Second Normal Form (2NF), seluruh atribut non-kunci bergantung sepenuhnya pada primary key (Brand_Id) karena tabel tidak memiliki kunci gabungan. Selanjutnya, pada Third Normal Form (3NF), tidak terdapat ketergantungan transitif antar atribut non-kunci, karena setiap atribut hanya menjelaskan entitas Brand dan tidak bergantung pada atribut non-kunci lainnya. Dengan demikian, tabel Brand sudah terstruktur dengan baik, efisien, dan siap diintegrasikan dengan tabel lain seperti Product.
+
+### ERD (Entity Relationship Diagram)
+
+```ERD
++--------------------+      1        N     +--------------------+
+|       BRAND        |-------------------->|      Product       |
++--------------------+                     +--------------------+
+| Brand_Id (PK)      |                     | Product_Id (PK)    |
+| Brand_Name (FK)    |                     | Brand_Id (FK)      |
+| Logo_Url           |                     | Category_Id        |
+| Origin_Country     |                     | Nama_Produk        |
++--------------------+                     | Deskripsi          |
+                                           | Status             |
+                                           +--------------------+
+```
+
 
 # 9. Tabel Subscription
 *(Ditambahkan oleh Hamudi Bait Khalimi)*
