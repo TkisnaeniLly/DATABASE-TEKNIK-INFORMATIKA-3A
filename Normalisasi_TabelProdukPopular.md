@@ -124,3 +124,31 @@ Perbedaan utama:
 +----------------------+        | score                        |
                                 | period                       |
                                 +------------------------------+
+## Kesalahan Desain yang Harus Dihindari
+
+* Menghitung data popularitas tanpa menyimpan histori di database  
+* Menyimpan data produk popular langsung di tabel Product  
+* Mengandalkan perhitungan logic aplikasi tanpa tabel khusus  
+* Mencampur data analitik dengan data transaksi  
+
+Dampak:
+
+* Tidak tersedia data tren jangka panjang  
+* Performa aplikasi menurun karena perhitungan berulang  
+* Sulit melakukan analisis dan pelaporan  
+* Struktur database tidak skalabel  
+
+---
+
+## Kesimpulan
+
+### Jawaban Final
+
+> **Tabel Produk Popular / Pencarian Popular WAJIB dijadikan tabel di database**.
+
+### Ringkasan
+
+* Memenuhi prinsip normalisasi hingga **Third Normal Form (3NF)**
+* Tidak tumpang tindih dengan tabel lain dalam sistem
+* Mendukung kebutuhan analitik dan fitur rekomendasi
+* Data bersifat historis dan tidak dapat digantikan oleh logic aplikasi
