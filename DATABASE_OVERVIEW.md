@@ -466,7 +466,30 @@ Digunakan untuk menyimpan daftar produk yang dipilih oleh user sebelum dilakukan
 
 ---
 
-## 12.
+## 12. Tabel Item Keranjang Sementara
+*(Ditambahkan oleh Nicko Ikhwan Prayogi)*
+
+### Deskripsi
+Item Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan data produk yang dipilih oleh user didalam keranjang sebelum dilakukan proses checkout dan pembuatan pesanan (Order). Item Keranjang bersifat sementara dan dapat berubah sewaktu-waktu selama user belum menyelesaikan transaksi.
+
+---
+
+### Atribut
+- `item_keranjang_id`   : sebagai Primary Key Item keranjang
+- `keranjang_id`        : sebagai Foreign Key ke tabel Keranjang
+- `variant_id`          : sebagai Foreign Key ke tabel Variant
+- `quantity`            : jumlah total dari suatu produk di dalam keranjang
+- `subtotall`           : total harga dari satu produk di dalam keranjang
+
+---
+
+### Relasi
+- keranjang -> item_keranjang (1:N) : satu keranjang dapat berisi banyak item
+
+---
+
+### Fungsi
+Digunakan untuk menyimpan data produk yang dipilih oleh user yang kemudian disimpan di dalam tabel Keranjang.
 
 ---
 
@@ -538,7 +561,7 @@ Tabel ini dirancang untuk memenuhi Third Normal Form (3NF), di mana semua atribu
 *(Ditambahkan oleh Elitsa Effie)*
 
 ### Deskripsi
-**Tabel wishlist** digunakan untuk menyimpan data produk yang ditandai sebagai favorit oleh pengguna dalam sistem e-commerce. Tabel ini berperan sebagai penghubung antara tabel users dan product, serta dipisahkan dari tabel keranjang karena memiliki fungsi penyimpanan minat pengguna, bukan persiapan transaksi pembelian.
+Tabel "wishlist' digunakan untuk menyimpan data produk yang ditandai sebagai favorit oleh pengguna dalam sistem e-commerce. Tabel ini berperan sebagai penghubung antara tabel users dan product, serta dipisahkan dari tabel keranjang karena memiliki fungsi penyimpanan minat pengguna, bukan persiapan transaksi pembelian.
 
 ### Atribut
 Tabel wishlist memiliki atribut sebagai berikut:
@@ -564,6 +587,7 @@ Aktivitas penambahan atau penghapusan wishlist dapat dicatat sebagai log aktivit
 **Tabel wishlist** berfungsi untuk menyimpan data produk yang diminati oleh pengguna serta memudahkan pengelolaan daftar produk favorit. Keberadaan tabel ini mendukung fitur lanjutan seperti rekomendasi produk dan notifikasi promo, serta membantu meningkatkan interaksi pengguna dan potensi transaksi pembelian di masa mendatang.
 
 ### Catatan Normalisasi
+'Tabel wishlist' menggunakan primary key tunggal dan foreign key ke tabel 'users' dan 'product' sehingga telah memenuhi normalisasi hingga Third Normal Form (3NF). Seluruh atribut bergantung langsung pada primary key tanpa redundansi data, serta menjaga integritas data dan mendukung pengembangan fitur lanjutan.
 **Tabel wishlist** menggunakan primary key tunggal dan foreign key ke tabel `users` dan `product` sehingga telah memenuhi normalisasi hingga **Third Normal Form (3NF)**. Seluruh atribut bergantung langsung pada primary key tanpa redundansi data, serta menjaga integritas data dan mendukung pengembangan fitur lanjutan.
 
 
