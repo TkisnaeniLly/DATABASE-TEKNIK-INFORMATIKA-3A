@@ -59,7 +59,23 @@ Penggabungan tabel User dan Customer dilakukan untuk menjaga normalisasi data hi
 2.
 3.
 4. ....
-5.
+
+5.Entitas utama : Variasi Produk (Ditambahkan oleh Araman TYPE R)
+Atribut Utama :
+Varian_Id (PK)
+Product_Id (FK)
+Varian_Type
+Ukuran_Varian
+Relasi :
+Variasi Produk <> Produk (N : 1)
+→ Satu produk dapat memiliki banyak variasi (warna, ukuran, material).
+Variasi Produk <> Inventory (1 : 1 / 1 : N)
+→ Setiap varian produk memiliki data stok yang dikelola pada tabel inventory.
+Variasi Produk <> Item Keranjang (1 : N)
+→ Satu varian produk dapat muncul pada banyak item keranjang dalam transaksi.
+Fungsi :
+Menyimpan dan mengelola detail variasi produk seperti jenis varian dan nilai varian, mendukung pengelolaan stok, harga, serta transaksi penjualan berdasarkan varian produk, serta meningkatkan fleksibilitas sistem dalam pengelompokan dan pencarian produk.
+
 6. Tabel Inventory (Ditambahk oleh Daris Nabil Maftuh)
    Entitas utama : Inventory (Stok Produk)
    Atribut Utama : Inventory_Id (PK), Variant_Id (FK), Location_Id (FK), Stock_Qty, Stock_Minimum, Stock_Status, Last_Updated
