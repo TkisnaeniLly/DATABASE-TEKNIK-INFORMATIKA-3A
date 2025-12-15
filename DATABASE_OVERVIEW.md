@@ -12,7 +12,7 @@ NORMALISASI BASIS DATA – Virgiawan Ananda Purwoko
 
 ### Atribut Awal
 
-| Atribut             | Keterangan                           |
+| Atribut             | Keterangan                                    |
 | ------------------- | ------------------------------------          |
 | `promo_id`          | ID unik promo (primary key)                   |
 | `kode_promo`        | Kode promo yang digunakan pengguna            |
@@ -27,72 +27,6 @@ NORMALISASI BASIS DATA – Virgiawan Ananda Purwoko
 | `status`            | Status promo (aktif / nonaktif / kadaluarsa)  |
 | `keterangan`        | Penjelasan atau syarat tambahan promo         |
 ---
-
-## Ringkasan Desain Database
-
-- Database menggunakan konsep relasional
-- Setiap tabel memiliki primary key
-- Relasi antar tabel menggunakan foreign key
-- Struktur database mendukung skalabilitas sistem
-
-## Entitas Utama dan Fungsinya
-1. **Tabel User** (Ditambahkan Oleh Tika Isnaeni)
-Tabel users merupakan hasil penggabungan antara tabel User dan Customer untuk meningkatkan efisiensi penyimpanan data dan menghindari redundansi. Dalam sistem e-commerce (Zalora-like), customer pada dasarnya adalah user yang telah melakukan autentikasi dan memiliki aktivitas transaksi, sehingga pemisahan tabel dianggap tidak diperlukan.
-
-Atribut:
-Tabel users memiliki atribut sebagai berikut:
--user_id : sebagai primary key yang mengidentifikasi setiap pengguna secara unik.
--role : untuk menentukan peran pengguna dalam sistem, seperti customer atau admin.
--email : digunakan sebagai identitas login pengguna.
--password : untuk menyimpan kata sandi pengguna dalam bentuk terenkripsi.
--phone : untuk menyimpan nomor telepon pengguna.
--status : untuk menunjukkan status akun pengguna (aktif atau nonaktif).
--last_login : untuk mencatat waktu terakhir pengguna melakukan login.
--full_name : untuk menyimpan nama lengkap pengguna.
--gender : untuk menyimpan jenis kelamin pengguna.
--birth_date : untuk menyimpan tanggal lahir pengguna.
--registered_at : untuk mencatat waktu pendaftaran akun.
-
-Relasi:
-Tabel users memiliki relasi dengan beberapa tabel lain dalam sistem, antara lain:
--(Relasi tabel alamat_pengiriman) Satu pengguna dapat memiliki lebih dari satu alamat pengiriman.
--(Relasi tabel keranjang) Satu pengguna memiliki satu keranjang belanja aktif.
--(Relasi tabel pesanan) Satu pengguna dapat melakukan banyak pesanan.
--(Relasi tabel wishlist) Satu pengguna dapat memiliki banyak item wishlist.
--(Relasi tabel user_subcription) Satu pengguna dapat memiliki satu atau lebih data subscription.
--(Relasi tabel Return) Satu pengguna dapat mengajukan beberapa klaim promo atau diskon.
--(Relasi tabel review) Satu pengguna dapat memberikan banyak ulasan produk.
--(Relasi tabel log_aktivitas) Satu pengguna memiliki banyak catatan log aktivitas.
--(Relasi tabel riwayat_pencarian) Satu pengguna memiliki banyak riwayat pencarian produk.
-
-Fungsi:
-Tabel users berfungsi sebagai pusat data pengguna dalam sistem e-commerce. Tabel ini digunakan untuk mengelola autentikasi dan otorisasi pengguna, menyimpan data profil customer, serta menjadi referensi utama bagi seluruh aktivitas pengguna seperti transaksi, subscription, pengajuan return, dan penggunaan promo. Dengan adanya tabel ini, sistem dapat mengelola data pengguna secara terintegrasi dan konsisten.
-
-Catatan:
-Penggabungan tabel User dan Customer dilakukan untuk menjaga normalisasi data hingga Third Normal Form (3NF), mengurangi duplikasi data, serta meningkatkan performa query dalam sistem e-commerce.
-
-2.
-3.
-4. ....
-5.
-6. Tabel Inventory (Ditambahkan oleh Daris Nabil Maftuh)
-   Entitas utama : Inventory (Stok Produk)
-   Atribut Utama : Inventory_Id (PK), Variant_Id (FK), Location_Id (FK), Stock_Qty, Stock_Minimum, Stock_Status, Last_Updated
-   Relasi        : Inventory <> Varian Produk (1 : 1 / 1 : N) → Satu varian produk memiliki data stok.
-                   Inventory <> Lokasi Operasional (N : 1) → Banyak data stok berada pada satu lokasi (gudang/toko).
-                   Inventory <> Item Pesanan (tidak langsung) → Stok berkurang saat terjadi transaksi pembelian.
-   Fungsi        : Mengelola ketersediaan stok setiap varian produk berdasarkan lokasi penyimpanan, memantau jumlah stok, serta mendukung proses pengendalian persediaan dan transaksi penjualan.
-7...
-8...
-9...
-10...
-11...
-12...
-13...
-14...
-15...
-16...
-17...
 
    
 18. Tabel Detail Pengiriman (Di tambahkan oleh Fajar Niko P)
@@ -113,43 +47,6 @@ Tabel Detail Pengiriman adalah tabel yang sangat terikat dengan alur transaksi:
  Kesimpulan
 Tabel Detail Pengiriman dirancang untuk memastikan pengelolaan data logistik berjalan efisien, terpusat, dan mendukung fitur pelacakan real-time. Desain ini memenuhi kaidah normalisasi hingga Third Normal Form (3NF).
 
-    
-
-    
-    
-22. Tabel Klaim Promo (Ditambahkan oleh Dimas Faril Ardiansyah)
-    ENTITAS UTAMA : (klaim promo)
-    ATRIBUT : sebagai berikut ya ges
-    -Klaim_id : sebagai primary key, identitas unik pada tabel klaim promo (Primary key), kunci utama.
-    -user_id : menunjukan siapa yang klaim promo (Foreign key), relasi ke tabel = User.
-    -Promo_id : promo yang di klaim (Foreign Key), relasi ke tabel = promo
-    -Order_id : promo yang di gunakan pada pesanan tertentu (Foreign Key), relasinya ke tabel = order
-    -Klaim_Date : yaitu waktu promo yang diklaim
-    -Klaim_status : mengetahui promo yang di ambil berhasil/dibatalkan
-    RELASI : ada 3 relasi yang bisa saya tunjukan:
-    [klaim promo + User] : dengan relasinya itu One-to-Many(1:N) yaitu:
-    -satu user bisa mengklaim banyak promo
-    -satu klaim promo hanya milik satu user
-    [Klaim promo + promo] : relasi One-to-Many(1:N) dijelaskan:
-    -satu promo dapat digunakan oleh banyak user
-    -satu klaim hanya untuk satu promo
-    [Klaim promo + Pesanan] : relasinya One-to-One(1:0.1) yaitu:
-    -satu pesanan boleh tidak pake promo
-    -jika pake promo'n hanya satu promo 
-        
-26. Tabel Lokasi Operasional (Ditambahkan oleh Najwa Alief Nursfhifa)
-Entitas utama : Lokasi Operasional
-Atribut Utama : Location_Id (PK), Location_Name
-Relasi : Lokasi Operasional <> Inventory (1 : N) → Satu lokasi operasional dapat menyimpan banyak data stok produk.
-         Lokasi Operasional <> Unit Operasional (1 : N) → Satu lokasi operasional dapat digunakan oleh banyak unit atau aktivitas kerja.
-Fungsi : Menyimpan dan mengelola data lokasi operasional sebagai referensi utama dalam sistem, memastikan konsistensi penggunaan lokasi pada berbagai modul, serta mendukung pengelolaan aktivitas operasional dan penyimpanan barang.
-
----
-
-## Catatan
-
-- Detail SQL dan implementasi teknis disesuaikan oleh Database Engineer (Satu Kelas)
-- Dokumen ini digunakan sebagai acuan konseptual dan akademik
 # DATABASE OVERVIEW – E-COMMERCE
 
 **Gambaran umum database** pada website e-commerce fashion. Database dirancang menggunakan **basis data relasional** untuk mendukung fitur belanja, transaksi, return, pengiriman dan subscription.
@@ -239,7 +136,6 @@ Tabel `users` berfungsi sebagai pusat data pengguna dalam sistem e-commerce. Tab
 
 ### Catatan Normalisasi  
 Penggabungan tabel **User** dan **Customer** dilakukan untuk menjaga normalisasi data hingga **Third Normal Form (3NF)**, mengurangi duplikasi data, serta meningkatkan performa query dalam sistem e-commerce.
-
 
 ---
 
@@ -337,31 +233,66 @@ Karena itu, data promo tidak dapat digabung langsung dengan tabel Order dan perl
 
 ## 6. Tabel Inventory  
 *(Ditambahkan oleh Daris Nabil Maftuh)*
+*NORMALISASI TABEL INVENTORY / STOK*
 
-### Entitas Utama  
-**Inventory (Stok Produk)**
+### 1. Entitas Utama
+Inventory merupakan entitas utama yang berfungsi menyimpan data stok produk berdasarkan varian dan lokasi penyimpanan. Tabel ini berperan penting dalam mengontrol ketersediaan barang pada sistem e-commerce.
 
-### Atribut Utama  
-- `inventory_id` (PK)  
-- `variant_id` (FK)  
-- `location_id` (FK)  
-- `stock_qty`  
-- `stock_minimum`  
-- `stock_status`  
-- `last_updated`  
+### 2. Atribut
+Tabel Inventory memiliki atribut sebagai berikut:
+- inventory_id (PK)
+- variant_id (FK)
+- location_id (FK)
+- stock_qty
+- stock_minimum
+- stock_status
+- last_updated
 
-### Relasi  
-- **Inventory – Varian Produk** (1 : 1 / 1 : N)  
-  Satu varian produk memiliki data stok  
+Setiap atribut memiliki fungsi spesifik dan tidak saling bergantung secara transitif.
 
-- **Inventory – Lokasi Operasional** (N : 1)  
-  Banyak data stok berada pada satu lokasi (gudang / toko)  
+### 3. Relasi Antar Tabel
+Relasi tabel Inventory dengan tabel lain adalah:
+- Inventory berelasi dengan tabel Varian melalui atribut variant_id.
+- Inventory berelasi dengan tabel Lokasi Operasional melalui atribut location_id.
 
-- **Inventory – Item Pesanan** (tidak langsung)  
-  Stok berkurang saat terjadi transaksi pembelian  
+Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi penyimpanan (gudang/toko).
 
-### Fungsi  
-Tabel `inventory` berfungsi untuk mengelola ketersediaan stok setiap varian produk berdasarkan lokasi penyimpanan, memantau jumlah stok, serta mendukung proses pengendalian persediaan dan transaksi penjualan.
+### 4. ERD (Entity Relationship Diagram)
+
+```ERD
++--------------------+      1        N      +--------------------+
+|       VARIAN       |-------------------->|     INVENTORY      |
++--------------------+                     +--------------------+
+| variant_id (PK)    |                     | inventory_id (PK)  |
+| product_id (FK)    |                     | variant_id (FK)    |
+| nama_varian        |                     | location_id (FK)   |
+| harga              |                     | stock_qty          |
++--------------------+                     | stock_minimum      |
+                                           | stock_status       |
+                                           | last_updated       |
+                                           +--------------------+
+                                                     |
+                                                     | N
+                                                     |
+                                                     | 1
+                                           +------------------------+
+                                           |  LOKASI_OPERASIONAL   |
+                                           +------------------------+
+                                           | location_id (PK)       |
+                                           | nama_lokasi            |
+                                           | tipe_lokasi            |
+                                           +------------------------+
+
+### 5. Keputusan Normalisasi
+Berdasarkan analisis normalisasi:
+- Tabel Inventory **tidak digabungkan** dengan tabel Varian maupun Produk.
+- Pemisahan tabel dilakukan untuk menghindari redundansi data dan menjaga konsistensi stok.
+- Tabel Inventory berdiri sendiri sebagai tabel transaksi stok dan memenuhi prinsip **Third Normal Form (3NF)**.
+
+Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi multi-gudang.
+
+### 6. Kesimpulan
+Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
 
 
 ---
@@ -409,6 +340,9 @@ Tabel `inventory` berfungsi untuk mengelola ketersediaan stok setiap varian prod
   ## Keputusan Normalisasi
 
   ### Dijadikan Tabel Tersendiri
+
+---
+
 ## 9. Tabel Subscription
 *(Ditambahkan oleh Hamudi Bait Khalimi)*
 
