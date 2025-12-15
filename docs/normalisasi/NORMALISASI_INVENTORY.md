@@ -27,6 +27,30 @@ Relasi tabel Inventory dengan tabel lain adalah:
 Relasi ini memungkinkan pengelolaan stok berdasarkan varian produk dan lokasi penyimpanan (gudang/toko).
 
 ---
+## ERD (Entity Relationship Diagram)
+
++--------------------+      1        N      +--------------------+
+|       VARIAN       |-------------------->|     INVENTORY      |
++--------------------+                     +--------------------+
+| variant_id (PK)    |                     | inventory_id (PK)  |
+| product_id (FK)    |                     | variant_id (FK)    |
+| nama_varian        |                     | location_id (FK)   |
+| harga              |                     | stock_qty          |
++--------------------+                     | stock_minimum      |
+                                           | stock_status       |
+                                           | last_updated       |
+                                           +--------------------+
+                                                     |
+                                                     | N
+                                                     |
+                                                     | 1
+                                           +------------------------+
+                                           |  LOKASI_OPERASIONAL   |
+                                           +------------------------+
+                                           | location_id (PK)       |
+                                           | nama_lokasi            |
+                                           | tipe_lokasi            |
+                                           +------------------------+
 
 ---
 
@@ -42,6 +66,7 @@ Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi mu
 
 ## 6. Kesimpulan
 Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
+
 
 
 
