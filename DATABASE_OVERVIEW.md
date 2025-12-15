@@ -1869,7 +1869,7 @@ Oleh karena itu, tabel ini harus berdiri sendiri.
 ## 6. Diagram ERD (Entity Relationship Diagram)
 
 Berikut adalah diagram ERD yang menggambarkan hubungan antara Lokasi Operasional dengan tabel-tabel terkait:
----
+```text
 +---------------------------+        1 ──── N        +---------------------------+
 |   LOKASI_OPERASIONAL      |-----------------------|     UNIT_OPERASIONAL      |
 +---------------------------+                       +---------------------------+
@@ -1899,7 +1899,8 @@ Berikut adalah diagram ERD yang menggambarkan hubungan antara Lokasi Operasional
 | city                      |                       +---------------------------+
 | type                      |
 +---------------------------+
----
+```
+## 7. Kesimpulan Tabel Lokasi Operasional wajib berdiri sendiri sebagai entitas referensi utama untuk menjaga: Konsistensi data Efisiensi penyimpanan Skalabilitas sistem basis data Desain ini mendukung integrasi dengan modul lain tanpa menimbulkan redundansi atau anomali data. masih aja apa yg salah sih
 
 # 27.Tabel : Produk Popular / Pencarian Popular 
 *( Ditambahkan oleh SAE AL CHAQ)
