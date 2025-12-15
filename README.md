@@ -15,17 +15,17 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 
 ## Fitur Utama
 
-- Autentikasi user (login & register)
-- Katalog produk fashion
-- Detail produk (gambar, brand, kategori)
-- Varian produk (size & warna)
-- Keranjang belanja
-- Checkout & pesanan
-- Pembayaran dan pengiriman
-- Wishlist
-- Review & rating produk
-- Promo dan diskon
-
+- [x] Autentikasi user (login & register) 
+- [ ] Katalog produk fashion
+- [ ] Detail produk (gambar, brand, kategori)
+- [ ] Varian produk (size & warna)
+- [ ] Keranjang belanja
+- [ ] Checkout & pesanan
+- [ ] Pembayaran dan pengiriman
+- [ ] Wishlist
+- [ ] Review & rating produk
+- [ ] Promo dan diskon
+  
 ---
 
 ## Database Overview
@@ -56,4 +56,5 @@ Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 ---
 
 Dokumentasi tambahan tersedia pada file terpisah di repository ini.
+
 
