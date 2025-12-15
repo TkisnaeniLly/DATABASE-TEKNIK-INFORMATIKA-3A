@@ -55,8 +55,8 @@ Berikut gambaran ERD sederhana untuk tabel Inventory:
                                           | tipe_lokasi          |
                                           +----------------------+
 
-
-Diagram ini menunjukkan bahwa satu varian dapat memiliki data stok, dan satu lokasi operasional dapat menyimpan banyak data inventory.
+Diagram ini menunjukkan bahwa satu varian dapat memiliki banyak data inventory,
+dan satu lokasi operasional dapat menyimpan banyak data inventory.
 
 ---
 
@@ -72,5 +72,6 @@ Keputusan ini mendukung sistem agar lebih fleksibel jika dikembangkan menjadi mu
 
 ## 6. Kesimpulan
 Tabel Inventory dirancang sebagai entitas mandiri untuk mengelola data stok secara akurat dan efisien. Dengan penerapan normalisasi hingga 3NF, struktur tabel menjadi lebih rapi, mudah dikembangkan, serta mendukung integritas data dalam proses transaksi dan manajemen persediaan.
+
 
 
