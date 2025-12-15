@@ -1566,28 +1566,110 @@ Tabel riwayat_pencarian telah dinormalisasi hingga Third Normal Form (3NF). Selu
 # 26. Tabel Lokasi Operasional  
 *(Ditambahkan oleh Najwa Alief Nursfhifa)*
 
-### Entitas Utama  
-**Lokasi Operasional**
+# NORMALISASI TABEL LOKASI OPERASIONAL
 
-### Atribut Utama  
-- `location_id` (PK)  
-- `location_name`  
+## 1. Entitas Utama
 
-### Relasi  
-- **Lokasi Operasional – Inventory** (1 : N)  
-  Satu lokasi operasional dapat menyimpan banyak data stok produk  
+**Lokasi Operasional** adalah entitas utama yang menyimpan data lokasi fisik tempat kegiatan operasional organisasi dijalankan, seperti kantor, gudang, dan toko.
+Tabel ini berfungsi sebagai **tabel referensi (master table)** yang digunakan oleh berbagai modul dalam sistem.
 
-- **Lokasi Operasional – Unit Operasional** (1 : N)  
-  Satu lokasi operasional dapat digunakan oleh banyak unit atau aktivitas kerja  
+---
 
-### Fungsi  
-Tabel `lokasi_operasional` berfungsi untuk menyimpan dan mengelola data lokasi operasional sebagai referensi utama dalam sistem, memastikan konsistensi penggunaan lokasi pada berbagai modul, serta mendukung pengelolaan aktivitas operasional dan penyimpanan barang.
+## 2. Atribut
 
-## Catatan
+Tabel **Lokasi Operasional** memiliki atribut sebagai berikut:
 
-- Detail SQL dan implementasi teknis disesuaikan oleh Database Engineer (Satu Kelas)
-- Dokumen ini digunakan sebagai acuan konseptual dan akademik
+* `location_id` (PK)
+* `location_name`
+* `address`
+* `city`
+* `type` (Warehouse / Office / Store)
 
+Seluruh atribut bersifat atomik dan merepresentasikan satu nilai per kolom.
+
+---
+
+## 3. Relasi Antar Tabel
+
+Tabel **Lokasi Operasional** berelasi dengan beberapa tabel lain, yaitu:
+
+* **Unit Operasional**
+* **Inventory / Stok**
+* **Detail Pengiriman** (opsional)
+
+Jenis relasi yang digunakan adalah **one-to-many (1 : N)**, di mana satu lokasi dapat digunakan oleh banyak unit, data stok, maupun aktivitas pengiriman.
+
+---
+
+## 4. Normalisasi
+
+Tabel **Lokasi Operasional** telah memenuhi **Third Normal Form (3NF)** karena:
+
+1. Setiap atribut memiliki nilai atomik (1NF)
+2. Seluruh atribut non-primary key bergantung sepenuhnya pada primary key (`location_id`) (2NF)
+3. Tidak terdapat ketergantungan transitif antar atribut non-key (3NF)
+
+Dengan demikian, tabel ini sudah optimal dari sisi struktur dan konsistensi data.
+
+---
+
+## 5. Penggabungan Tabel
+
+Tabel **Lokasi Operasional tidak digabungkan dengan tabel lain** karena berfungsi sebagai tabel referensi utama.
+Penggabungan tabel berpotensi menimbulkan:
+
+* Duplikasi data lokasi
+* Inkonsistensi alamat dan jenis lokasi
+* Kesulitan pemeliharaan data
+
+Oleh karena itu, tabel ini harus berdiri sendiri.
+
+---
+
+## 6. Diagram ERD (Entity Relationship Diagram)
+
+Berikut adalah diagram ERD yang menggambarkan hubungan antara **Lokasi Operasional** dengan tabel-tabel terkait:
+
++---------------------------+        1 ──── N        +---------------------------+
+|   LOKASI_OPERASIONAL      |-----------------------|     UNIT_OPERASIONAL      |
++---------------------------+                       +---------------------------+
+| location_id (PK)          |                       | unit_id (PK)              |
+| location_name             |                       | unit_name                 |
+| address                   |                       | location_id (FK)          |
+| city                      |                       +---------------------------+
+| type                      |
++---------------------------+
+
++---------------------------+        1 ──── N        +---------------------------+
+|   LOKASI_OPERASIONAL      |-----------------------|        INVENTORY          |
++---------------------------+                       +---------------------------+
+| location_id (PK)          |                       | inventory_id (PK)         |
+| location_name             |                       | item_name                 |
+| address                   |                       | quantity                  |
+| city                      |                       | location_id (FK)          |
+| type                      |                       +---------------------------+
++---------------------------+
+
++---------------------------+        1 ──── N        +---------------------------+
+|   LOKASI_OPERASIONAL      |-----------------------|    DETAIL_PENGIRIMAN      |
++---------------------------+                       +---------------------------+
+| location_id (PK)          |                       | shipment_detail_id (PK)   |
+| location_name             |                       | shipment_date             |
+| address                   |                       | location_id (FK)          |
+| city                      |                       +---------------------------+
+| type                      |
++---------------------------+
+
+
+## 7. Kesimpulan
+
+Tabel **Lokasi Operasional** wajib berdiri sendiri sebagai entitas referensi utama untuk menjaga:
+
+* Konsistensi data
+* Efisiensi penyimpanan
+* Skalabilitas sistem basis data
+
+Desain ini mendukung integrasi dengan modul lain tanpa menimbulkan redundansi atau anomali data.
 
 ---
 
