@@ -28,25 +28,6 @@ NORMALISASI BASIS DATA – Virgiawan Ananda Purwoko
 | `keterangan`        | Penjelasan atau syarat tambahan promo         |
 ---
 
-   
-18. Tabel Detail Pengiriman (Di tambahkan oleh Fajar Niko P)
-    ENTITAS UTAMA : Detail Pengiriman
-    ATRIBUT : ini di bawah yaa
-            : Primary Key sebagai identitas unik data detail pengiriman
-            : Order_Id Foreign Key (FK) merujuk ke tabel Pesanan (Tabel 13). Mengidentifikasi pesanan mana yang terkait dengan detail ini.
-            :Courier_Id  Foreign Key (FK) merujuk ke tabel Jasa Pengiriman (Tabel 17). Mengidentifikasi layanan pengiriman yang digunakan.
-            : Tracking_Number  Nomor resi resmi dari jasa pengiriman
-            : Shipped_At  Tanggal dan waktu paket diserahkan ke kurir atau mulai dikirim
-            : Delivered_At | Tanggal dan waktu paket berhasil diterima oleh customer
-            :  Pengiriman_Status | Status terbaru paket (misalnya: Diambil Kurir, Dalam Perjalanan, Tiba di Hub, Diterima)
-Relasi Tabel Detail Pengiriman
-Tabel Detail Pengiriman adalah tabel yang sangat terikat dengan alur transaksi:
- Pesanan (Tabel 13) > 1 : 1 > Satu Pesanan memiliki Satu Detail Pengiriman (Order_Id FK). 
- Jasa Pengiriman (Tabel 17) > N : 1 > Banyak Detail Pengiriman menggunakan Satu Jenis Layanan Pengiriman (Courier_Id FK). 
- Patner Company (Tabel 28) > N : 1 > Secara tidak langsung, Jasa Pengiriman terkait dengan Partner Company (Logistik). 
- Kesimpulan
-Tabel Detail Pengiriman dirancang untuk memastikan pengelolaan data logistik berjalan efisien, terpusat, dan mendukung fitur pelacakan real-time. Desain ini memenuhi kaidah normalisasi hingga Third Normal Form (3NF).
-
 # DATABASE OVERVIEW – E-COMMERCE
 
 **Gambaran umum database** pada website e-commerce fashion. Database dirancang menggunakan **basis data relasional** untuk mendukung fitur belanja, transaksi, return, pengiriman dan subscription.
@@ -59,8 +40,6 @@ Tabel Detail Pengiriman dirancang untuk memastikan pengelolaan data logistik ber
 - Mengelola produk fashion beserta varian dan stok
 - Mendukung proses keranjang, pesanan, pembayaran, dan pengiriman
 - Mendukung fitur return, promo, wishlist, review, dan subscription
-
----
 
 ## Ringkasan Desain Database
 
@@ -477,6 +456,7 @@ Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan daftar prod
 | end_date    |                 +----------------+                 +-------------+
 | status      |
 +-------------+
+```
 ### Atribut
 - `keranjang_id`   : sebagai Primary Key keranjang
 - `user_id`        : sebagai Foreign Key ke tabel user
@@ -514,7 +494,7 @@ Item Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan data p
 
 ### Relasi
 - keranjang -> item_keranjang (1:N) : satu keranjang dapat berisi banyak item
-
+```
            1
            |
            |
@@ -530,8 +510,6 @@ Item Keranjang Sementara pada sistem e-commerce digunakan untuk menyimpan data p
      +-------------+
 
 ```
-
----
 
 ## Perbandingan dengan Tabel Mahasiswa Lain
 
@@ -848,7 +826,6 @@ Tabel Detail Pengiriman berfungsi sebagai:
 
 ---
 
-## 20.
 ## 20. Tabel Return  
 *(ditambah oleh Fifi Nurfadilah)*
 
