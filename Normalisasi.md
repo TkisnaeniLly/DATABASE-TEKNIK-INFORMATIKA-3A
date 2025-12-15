@@ -124,11 +124,46 @@ Namun:
 ## Relasi Antar Tabel (Ringkas)
 
 ```text
-Customer (1) ──── (N) Alamat_Pengiriman
-                      │
-                      │ (1)
-                      ▼
-                   Order
++-----------------------+        +-----------------------------+
+|       CUSTOMER        | 1    N |     ALAMAT_PENGIRIMAN        |
++-----------------------+--------+-----------------------------+
+| PK customer_id        |        | PK address_id               |
+| email                 |        | FK customer_id              |
+| status                |        | label                       |
++-----------------------+        | nama_penerima               |
+                                 | telepon                     |
+                                 | alamat                      |
+                                 | provinsi                    |
+                                 | kota                        |
+                                 | kecamatan                   |
+                                 | kode_pos                    |
+                                 | is_default                  |
+                                 | dibuat_pada                 |
+                                 +-----------------------------+
+
++-----------------------------+        +----------------------+
+|     ALAMAT_PENGIRIMAN       | 1    N |        ORDER         |
++-----------------------------+--------+----------------------+
+| PK address_id               |        | PK order_id          |
+| FK customer_id              |        | FK user_id           |
++-----------------------------+        | FK address_id        |
+                                      | order_date           |
+                                      | status               |
+                                      | total_price          |
+                                      +----------------------+
+
++----------------------+        +-----------------------------+
+|        ORDER         | 1    1 |     DETAIL_PENGIRIMAN        |
++----------------------+--------+-----------------------------+
+| PK order_id          |        | PK detail_pengiriman_id     |
+| FK address_id        |        | FK order_id                 |
++----------------------+        | courier_id                  |
+                                | tracking_number             |
+                                | shipped_at                  |
+                                | delivered_at                |
+                                | pengiriman_status           |
+                                +-----------------------------+
+
 ```
 
 ---
