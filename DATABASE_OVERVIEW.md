@@ -1696,6 +1696,39 @@ Penggabungan tabel berpotensi menimbulkan:
 
 Oleh karena itu, tabel ini harus berdiri sendiri.
 
+## 6. Diagram ERD (Entity Relationship Diagram)
+
+Berikut adalah diagram ERD yang menggambarkan hubungan antara Lokasi Operasional dengan tabel-tabel terkait:
+---
++---------------------------+        1 ──── N        +---------------------------+
+|   LOKASI_OPERASIONAL      |-----------------------|     UNIT_OPERASIONAL      |
++---------------------------+                       +---------------------------+
+| location_id (PK)          |                       | unit_id (PK)              |
+| location_name             |                       | unit_name                 |
+| address                   |                       | location_id (FK)          |
+| city                      |                       +---------------------------+
+| type                      |
++---------------------------+
+
++---------------------------+        1 ──── N        +---------------------------+
+|   LOKASI_OPERASIONAL      |-----------------------|        INVENTORY          |
++---------------------------+                       +---------------------------+
+| location_id (PK)          |                       | inventory_id (PK)         |
+| location_name             |                       | item_name                 |
+| address                   |                       | quantity                  |
+| city                      |                       | location_id (FK)          |
+| type                      |                       +---------------------------+
++---------------------------+
+
++---------------------------+        1 ──── N        +---------------------------+
+|   LOKASI_OPERASIONAL      |-----------------------|    DETAIL_PENGIRIMAN      |
++---------------------------+                       +---------------------------+
+| location_id (PK)          |                       | shipment_detail_id (PK)   |
+| location_name             |                       | shipment_date             |
+| address                   |                       | location_id (FK)          |
+| city                      |                       +---------------------------+
+| type                      |
++---------------------------+
 ---
 
 # 27.Tabel : Produk Popular / Pencarian Popular 
