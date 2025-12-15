@@ -46,17 +46,17 @@ Oleh karena itu, tabel **User** dan **Customer** digabung menjadi satu tabel ber
 
 Tabel `users` menjadi pusat relasi dalam sistem e-commerce dan berhubungan dengan beberapa tabel lain sebagai berikut:
 
-| Tabel Terkait     | Jenis Relasi | Keterangan                              |
-| ----------------- | ------------ | --------------------------------------- |
-| alamat_pengiriman | 1 : N        | Satu user dapat memiliki banyak alamat  |
-| keranjang         | 1 : 1        | Satu user memiliki satu keranjang aktif |
-| pesanan           | 1 : N        | User dapat melakukan banyak transaksi   |
-| wishlist          | 1 : N        | User dapat menyimpan produk favorit     |
-| review            | 1 : N        | User dapat memberikan ulasan produk     |
-| user_subscription | 1 : N        | Riwayat langganan user                  |
-| klaim_promo       | 1 : N        | User dapat mengklaim promo              |
-| log_aktivitas     | 1 : N        | Aktivitas user tercatat dalam sistem    |
-
+| Tabel Terkait     | Jenis Relasi | Keterangan                                |
+| ----------------- | ------------ | ----------------------------------------- |
+| alamat_pengiriman | 1 : N        | Satu user dapat memiliki banyak alamat    |
+| keranjang         | 1 : 1        | Satu user memiliki satu keranjang aktif   |
+| pesanan           | 1 : N        | User dapat melakukan banyak transaksi     |
+| wishlist          | 1 : N        | User dapat menyimpan produk favorit       |
+| review            | 1 : N        | User dapat memberikan ulasan produk       |
+| user_subscription | 1 : N        | Riwayat langganan user                    |
+| klaim_promo       | 1 : N        | User dapat mengklaim promo                |
+| log_aktivitas     | 1 : N        | Aktivitas user tercatat dalam sistem      |
+| return            | 1 : N        | User dapat mengajukan pengembalian barang |
 ---
 
 ## 4. Fungsi Tabel `users`
