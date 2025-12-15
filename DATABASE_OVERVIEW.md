@@ -1,32 +1,3 @@
-NORMALISASI BASIS DATA – Virgiawan Ananda Purwoko
-
-*Proyek** : Aplikasi E-Commerce
-**Mata Kuliah** : Basis Data
-**Tahap** : 1 – Analisis & Normalisasi
-
----
-
-## Deskripsi Awal Tabel
-
-**Detail Promosi** pada sistem e-commerce.
-
-### Atribut Awal
-
-| Atribut             | Keterangan                                    |
-| ------------------- | ------------------------------------          |
-| `promo_id`          | ID unik promo (primary key)                   |
-| `kode_promo`        | Kode promo yang digunakan pengguna            |
-| `nama_promo`        | Nama atau judul promo                         |
-| `jenis_diskon`      | Jenis diskon (persentase / nominal)           |
-| `nilai_diskon`      | Besar diskon yang diberikan                   |
-| `tanggal_mulai`     | Tanggal mulai promo berlaku                   |
-| `tanggal_akhir`     | Tanggal promo berakhir                        |
-| `minimal_transaksi` | Minimum nilai transaksi agar promo aktif      |
-| `maksimal_diskon`   | Batas maksimum potongan (jika persen)         |
-| `kuota`             | Jumlah maksimal penggunaan promo              |
-| `status`            | Status promo (aktif / nonaktif / kadaluarsa)  |
-| `keterangan`        | Penjelasan atau syarat tambahan promo         |
----
 
 # DATABASE OVERVIEW – E-COMMERCE
 
