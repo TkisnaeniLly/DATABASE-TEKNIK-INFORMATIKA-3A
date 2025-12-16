@@ -40,6 +40,11 @@ const revokeDevice = async (req, res) => {
   return revokeDevicePage(req, res);
 };
 
+const catalogPage = require("./Catalog/index");
+const catalog = async (req, res) => {
+  return catalogPage(req, res);
+};
+
 module.exports = {
   home,
   register,
@@ -50,4 +55,5 @@ module.exports = {
   logoutAll,
   getUserDevices,
   revokeDevice,
+  catalog,
 };
