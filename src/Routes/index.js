@@ -17,5 +17,6 @@ router.delete("/auth/revoke-device", app.revokeDevice);
 router.get("/", authenticated, authorizeRole(["user"]), app.home);
 router.get("/home", authenticated, authorizeRole(["user"]), app.home);
 router.get("/beranda", authenticated, authorizeRole(["user"]), app.home);
+router.get("/catalog", authenticated, authorizeRole(["user"]), app.catalog);
 
 module.exports = router;
