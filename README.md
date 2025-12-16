@@ -20,7 +20,7 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 | 1   | User           | Autentikasi user (login & register)             |   [x]   |   [ ]    | [ ] |    [ ]     |
 | 2   | User           | Katalog produk fashion                          |   [x]   |   [ ]    | [ ] |    [ ]     |
 | 3   | User           | Detail produk (gambar, brand, kategori) by Slug |   [x]   |   [ ]    | [ ] |    [ ]     |
-| 4   | Admin          | Varian produk (size & warna)                    |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 4   | Admin/Operator | Varian produk (size & warna)                    |   [ ]   |   [ ]    | [ ] |    [ ]     |
 | 5   | User           | Keranjang belanja                               |   [ ]   |   [ ]    | [ ] |    [ ]     |
 | 6   | User           | Checkout & pesanan                              |   [ ]   |   [ ]    | [ ] |    [ ]     |
 | 7   | Admin/Operator | Pembayaran dan pengiriman                       |   [ ]   |   [ ]    | [ ] |    [ ]     |
@@ -65,6 +65,7 @@ Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 ---
 
 Dokumentasi tambahan tersedia pada file terpisah di repository ini.
+
 
 
 
