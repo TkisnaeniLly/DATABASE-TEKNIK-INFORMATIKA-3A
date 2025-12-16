@@ -15,18 +15,18 @@ Proyek ini merupakan pengembangan **website e-commerce fashion** dengan fokus pa
 
 ## Fitur Utama
 
-| No  | Fitur                                   | Backend | Frontend | UI  | UX/Testing |
-| --- | --------------------------------------- | :-----: | :------: | :-: | :--------: |
-| 1   | Autentikasi user (login & register)     |   [x]   |   [ ]    | [ ] |    [ ]     |
-| 2   | Katalog produk fashion                  |   [x]   |   [ ]    | [ ] |    [ ]     |
-| 3   | Detail produk (gambar, brand, kategori) |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 4   | Varian produk (size & warna)            |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 5   | Keranjang belanja                       |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 6   | Checkout & pesanan                      |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 7   | Pembayaran dan pengiriman               |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 8   | Wishlist                                |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 9   | Review & rating produk                  |   [ ]   |   [ ]    | [ ] |    [ ]     |
-| 10  | Promo dan diskon                        |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| No  | Level          | Fitur                                           | Backend | Frontend | UI  | UX/Testing |
+| --- | -------------- | ----------------------------------------------- | :-----: | :------: | :-: | :--------: |
+| 1   | User           | Autentikasi user (login & register)             |   [x]   |   [ ]    | [ ] |    [ ]     |
+| 2   | User           | Katalog produk fashion                          |   [x]   |   [ ]    | [ ] |    [ ]     |
+| 3   | User           | Detail produk (gambar, brand, kategori) by Slug |   [x]   |   [ ]    | [ ] |    [ ]     |
+| 4   | Admin          | Varian produk (size & warna)                    |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 5   | User           | Keranjang belanja                               |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 6   | User           | Checkout & pesanan                              |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 7   | Admin/Operator | Pembayaran dan pengiriman                       |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 8   | User           | Wishlist                                        |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 9   | User           | Review & rating produk                          |   [ ]   |   [ ]    | [ ] |    [ ]     |
+| 10  | Admin/Operator | Promo dan diskon                                |   [ ]   |   [ ]    | [ ] |    [ ]     |
 
 Keterangan:
 
@@ -65,6 +65,7 @@ Detail pembagian tugas tiap peran dapat dilihat pada dokumen **Task Division**.
 ---
 
 Dokumentasi tambahan tersedia pada file terpisah di repository ini.
+
 
 
 
