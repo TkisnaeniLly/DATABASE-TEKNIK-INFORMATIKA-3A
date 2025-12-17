@@ -13,24 +13,16 @@ router.delete("/auth/logout", authenticated, app.logout);
 router.delete("/auth/logout-all", app.logoutAll);
 router.get("/auth/get-user-devices", app.getUserDevices);
 router.delete("/auth/revoke-device", app.revokeDevice);
-// Users
-router.get("/", authenticated, authorizeRole(["user"]), app.home);
+// Public
+router.get("/", app.home);
+router.get("/catalog", app.catalog);
+router.get("/product", app.catalog);
+router.get("/catalog/:slug", app.getProductBySlug);
+router.get("/product/:slug", app.getProductBySlug);
+// Users => Home
 router.get("/home", authenticated, authorizeRole(["user"]), app.home);
 router.get("/beranda", authenticated, authorizeRole(["user"]), app.home);
-router.get("/catalog", authenticated, authorizeRole(["user"]), app.catalog);
-router.get(
-  "/catalog/:slug",
-  authenticated,
-  authorizeRole(["user"]),
-  app.getProductBySlug
-);
-router.get(
-  "/product/:slug",
-  authenticated,
-  authorizeRole(["user"]),
-  app.getProductBySlug
-);
-// Cart
+// User => Cart
 router.get("/cart", authenticated, authorizeRole(["user"]), app.getMyCart);
 router.post("/cart", authenticated, authorizeRole(["user"]), app.addToCart);
 router.put("/cart", authenticated, authorizeRole(["user"]), app.updateCartItem);
