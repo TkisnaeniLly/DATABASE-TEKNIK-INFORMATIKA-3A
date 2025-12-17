@@ -1,6 +1,13 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../../Config/sequelizeConnect");
 
+const slugify = (text) =>
+  text
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+
 const Product = sequelize.define(
   "Product",
   {
@@ -21,6 +28,11 @@ const Product = sequelize.define(
       type: DataTypes.STRING(150),
       allowNull: false,
     },
+    slug: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      unique: true,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -35,6 +47,14 @@ const Product = sequelize.define(
     timestamps: true,
     createdAt: "created_at",
     updatedAt: "updated_at",
+
+    hooks: {
+      beforeValidate: async (product) => {
+        if (!product.slug && product.product_name) {
+          product.slug = slugify(product.product_name);
+        }
+      },
+    },
   }
 );
 
