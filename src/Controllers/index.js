@@ -3,6 +3,7 @@ const home = async (req, res) => {
   return homePage(req, res);
 };
 
+//! Auth
 const registerPage = require("./Auth/Register");
 const register = async (req, res) => {
   return registerPage(req, res);
@@ -40,11 +41,33 @@ const revokeDevice = async (req, res) => {
   return revokeDevicePage(req, res);
 };
 
-const catalogPage = require("./Catalog/index");
+//! Product
+const catalogPage = require("./Product/getCatalog");
 const catalog = async (req, res) => {
   return catalogPage(req, res);
 };
+const getProductBySlugPage = require("./Product/getProductBySlug");
+const getProductBySlug = async (req, res) => {
+  return getProductBySlugPage(req, res);
+};
 
+//! Cart
+const addToCartPage = require("./Cart/addToCart");
+const addToCart = async (req, res) => {
+  return addToCartPage(req, res);
+};
+const getMyCartPage = require("./Cart/getMyCart");
+const getMyCart = async (req, res) => {
+  return getMyCartPage(req, res);
+};
+const updateCartItemPage = require("./Cart/updateCartItem");
+const updateCartItem = async (req, res) => {
+  return updateCartItemPage(req, res);
+};
+const deleteCartItemPage = require("./Cart/deleteCartItem");
+const deleteCartItem = async (req, res) => {
+  return deleteCartItemPage(req, res);
+};
 module.exports = {
   home,
   register,
@@ -56,4 +79,9 @@ module.exports = {
   getUserDevices,
   revokeDevice,
   catalog,
+  getProductBySlug,
+  addToCart,
+  getMyCart,
+  updateCartItem,
+  deleteCartItem,
 };
