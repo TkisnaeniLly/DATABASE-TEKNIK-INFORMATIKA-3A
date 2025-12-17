@@ -18,5 +18,26 @@ router.get("/", authenticated, authorizeRole(["user"]), app.home);
 router.get("/home", authenticated, authorizeRole(["user"]), app.home);
 router.get("/beranda", authenticated, authorizeRole(["user"]), app.home);
 router.get("/catalog", authenticated, authorizeRole(["user"]), app.catalog);
-
+router.get(
+  "/catalog/:slug",
+  authenticated,
+  authorizeRole(["user"]),
+  app.getProductBySlug
+);
+router.get(
+  "/product/:slug",
+  authenticated,
+  authorizeRole(["user"]),
+  app.getProductBySlug
+);
+// Cart
+router.get("/cart", authenticated, authorizeRole(["user"]), app.getMyCart);
+router.post("/cart", authenticated, authorizeRole(["user"]), app.addToCart);
+router.put("/cart", authenticated, authorizeRole(["user"]), app.updateCartItem);
+router.delete(
+  "/cart",
+  authenticated,
+  authorizeRole(["user"]),
+  app.deleteCartItem
+);
 module.exports = router;
