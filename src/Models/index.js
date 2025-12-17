@@ -18,6 +18,10 @@ const Media = require("./scripts/Catalog/Media");
 const Variant = require("./scripts/Catalog/Variant");
 const Inventory = require("./scripts/Catalog/Inventory");
 
+// Cart
+const Cart = require("./scripts/Cart/Cart");
+const CartItem = require("./scripts/Cart/CartItem");
+
 // ==================
 // Relasi Auth
 // ==================
@@ -119,6 +123,37 @@ Inventory.belongsTo(Variant, {
 });
 
 // ==================
+// Relasi Cart
+// ==================
+
+// User -> Cart (1 : N)
+User.hasMany(Cart, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+Cart.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// Cart -> CartItem (1 : N)
+Cart.hasMany(CartItem, {
+  foreignKey: "cart_id",
+  onDelete: "CASCADE",
+});
+CartItem.belongsTo(Cart, {
+  foreignKey: "cart_id",
+});
+
+// Variant -> CartItem (1 : N)
+Variant.hasMany(CartItem, {
+  foreignKey: "variant_id",
+  onDelete: "RESTRICT",
+});
+CartItem.belongsTo(Variant, {
+  foreignKey: "variant_id",
+});
+
+// ==================
 // Export
 // ==================
 module.exports = {
@@ -138,4 +173,8 @@ module.exports = {
   Media,
   Variant,
   Inventory,
+
+  // Cart
+  Cart,
+  CartItem,
 };
