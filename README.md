@@ -77,9 +77,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 Baca selengkapnya di [Dokumentasi Auth](Doc/authentikasi.md).
 
----
-
-## 🔄 Alur Autentikasi
+#### 🔄 Alur Autentikasi
 
 ```text
 Register
@@ -100,6 +98,33 @@ Akses API terproteksi
    ↓
 Logout
 ```
+
+---
+
+### 📦 Catalog / Produk
+
+| Method | Endpoint              | Deskripsi                            | Auth |
+| ------ | --------------------- | ------------------------------------ | ---- |
+| GET    | `/api/catalog`        | Ambil semua produk                   | ❌   |
+| GET    | `/api/catalog/:slug`  | Ambil detail produk berdasarkan slug | ❌   |
+| GET    | `/api/products`       | Ambil semua produk                   | ❌   |
+| GET    | `/api/products/:slug` | Ambil detail produk berdasarkan slug | ❌   |
+
+Baca selengkapnya di [Dokumentasi Products/Catalog](Doc/product.md).
+
+---
+
+### 🛒 Cart / Keranjang
+
+| Method | Endpoint             | Deskripsi                     | Auth |
+| ------ | -------------------- | ----------------------------- | ---- |
+| GET    | `/api/cart`          | Ambil keranjang milik user    | JWT  |
+| POST   | `/api/cart/add`      | Tambah item ke keranjang      | JWT  |
+| PUT    | `/api/cart/update`   | Update qty & varian item cart | JWT  |
+| DELETE | `/api/cart/delete`   | Kurangi qty / hapus item cart | JWT  |
+| POST   | `/api/cart/checkout` | Checkout keranjang user       | JWT  |
+
+Baca selengkapnya di [Dokumentasi Cart](Doc/cart.md).
 
 ---
 
