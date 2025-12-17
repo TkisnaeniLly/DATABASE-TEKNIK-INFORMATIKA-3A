@@ -1,0 +1,56 @@
+# ========================
+# Laravel Core
+# ========================
+/vendor/
+/node_modules/
+/public/build/
+/public/hot/
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/bootstrap/cache/*
+
+!bootstrap/cache/.gitignore
+
+# ========================
+# Environment
+# ========================
+.env
+.env.*
+!.env.example
+/auth.json
+
+# ========================
+# IDE & OS
+# ========================
+.idea/
+.vscode/
+.fleet/
+.zed/
+.nova/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ========================
+# Logs & Cache
+# ========================
+*.log
+*.tmp
+.phpunit.result.cache
+.phpunit.cache
+
+# ========================
+# Composer / PHPUnit
+# ========================
+.phpactor.json
+.phpunit.result.cache
+
+# ========================
+# Homestead
+# ========================
+Homestead.json
+Homestead.yaml
