@@ -9,3 +9,4 @@ dist/
 coverage/
 sync-db.js
 request.rest
+*.sql
