@@ -359,7 +359,7 @@ Produk memiliki relasi N:M dengan entitas lain (seperti Keranjang atau Pesanan) 
 
 ---
 
-# 5. # NORMALISASI BASIS DATA -  MUHAMMAD ARMAN MAULANA
+# 5. # NORMALISASI BASIS DATA -  TABEL VARIAN
 
 *Tahap 1* : Analisis dan Normalisasi 
 
