@@ -10,3 +10,5 @@ coverage/
 sync-db.js
 request.rest
 *.sql
+Doc/
+.gitignore
