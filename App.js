@@ -41,6 +41,10 @@ fs.readdirSync(aliasesDir).forEach((file) => {
 });
 
 app.use("/public", express.static(path.join(__dirname, "/src/Assets/Public")));
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "/src/Assets/Public/images"))
+);
 
 const apiRoutes = require("./src/Routes/index");
 app.use("/api", apiRoutes);
@@ -54,7 +58,7 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 const startServer = () => {
-  const server = app.listen(port, () => {
+  const server = app.listen(port, "0.0.0.0", () => {
     console.log(`🚀 Server running on port ${port}`);
   });
 
