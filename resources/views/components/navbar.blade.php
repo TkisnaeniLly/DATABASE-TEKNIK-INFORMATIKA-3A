@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             </div>
-            <button class="nav-icon" style="position: relative;" aria-label="Cart">
+            <button class="nav-icon" style="position: relative;" aria-label="Cart" onclick="goToCart()">
                 <i class="fas fa-shopping-bag"></i>
                 <span class="cart-count" id="cartCount">0</span>
             </button>
@@ -43,7 +43,7 @@
         </div>
     </nav>
 
-        <!-- Mobile Navigation -->
+    <!-- Mobile Navigation -->
     <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-nav-close" id="mobileNavClose">
@@ -57,3 +57,8 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
+    <script>
+        function goToCart() {
+            window.location.href = '/cart';
+        }
+    </script>
