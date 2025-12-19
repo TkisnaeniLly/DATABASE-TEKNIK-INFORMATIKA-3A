@@ -406,9 +406,9 @@ Jika `category_id`, `category_name`, dan `icon_url` disimpan berulang di banyak 
 
 ### **WAJIB dijadikan Tabel di Database**
 
-❌ **Tidak disarankan** hanya diproses di aplikasi
+ **Tidak disarankan** hanya diproses di aplikasi
 
-✅ **Disarankan kuat** menjadi tabel fisik di database
+ **Disarankan kuat** menjadi tabel fisik di database
 
 ### Alasan:
 
@@ -463,16 +463,14 @@ Normalisasi tabel **Kategori**:
 * Menghindari redundansi
 * Mendukung skalabilitas dan maintenance jangka panjang
 
- **Catatan Dosen Style**:
+ **Catatan Dosen**:
 
 > Selama data bersifat *master* dan dipakai lintas transaksi, maka hasil normalisasi **WAJIB** diwujudkan dalam bentuk tabel di database, bukan hanya logika aplikasi.
 
 ---
 
-# 5. Tabel Kategori
+# 5. Tabel Varian
 *(Ditambahkan oleh MUHAMMAD ARMAN MAULANA)*
-
-*Tahap 1* : Analisis dan Normalisasi 
 
 ## Atribut Awal  
 
@@ -483,6 +481,8 @@ Normalisasi tabel **Kategori**:
 | Varian_Type   | Jenis varian(misalnya Warna,Ukuran,Material) |
 | Ukuran_Varian | Nilai detail varian (contoh: Merah, Small)   |
 
+---
+
 ## Proses Normalisasi  
 
 ### First Normal Form (1NF)  
@@ -490,21 +490,27 @@ Normalisasi tabel **Kategori**:
 - Tidak ada atribut multivalue atau repeating  
 - Setiap field bernilai atomik  
 
-*LULUS 1NF*  
+**LULUS 1NF**  
+
+---
 
 ### Second Normal Form (2NF)  
 
-- Punya PK tunggal (Varian_Id)  
+- Punya PK tunggal (`Varian_Id`)  
 - Semua atribut non-key bergantung penuh ke PK  
 
-*LULUS 2NF*  
+**LULUS 2NF**  
+
+---
 
 ### Third Normal Form (3NF)  
 
 - Tidak terdapat dependensi transitif antar atribut non-key  
-- Varian_Type dan Ukuran_Varian bergantung langsung pada Varian_Id, bukan pada atribut lain  
+- `Varian_Type` dan `Ukuran_Varian` bergantung langsung pada `Varian_Id`, bukan pada atribut lain  
 
-*LULUS 3NF*  
+**LULUS 3NF**  
+
+---
 
 ## Keputusan Normalisasi  
 
@@ -517,10 +523,14 @@ Alasan:
 3. Memudahkan pengelolaan stok dan harga berdasarkan varian  
 4. Mendukung fleksibilitas sistem e-commerce (misalnya filter produk berdasarkan warna/ukuran)  
 
+---
+
 ## Relasi Antar Tabel  
 
-- *Produk (1) → (N) Varian*  
-- *Varian (1) → (N) Item Keranjang*  
+- **Produk (1) → (N) Varian**  
+- **Varian (1) → (N) Item Keranjang**  
+
+---
 
 ## ERD  
 
@@ -533,16 +543,17 @@ Alasan:
 | kategori       |        | varian_type      |        | varian_id(FK)         |
 | harga          |        | ukuran_varian    |        | quantity              |
 | deskripsi      |        +------------------+        | subtotal              |
-+----------------+                                     +-----------------------+
++----------------+                                    +-----------------------+
 ```
+---
 
 ## Kesimpulan  
 
-Tabel *Varian Produk* dijadikan tabel tersendiri karena:  
+Tabel **Varian Produk** dijadikan tabel tersendiri karena:  
 - Memenuhi prinsip normalisasi hingga 3NF  
 - Menghindari duplikasi data produk dengan banyak varian  
 - Mendukung fleksibilitas sistem (filter, stok, harga per varian)  
-- Menjadi penghubung penting antara *Produk* dan *Item Keranjang*
+- Menjadi penghubung penting antara **Produk** dan **Item Keranjang**  
 
 ---
 
