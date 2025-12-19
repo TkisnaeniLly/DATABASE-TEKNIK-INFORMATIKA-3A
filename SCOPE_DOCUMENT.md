@@ -14,6 +14,8 @@ Membangun website e-commerce fashion berbasis web yang memungkinkan pengguna unt
 
 Fitur-fitur berikut **WAJIB dikerjakan** dalam proyek ini:
 
+### Membuat Aplikasi E commerce
+
 ### 2.1 Manajemen User
 
 - Registrasi user
@@ -58,11 +60,9 @@ Fitur-fitur berikut **WAJIB dikerjakan** dalam proyek ini:
 
 Fitur berikut **TIDAK dikerjakan** dalam proyek ini:
 
-- Aplikasi mobile (Android/iOS)
+- Membuat fitur yang tidak berkaitan dengan tabel, dapat di lihat DATABASE_OVERVIEW
 - Sistem multi-vendor
-- Live chat customer service
 - Refund otomatis terintegrasi payment gateway
-- Integrasi API real-time pihak ketiga
 - Sistem rekomendasi berbasis AI
 
 ---
