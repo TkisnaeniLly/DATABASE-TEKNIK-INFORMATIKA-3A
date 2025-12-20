@@ -229,3 +229,4 @@ Authorization: Bearer <JWT_TOKEN>
   "data": null
 }
 ```
+
