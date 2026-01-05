@@ -21,7 +21,7 @@ Website e-commerce yang dikembangkan memiliki fitur utama:
 
 **Project Manager (PM):** Tika Isnaeni, Khilmy Firdaus Romadon
 
-**Frontend Developer:** Dimas Faril, Arman Maulana, Panji Pramudia, Rafik Hidayat, Fajar Niko 
+**Frontend Developer:** Dimas Faril, Arman Maulana, Panji Pramudia, Rafik Hidayat, Fajar Niko, Apriyoda
 
 **Backend Developer:** Daris Nabil Maftuh, Moh, Ilham Dwinanto, Hamudi Bait Khalimi, Wylson Marcho, Faiq Ahmad
 
